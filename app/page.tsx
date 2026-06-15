@@ -11,22 +11,22 @@ export default function Home() {
       <section className="flex flex-col items-center justify-center bg-gray-300 p-10">
         <h2 className="text-2xl font-bold">Les bonnes pratiques</h2>
         <p className="text-lg">Les bonnes pratiques pour rendre un festival accessible.</p>
-        <Cta href="/">En savoir plus</Cta>
+        <Cta href="/goodPractices">En savoir plus</Cta>
       </section>
       <section className="flex flex-col items-center justify-center bg-gray-100 p-10">
         <h2 className="text-2xl font-bold">Les types de handicaps</h2>
         <p className="text-lg">Les types de handicaps pour rendre un festival accessible.</p>
-        <Cta href="/">En savoir plus</Cta>
+        <Cta href="/disabilitiesTypes">En savoir plus</Cta>
       </section>
       <section className="flex flex-col items-center justify-center bg-gray-300 p-10">
         <h2 className="text-2xl font-bold">Ressources</h2>
         <p className="text-lg">Les ressources pour rendre un festival accessible.</p>
-        <Cta href="/">En savoir plus</Cta>
+        <Cta href="/ressources">En savoir plus</Cta>
       </section>
       <section className="flex flex-col items-center justify-center bg-gray-100 p-10">
         <h2 className="text-2xl font-bold">La fédé</h2>
         <p className="text-lg">La F.M.M. (Fédération des Musiques Métalliques) est une association qui regroupe les festivals de musique métallique en France.</p>
-        <Cta href="/">En savoir plus</Cta>
+        <Cta href="/federation">En savoir plus</Cta>
       </section>
     </div>
   );
