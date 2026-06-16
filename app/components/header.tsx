@@ -10,6 +10,7 @@ export default function Header() {
           <Link href="/disabilitiesTypes" className="text-gray-800">Types de handicaps</Link>
           <Link href="/ressources" className="text-gray-800">Ressources</Link>
           <Link href="/federation" className="text-gray-800">La fédé</Link>
+          <Link href="/blog" className="text-gray-800">Blog</Link>
           <Link href="/audit" className="text-gray-800">Audit</Link>
         </nav>
       </div>
