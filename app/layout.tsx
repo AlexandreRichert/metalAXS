@@ -1,12 +1,116 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
-import "@fortawesome/fontawesome-free/css/fontawesome.min.css";
-import "@fortawesome/fontawesome-free/css/brands.min.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const markPro = localFont({
+  src: [
+    {
+      path: "../public/fonts/Mark pro/Mark pro/MarkPro-ExtraLight.otf",
+      weight: "200",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Mark pro/Mark pro/MarkPro-ExtraLightItalic.otf",
+      weight: "200",
+      style: "italic",
+    },
+    {
+      path: "../public/fonts/Mark pro/Mark pro/MarkPro-Light.otf",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Mark pro/Mark pro/MarkPro-LightItalic.otf",
+      weight: "300",
+      style: "italic",
+    },
+    {
+      path: "../public/fonts/Mark pro/Mark pro/MarkPro-Book.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Mark pro/Mark pro/MarkPro-BookItalic.otf",
+      weight: "400",
+      style: "italic",
+    },
+    {
+      path: "../public/fonts/Mark pro/Mark pro/MarkPro.otf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Mark pro/Mark pro/MarkPro-Italic.otf",
+      weight: "500",
+      style: "italic",
+    },
+    {
+      path: "../public/fonts/Mark pro/Mark pro/MarkPro-Medium.otf",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Mark pro/Mark pro/MarkPro-MediumItalic.otf",
+      weight: "600",
+      style: "italic",
+    },
+    {
+      path: "../public/fonts/Mark pro/Mark pro/MarkPro-Bold.otf",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Mark pro/Mark pro/MarkPro-BoldItalic.otf",
+      weight: "700",
+      style: "italic",
+    },
+    {
+      path: "../public/fonts/Mark pro/Mark pro/MarkPro-Heavy.otf",
+      weight: "800",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Mark pro/Mark pro/MarkPro-HeavyItalic.otf",
+      weight: "800",
+      style: "italic",
+    },
+    {
+      path: "../public/fonts/Mark pro/Mark pro/MarkPro-Black.otf",
+      weight: "900",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Mark pro/Mark pro/MarkPro-BlackItalic.otf",
+      weight: "900",
+      style: "italic",
+    },
+    {
+      path: "../public/fonts/Mark pro/Mark pro/MarkPro-ThinItalic.otf",
+      weight: "100",
+      style: "italic",
+    },
+  ],
+  variable: "--font-mark-pro",
+  display: "swap",
+});
+
+const hintdake = localFont({
+  src: "../public/fonts/Hintdake/Hintdake Sans Regular.otf",
+  variable: "--font-hintdake",
+  display: "swap",
+});
+
+const hintdakeRough = localFont({
+  src: "../public/fonts/Hintdake/Hintdake Sans Rough.otf",
+  variable: "--font-hintdake-rough",
+  display: "swap",
+});
+
+const hintdakeStamp = localFont({
+  src: "../public/fonts/Hintdake/Hintdake Sans Stamp.otf",
+  variable: "--font-hintdake-stamp",
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
@@ -31,9 +135,9 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${markPro.variable} ${hintdake.variable} ${hintdakeRough.variable} ${hintdakeStamp.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full">{children}</body>
+      <body className="min-h-full font-sans">{children}</body>
     </html>
   );
 }
