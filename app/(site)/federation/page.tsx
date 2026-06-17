@@ -1,7 +1,7 @@
 export default function federationPage() {
     return (
         <div>
-            <h1 className="text-4xl font-hintdake">LA FÉDÉ 🎸</h1>
+            <h1 className="text-4xl font-heading">LA FÉDÉ 🎸</h1>
             <section className="flex flex-col gap-4">
                 <h2 className="text-2xl font-sans font-bold">
                 Une fédération née d'un besoin de représentation
