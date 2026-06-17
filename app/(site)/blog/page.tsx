@@ -32,7 +32,7 @@ export default async function BlogPage() {
   });
 
   return (
-    <div className="mx-auto max-w-5xl">
+    <div className="mx-auto max-w-[1200px]">
       <section className="mx-auto mb-10 flex h-[450px] w-full max-w-[1200px] gap-20 p-6">
         <div className="flex flex-col gap-8 w-1/3 pt-4">
           <div className="flex flex-col gap-4">
@@ -63,61 +63,97 @@ export default async function BlogPage() {
         </div>
       </section>
 
-      {posts.length === 0 ? (
-        <p className="rounded-lg bg-gray-100 p-8 text-center text-gray-500">
-          Aucun article pour le moment. Revenez bientôt !
-        </p>
-      ) : (
-        <ul className="grid grid-cols-1 gap-8 sm:grid-cols-2">
-          {posts.map((post) => (
-            <li
-              key={post._id}
-              className="overflow-hidden rounded-lg border border-gray-200 transition-shadow hover:shadow-md"
+      <div className="mx-auto w-full max-w-[1200px]">
+        <div className="mb-10 flex items-center gap-4 rounded-[16px] border border-gray-200 p-2 pl-5">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="pointer-events-none h-5 w-5 shrink-0 text-secondary"
+          >
+            <circle cx={11} cy={11} r={8} />
+            <path d="m21 21-4.3-4.3" />
+          </svg>
+          <input
+            type="search"
+            placeholder="Rechercher un article..."
+            className="flex-1 bg-transparent text-secondary outline-none"
+          />
+          <div className="relative shrink-0">
+            <select
+              defaultValue="recent"
+              aria-label="Filtrer par"
+              className="appearance-none rounded-[12px] bg-[#E3E1DC] py-2.5 pl-4 pr-10 text-sm text-primary outline-none"
             >
-              <Link href={`/blog/${post.slug}`} className="block">
-                {post.mainImage?.asset ? (
-                  <Image
-                    src={urlForImage(post.mainImage)
-                      .width(800)
-                      .height(450)
-                      .fit("crop")
-                      .url()}
-                    alt={post.mainImage.alt || post.title}
-                    width={800}
-                    height={450}
-                    className="h-48 w-full object-cover"
-                  />
-                ) : (
-                  <div className="h-48 w-full bg-gray-100" />
-                )}
-                <div className="p-5">
-                  {post.tags && post.tags.length > 0 ? (
-                    <div className="mb-2 flex flex-wrap gap-2">
-                      {post.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-600"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  ) : null}
-                  <h2 className="text-xl font-semibold">{post.title}</h2>
-                  <p className="mt-2 line-clamp-3 text-gray-600">
-                    {post.description}
-                  </p>
-                  <p className="mt-3 text-sm text-gray-500">
-                    {[post.author?.name, formatDate(post.publishedAt)]
-                      .filter(Boolean)
-                      .join(" — ")}
-                  </p>
-                </div>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
+              <option value="recent">Filtrer par : le plus récent</option>
+              <option value="oldest">Filtrer par : le plus ancien</option>
+            </select>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-primary"
+            >
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </div>
+        </div>
+
+        {posts.length === 0 ? (
+          <p className="rounded-lg bg-gray-100 p-8 text-center text-gray-500">
+            Aucun article pour le moment. Revenez bientôt !
+          </p>
+        ) : (
+          <ul className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {posts.map((post) => (
+              <li
+                key={post._id}
+                className="flex h-[600px] flex-col rounded-3xl border border-gray-200 p-4 transition-shadow hover:shadow-md"
+              >
+                <Link href={`/blog/${post.slug}`} className="flex h-full flex-col">
+                  {post.mainImage?.asset ? (
+                    <Image
+                      src={urlForImage(post.mainImage)
+                        .width(800)
+                        .height(450)
+                        .fit("crop")
+                        .url()}
+                      alt={post.mainImage.alt || post.title}
+                      width={800}
+                      height={450}
+                      className="h-44 w-full rounded-2xl object-cover"
+                    />
+                  ) : (
+                    <div className="h-44 w-full rounded-2xl bg-gray-100" />
+                  )}
+                  <div className="flex flex-1 flex-col px-1 pt-4">
+                    <p className="text-xs text-secondary">
+                      {formatDate(post.publishedAt)}
+                    </p>
+                    <h2 className="mt-2 text-h3 font-black uppercase italic text-primary">
+                      {post.title}
+                    </h2>
+                    <p className="mt-2 text-lg text-secondary">
+                      {post.description}
+                    </p>
+                    <span className="mt-auto rounded-full bg-gray-100 px-6 py-3 text-center text-sm font-medium text-primary transition-colors hover:bg-gray-200">
+                      Lire l&apos;article
+                    </span>
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   );
 }
