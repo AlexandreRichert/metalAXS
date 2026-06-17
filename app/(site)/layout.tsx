@@ -1,3 +1,6 @@
+import "@fortawesome/fontawesome-free/css/fontawesome.min.css";
+import "@fortawesome/fontawesome-free/css/brands.min.css";
+
 import Header from "@/app/components/header";
 import Footer from "@/app/components/footer";
 
