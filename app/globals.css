@@ -9,7 +9,9 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-mark-pro);
+  --default-font-family: var(--font-mark-pro);
   --font-mono: var(--font-geist-mono);
+  --default-mono-font-family: var(--font-geist-mono);
   --font-hintdake: var(--font-hintdake);
   --font-hintdake-rough: var(--font-hintdake-rough);
   --font-hintdake-stamp: var(--font-hintdake-stamp);

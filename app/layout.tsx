@@ -137,7 +137,7 @@ export default function RootLayout({
       lang="fr"
       className={`${markPro.variable} ${hintdake.variable} ${hintdakeRough.variable} ${hintdakeStamp.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full font-sans">{children}</body>
+      <body className={`${markPro.className} min-h-full`}>{children}</body>
     </html>
   );
 }
