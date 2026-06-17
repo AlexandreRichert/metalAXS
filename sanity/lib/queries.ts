@@ -35,6 +35,34 @@ export const POST_QUERY = defineQuery(`
   }
 `);
 
+export const LATEST_POST_QUERY = defineQuery(`
+  *[_type == "post" && defined(slug.current)]
+  | order(coalesce(publishedAt, _createdAt) desc)[0]{
+    _id,
+    title,
+    "slug": slug.current,
+    description,
+    publishedAt,
+    mainImage,
+    tags,
+    "author": author->{ name, "slug": slug.current, avatar, bio }
+  }
+`);
+
+export const POSTS_LIST_QUERY = defineQuery(`
+  *[_type == "post" && defined(slug.current)]
+  | order(coalesce(publishedAt, _createdAt) desc)[1...9]{
+    _id,
+    title,
+    "slug": slug.current,
+    description,
+    publishedAt,
+    mainImage,
+    tags,
+    "author": author->{ name, "slug": slug.current, avatar, bio }
+  }
+`);
+
 // Tous les slugs d'articles (pour la génération statique des pages).
 export const POSTS_SLUGS_QUERY = defineQuery(`
   *[_type == "post" && defined(slug.current)]{ "slug": slug.current }
