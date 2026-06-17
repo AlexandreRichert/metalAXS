@@ -13,7 +13,6 @@ import { blockContent } from "./objects/blockContent";
 import { question } from "./objects/question";
 import { questionOption } from "./objects/questionOption";
 import { step } from "./objects/step";
-import { video } from "./objects/video";
 
 export const schemaTypes: SchemaTypeDefinition[] = [
   // Documents
@@ -24,7 +23,6 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   submission,
   // Objets
   blockContent,
-  video,
   step,
   question,
   questionOption,

@@ -29,12 +29,6 @@ export type PostListItem = {
   author?: Pick<Author, "name" | "slug" | "avatar">;
 };
 
-export type PostVideo = {
-  url?: string;
-  fileUrl?: string;
-  caption?: string;
-};
-
 export type Post = {
   _id: string;
   title: string;
@@ -43,7 +37,6 @@ export type Post = {
   publishedAt?: string;
   mainImage?: SanityImage;
   gallery?: SanityImage[];
-  video?: PostVideo;
   tags?: string[];
   body?: PortableTextBlock[];
   author?: Author;

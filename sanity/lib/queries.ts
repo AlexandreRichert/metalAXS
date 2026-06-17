@@ -29,7 +29,6 @@ export const POST_QUERY = defineQuery(`
     publishedAt,
     mainImage,
     gallery,
-    video{ url, caption, "fileUrl": file.asset->url },
     tags,
     body,
     "author": author->{ name, "slug": slug.current, avatar, bio }
