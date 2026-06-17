@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 
+import Button from "@/app/components/button";
 import { BlogPostsSearch } from "@/app/components/blog-posts-search";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { urlForImage } from "@/sanity/lib/image";
@@ -65,7 +65,30 @@ export default async function BlogPage() {
             <h1 className="text-h3 text-primary font-black italic">{latestPost?.title}</h1>
             <p className="text-lg text-secondary">{latestPost?.description}</p>
           </div>
-          <Link href={`/blog/${latestPost?.slug}`} className="text-blue-500 hover:text-blue-700">Lire l&apos;article</Link>
+          <Button
+            href={`/blog/${latestPost?.slug}`}
+            variant="secondary"
+            className="self-start"
+            icon={
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M3 8h10M9 4l4 4-4 4"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            }
+          >
+            Lire l&apos;article
+          </Button>
         </div>
         <div className="h-full w-2/3">
           {latestPost?.mainImage?.asset ? (
