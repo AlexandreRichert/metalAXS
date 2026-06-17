@@ -1,25 +1,31 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Palette Metal AXS (issue des variables Figma) */
+  --background: #f2ede3; /* White / crème */
+  --foreground: #2c1f00; /* Brown / encre */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  /* Couleurs de marque */
+  --color-cream: #f2ede3;
+  --color-ink: #2c1f00;
+  --color-muted: #807866;
+  --color-lime: #abf000;
+  --color-flame: #fc470d;
+  --color-wine: #610017;
+  --color-line: #e3e1dc;
+
+  /* Polices */
   --font-sans: var(--font-mark-pro);
+  --font-display: var(--font-afacad-flux);
   --font-mono: var(--font-geist-mono);
   --font-hintdake: var(--font-hintdake);
   --font-hintdake-rough: var(--font-hintdake-rough);
   --font-hintdake-stamp: var(--font-hintdake-stamp);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {

@@ -1,49 +1,155 @@
-import Image from "next/image";
 import Link from "next/link";
+import DarkTexture from "@/app/components/dark-texture";
+
+// Pied de page (design Figma « Frame 35 » 629:2464) : aplat #2c1f00 + texture, colonnes + contacts + logotype.
+const linkColumns = [
+  {
+    title: "Accessibilité",
+    links: [
+      { label: "Qu’est ce que c’est ?", href: "/goodPractices" },
+      { label: "Comment débuter ?", href: "/goodPractices" },
+      { label: "Retours d’expériences", href: "/blog" },
+    ],
+  },
+  {
+    title: "Ressources",
+    links: [
+      { label: "Banque d’icônes", href: "/pictos" },
+      { label: "Dossiers chiffrés", href: "/ressources" },
+      { label: "Partenaires", href: "/federation" },
+    ],
+  },
+];
+
+const handicaps = [
+  { label: "Moteurs", href: "/disabilitiesTypes/motor" },
+  { label: "Visuels", href: "/disabilitiesTypes/view" },
+  { label: "Auditifs", href: "/disabilitiesTypes/audio" },
+  { label: "Cognitifs", href: "/disabilitiesTypes/cognitif" },
+];
+
+const contacts = [
+  {
+    label: "contact@fedemetal.com",
+    href: "mailto:contact@fedemetal.com",
+    icon: <EnvelopeIcon />,
+  },
+  {
+    label: "Fédération des Musiques Métalliques",
+    href: "https://www.facebook.com/profile.php?id=100086192674757",
+    icon: <i className="fa-brands fa-facebook text-lg" aria-hidden="true" />,
+  },
+  {
+    label: "Fédération des Musiques Métalliques",
+    href: "https://discord.com/invite/aT8McwWM",
+    icon: <i className="fa-brands fa-discord text-lg" aria-hidden="true" />,
+  },
+  {
+    label: "@federationmusiquesmetalliques",
+    href: "https://www.instagram.com/federationmusiquesmetalliques/",
+    icon: <i className="fa-brands fa-instagram text-lg" aria-hidden="true" />,
+  },
+];
+
+function EnvelopeIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="size-5">
+      <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="1.8" />
+      <path d="M4 7l8 6 8-6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function Column({
+  title,
+  links,
+}: {
+  title: string;
+  links: { label: string; href: string }[];
+}) {
+  return (
+    <div className="flex flex-col gap-4">
+      <span className="text-sm font-medium text-lime">{title}</span>
+      <ul className="flex flex-col gap-3">
+        {links.map((link) => (
+          <li key={link.label}>
+            <Link
+              href={link.href}
+              className="text-sm font-medium text-white transition-colors hover:text-lime"
+            >
+              {link.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-300 p-10">
-      <div className="flex items-center justify-center flex-col gap-2">
-        <Link href="/" className="text-gray-800 text-lg font-bold">Metalaxs</Link> 
-          <Link
-            href="https://federationdesmusiquesmetalliques.com/"
-            className="inline-flex items-center gap-2 text-gray-800 hover:text-[#FFD315]"
-          >
-            <Image
-              src="/FMM_Sigle_Clean_Black.png"
-              alt="F.M.M"
-              width={40}
-              height={40}
-              className="h-10 w-10"
-            />
-            <span>F.M.M</span>
-          </Link>
-          <Link
-            href="https://www.facebook.com/profile.php?id=100086192674757"
-            aria-label="Facebook"
-            className="inline-flex items-center gap-2 text-gray-800 hover:text-blue-600"
-          >
-            <i className="fa-brands fa-facebook fa-2x" aria-hidden="true" />
-            <span>Facebook</span>
-          </Link>
-          <Link
-            href="https://www.instagram.com/federationmusiquesmetalliques/"
-            aria-label="Instagram"
-            className="inline-flex items-center gap-2 text-gray-800 hover:text-purple-600"
-          >
-            <i className="fa-brands fa-instagram fa-2x" aria-hidden="true" />
-            <span>Instagram</span>
-          </Link>
-          <Link
-            href="https://discord.com/invite/aT8McwWM"
-            aria-label="Discord"
-            className="inline-flex items-center gap-2 text-gray-800 hover:text-green-600"
-          >
-            <i className="fa-brands fa-discord fa-2x" aria-hidden="true" />
-            <span>Discord</span>
-          </Link>
+    <footer className="relative overflow-hidden bg-ink text-cream">
+      <DarkTexture />
+      <div className="relative mx-auto max-w-[1440px] px-6 pb-10 pt-16 sm:px-8 lg:pt-20">
+        {/* Colonnes de liens + contacts */}
+        <div className="flex flex-col gap-12 lg:flex-row lg:justify-between">
+          <div className="flex flex-wrap gap-12 sm:gap-20 lg:gap-24">
+            <Column {...linkColumns[0]} />
+            <Column {...linkColumns[1]} />
+            <div className="flex flex-col gap-4">
+              <span className="text-sm font-medium text-lime">Handicaps</span>
+              <ul className="grid grid-cols-2 gap-x-12 gap-y-3">
+                {handicaps.map((h) => (
+                  <li key={h.label}>
+                    <Link
+                      href={h.href}
+                      className="text-sm font-medium text-white transition-colors hover:text-lime"
+                    >
+                      {h.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-4 lg:max-w-[680px] lg:flex-1">
+            <span className="text-sm font-medium text-lime">Contacts</span>
+            <div className="grid justify-items-start gap-4 sm:grid-cols-2">
+              {contacts.map((contact, i) => (
+                <Link
+                  key={i}
+                  href={contact.href}
+                  className="inline-flex items-center gap-3 rounded-xl border border-line/40 px-4 py-3 text-sm font-medium text-white transition-colors hover:border-lime hover:text-lime"
+                >
+                  <span className="shrink-0">{contact.icon}</span>
+                  <span className="truncate">{contact.label}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Logotype : crème, droit, tracking serré, dimensionné en cqw pour remplir
+            la largeur de contenu sans déborder (conteneur de requête explicite). */}
+        <div className="mt-14 lg:mt-16" style={{ containerType: "inline-size" }}>
+          <span className="block whitespace-nowrap font-display text-[11cqw] font-extrabold uppercase leading-[0.8] tracking-tight text-cream">
+            all access metal
+          </span>
+        </div>
+
+        {/* Crédits */}
+        <div className="mt-8 flex flex-col gap-2 text-sm font-medium text-muted sm:flex-row sm:items-center sm:justify-between">
+          <p className="inline-flex items-center gap-1.5">
+            Made with
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="size-4">
+              <path d="M12 21s-7.5-4.7-10-9.3C.6 9 1.4 5.6 4.3 4.6 6.4 3.9 8.5 4.8 12 8c3.5-3.2 5.6-4.1 7.7-3.4 2.9 1 3.7 4.4 2.3 7.1C19.5 16.3 12 21 12 21Z" />
+            </svg>
+            by Elie, Audrey, Valentine, Alex, Julie, Ethan, Julien et les autres
+          </p>
+          <p>©2026 — Tous droits réservés</p>
+        </div>
       </div>
-        </footer>
+    </footer>
   );
 }

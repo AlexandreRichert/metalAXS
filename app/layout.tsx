@@ -1,7 +1,14 @@
 import type { Metadata } from "next";
-import { Geist_Mono } from "next/font/google";
+import { Afacad_Flux, Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+
+// Police d'affichage des grands titres (variable, on l'utilise en ExtraBold/800).
+const afacadFlux = Afacad_Flux({
+  subsets: ["latin"],
+  variable: "--font-afacad-flux",
+  display: "swap",
+});
 
 const markPro = localFont({
   src: [
@@ -135,7 +142,7 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={`${markPro.variable} ${hintdake.variable} ${hintdakeRough.variable} ${hintdakeStamp.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${markPro.variable} ${afacadFlux.variable} ${hintdake.variable} ${hintdakeRough.variable} ${hintdakeStamp.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full font-sans">{children}</body>
     </html>
