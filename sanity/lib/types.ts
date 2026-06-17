@@ -11,6 +11,14 @@ export type SanityImage = {
   alt?: string;
 };
 
+export type TextWithImage = {
+  _type: "textWithImage";
+  _key: string;
+  text?: PortableTextBlock[];
+  image?: SanityImage;
+  imagePosition?: "left" | "right";
+};
+
 export type Author = {
   name: string;
   slug: string;
