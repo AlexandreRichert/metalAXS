@@ -2,8 +2,10 @@
 
 :root {
   /* Palette Metal AXS (issue des variables Figma) */
-  --background: #f2ede3; /* White / crème */
-  --foreground: #2c1f00; /* Brown / encre */
+  --background: #f2ede3;
+  /* White / crème */
+  --foreground: #2c1f00;
+  /* Brown / encre */
 }
 
 @theme inline {
@@ -106,11 +108,81 @@
     font-family: var(--font-mark-pro), sans-serif;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
+  h1 {
+    font-family: var(--font-heading), sans-serif;
+    font-size: var(--text-h1);
+    /* 6rem = 96px */
+    font-weight: var(--weight-extrabold);
+    /* 800 */
+    line-height: 0.9;
+    /* 90% */
+    text-transform: uppercase;
+  }
+
+  .h1-small {
+    font-family: var(--font-heading), sans-serif;
+    font-size: 30px;
+    line-height: 1;
+    font-weight: var(--weight-extrabold);
+    text-transform: uppercase;
+  }
+
+
+  h2 {
+    font-family: var(--font-heading), sans-serif;
+    font-size: 56px;
+    font-weight: var(--weight-extrabold);
+    /* 800 */
+    line-height: 0.9;
+    /* 90% */
+    text-transform: uppercase;
+  }
+
+  .h2-small {
+    font-family: var(--font-heading), sans-serif;
+    font-size: 24px;
+    font-weight: var(--weight-extrabold);
+    line-height: 1;
+    /* 100% */
+    text-transform: uppercase;
+  }
+
+
+  h3 {
+    font-family: var(--font-heading), sans-serif;
+    font-size: 48px;
+    font-weight: var(--weight-extrabold);
+    /* 800 */
+    line-height: 1;
+    /* 100% */
+  }
+
+  .h3-small {
+    font-family: var(--font-heading), sans-serif;
+    font-size: 30px;
+    line-height: 1;
+    font-weight: var(--weight-extrabold);
+    text-transform: uppercase;
+  }
+
+  h4 {
+    font-family: var(--font-heading), sans-serif;
+    font-size: 32px;
+    font-weight: var(--weight-extrabold);
+    /* 800 */
+    line-height: 1;
+    /* 100% */
+    text-transform: uppercase;
+  }
+
+  h5 {
+    font-family: var(--font-heading), sans-serif;
+    font-size: 24px;
+    font-weight: var(--weight-extrabold);
+    line-height: 1;
+    /* 100% */
+  }
+
   h6 {
     font-family: var(--font-heading), sans-serif;
   }

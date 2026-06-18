@@ -13,7 +13,7 @@ interface Card {
     description: string;
 }
 
-export default function MotorDisabilityPage() {
+export default function AudioDisabilityPage() {
     const sectionRef = useRef(null);
     const isInView = useInView(sectionRef, {
         once: true,
@@ -25,75 +25,64 @@ export default function MotorDisabilityPage() {
         {
             id: 1,
             image: "/disable.jpg",
-            title: "Information transport",
+            title: "Papier et crayon",
             description: "Des informations claires sur l'accessibilité des transports pour se rendre au festival.",
         },
         {
             id: 2,
             image: "/disable.jpg",
-            title: "Stationnement réservé",
+            title: "Boucles magnétiques",
             description: "Un parking réservé près de l'entrée, ou une navette entre le parking et les accès au site.",
         },
         {
             id: 3,
             image: "/disable.jpg",
-            title: "Cheminements accessibles",
+            title: "Sous-titrage et sur-titrage",
             description: "Des informations claires sur l'accessibilité des transports pour se rendre au festival.",
         },
         {
             id: 4,
             image: "/disable.jpg",
-            title: "Plaques de roulage",
+            title: "Application de retranscription",
             description: "Identifier en amont les zones du site susceptibles de devenir difficiles d'accès en cas de pluie ou de passage intensif : allées principales entre les scènes, accès aux zones de restauration, parcours vers les sanitaires et le camping.\n\n Installer des plaques de roulage rigides et antidérapantes sur ces zones, en veillant à ce qu'elles soient bien fixées au sol pour éviter tout risque de basculement, et suffisamment larges pour permettre le passage d'un fauteuil roulant sans difficulté.\n\nPrévoir un balisage clair indiquant les chemins équipés de plaques, afin que les personnes à mobilité réduite puissent identifier facilement les parcours accessibles dès leur arrivée sur le site.",
         },
         {
             id: 5,
             image: "/disable.jpg",
-            title: "Plateformes dédiées",
+            title: "Eclairage des points d'information",
             description: "Des plateformes pour les personnes en fauteuil roulant, avec une place réservée à leur accompagnant.",
         },
         {
             id: 6,
             image: "/disable.jpg",
-            title: "Pentes douces",
+            title: "Alertes lumineuses",
             description: "Des pentes à moins de 5 % sur les longs trajets, pour limiter l'effort en fauteuil manuel.",
         },
         {
             id: 7,
             image: "/disable.jpg",
-            title: "Comptoirs abaissés",
+            title: "Formation à la LSF",
             description: "Des comptoirs abaissés aux points de restauration et de bar.",
         },
         {
             id: 8,
             image: "/disable.jpg",
-            title: "Toilettes adaptées",
+            title: "Interprètes LSF",
             description: "Des cabines de toilettes accessibles aux personnes en fauteuil roulant.",
         },
         {
             id: 9,
             image: "/disable.jpg",
-            title: "Bornes de recharge",
+            title: "Gilets vibrants",
             description: "Des bornes de recharge et de réparation pour les fauteuils électriques.",
         },
         {
             id: 10,
             image: "/disable.jpg",
-            title: "Mains courantes",
+            title: "Spectacles chansignés",
             description: "Des mains courantes sur les zones à risque.",
         },
-        {
-            id: 11,
-            image: "/disable.jpg",
-            title: "Points d'étape",
-            description: "Des espaces aménagés pour faire une pause à différents endroits du parcours.",
-        },
-        {
-            id: 12,
-            image: "/disable.jpg",
-            title: "Hébergements recencés",
-            description: "Un recensement des hébergements accessibles à proximité du site.",
-        },
+
     ];
 
     return (
@@ -105,22 +94,18 @@ export default function MotorDisabilityPage() {
 
                         <div className="w-full lg:w-1/2">
                             <h1 >
-                                Handicap <Highlight>Moteur</Highlight>
+                                Handicap <Highlight>Auditif</Highlight>
                             </h1>
 
+                            <p className="leading-relaxed">Les handicaps auditifs touchent officiellement 4 millions de personnes en France : faible acuité auditive, acouphènes, ou plus rarement surdité complète. Certaines personnes malentendantes sont appareillées, d'autres non.</p>
+                            <p className="leading-relaxed">Certaines personnes communiquent en Langue des Signes Française, en Langage Parlé Complété ou par lecture labiale, d'autres pas du tout.</p>
+                            <p className="leading-relaxed">Pour une personne sourde de naissance ayant grandi avec la LSF, le français courant peut même s'apparenter à une langue étrangère, avec un niveau de maîtrise qui varie beaucoup d'une personne à l'autre.</p>
 
-                            <p className="leading-relaxed">
-                                Le handicap moteur regroupe plusieurs profils avec des besoins
-                                différents : des personnes en fauteuil roulant aux personnes à
-                                mobilité réduite utilisant une canne, des béquilles ou un
-                                déambulateur, en passant par celles qui se déplacent sans
-                                assistance mais manquent d'endurance ou de force.
-                            </p>
                         </div>
                         <div className="w-full lg:w-1/2">
                             <img
                                 src="/disable.jpg"
-                                alt="Handicaps moteur"
+                                alt="Handicaps auditifs"
                                 className="w-full h-64 md:h-80 lg:h-96 object-cover rounded-lg shadow-lg"
                             />
                         </div>
@@ -147,29 +132,13 @@ export default function MotorDisabilityPage() {
                             </h2>
 
                             <p className="leading-relaxed">
-                                Sur un festival, les personnes à mobilité réduite expriment
-                                plusieurs besoins récurrents :
+                                Sur un festival, les personnes sourdes ou les personnes malentendantes expriment plusieurs besoins :
                             </p>
 
                             <ul className="list-disc pl-6 mt-4 space-y-2">
-                                <li>Des déplacements les plus courts possibles</li>
-                                <li>Des surfaces planes et non glissantes</li>
-                                <li>Un bon éclairage</li>
-                                <li>
-                                    Une signalétique visible, y compris pour les personnes se
-                                    déplaçant en fauteuil roulant
-                                </li>
-                                <li>
-                                    La possibilité de faire des pauses dans leurs parcours
-                                </li>
-                                <li>
-                                    La possibilité d’être autonomes dans leur expérience du
-                                    festival
-                                </li>
-                                <li>
-                                    Des places offrant une bonne visibilité aux personnes en
-                                    fauteuil roulant
-                                </li>
+                                <li>Un bon éclairage pour voir les informations écrites et les visages de leurs interlocuteurs</li>
+                                <li>Des espaces de repos, à l'écart du bruit et du brouhaha</li>
+                                <li>Une information visuelle, plutôt qu'orale</li>
                             </ul>
                         </div>
                     </div>

@@ -13,7 +13,7 @@ interface Card {
     description: string;
 }
 
-export default function MotorDisabilityPage() {
+export default function AutisticDisabilityPage() {
     const sectionRef = useRef(null);
     const isInView = useInView(sectionRef, {
         once: true,
@@ -25,75 +25,17 @@ export default function MotorDisabilityPage() {
         {
             id: 1,
             image: "/disable.jpg",
-            title: "Information transport",
-            description: "Des informations claires sur l'accessibilité des transports pour se rendre au festival.",
+            title: "Ambiance apaisée",
+            description: "Lorem ipsum dolor sit amet consectetur. Diam maecenas dignissim proin quam tincidunt sapien sit. Ut neque ultricies elementum nec sapien donec lacus. Eget est massa id arcu suspendisse fermentum sit egestas sed. Lectus in vel tempor netus accumsan facilisis. Placerat urna eros hendrerit vel turpis pretium. Nisl dictum eu egestas pellentesque adipiscing tincidunt. Et bibendum velit pellentesque facilisi donec congue amet orci. Posuere in ut semper quam pharetra at purus scelerisque. Orci turpis elementum urna dolor fringilla quam tempor egestas. Nisl in duis cras vitae a adipiscing. Imperdiet augue pellentesque elementum mi.",
         },
         {
             id: 2,
             image: "/disable.jpg",
-            title: "Stationnement réservé",
-            description: "Un parking réservé près de l'entrée, ou une navette entre le parking et les accès au site.",
+            title: "Espaces de repos",
+            description: "Lorem ipsum dolor sit amet consectetur. Diam maecenas dignissim proin quam tincidunt sapien sit. Ut neque ultricies elementum nec sapien donec lacus. Eget est massa id arcu suspendisse fermentum sit egestas sed. Lectus in vel tempor netus accumsan facilisis. Placerat urna eros hendrerit vel turpis pretium. Nisl dictum eu egestas pellentesque adipiscing tincidunt. Et bibendum velit pellentesque facilisi donec congue amet orci. Posuere in ut semper quam pharetra at purus scelerisque. Orci turpis elementum urna dolor fringilla quam tempor egestas. Nisl in duis cras vitae a adipiscing. Imperdiet augue pellentesque elementum mi.",
         },
-        {
-            id: 3,
-            image: "/disable.jpg",
-            title: "Cheminements accessibles",
-            description: "Des informations claires sur l'accessibilité des transports pour se rendre au festival.",
-        },
-        {
-            id: 4,
-            image: "/disable.jpg",
-            title: "Plaques de roulage",
-            description: "Identifier en amont les zones du site susceptibles de devenir difficiles d'accès en cas de pluie ou de passage intensif : allées principales entre les scènes, accès aux zones de restauration, parcours vers les sanitaires et le camping.\n\n Installer des plaques de roulage rigides et antidérapantes sur ces zones, en veillant à ce qu'elles soient bien fixées au sol pour éviter tout risque de basculement, et suffisamment larges pour permettre le passage d'un fauteuil roulant sans difficulté.\n\nPrévoir un balisage clair indiquant les chemins équipés de plaques, afin que les personnes à mobilité réduite puissent identifier facilement les parcours accessibles dès leur arrivée sur le site.",
-        },
-        {
-            id: 5,
-            image: "/disable.jpg",
-            title: "Plateformes dédiées",
-            description: "Des plateformes pour les personnes en fauteuil roulant, avec une place réservée à leur accompagnant.",
-        },
-        {
-            id: 6,
-            image: "/disable.jpg",
-            title: "Pentes douces",
-            description: "Des pentes à moins de 5 % sur les longs trajets, pour limiter l'effort en fauteuil manuel.",
-        },
-        {
-            id: 7,
-            image: "/disable.jpg",
-            title: "Comptoirs abaissés",
-            description: "Des comptoirs abaissés aux points de restauration et de bar.",
-        },
-        {
-            id: 8,
-            image: "/disable.jpg",
-            title: "Toilettes adaptées",
-            description: "Des cabines de toilettes accessibles aux personnes en fauteuil roulant.",
-        },
-        {
-            id: 9,
-            image: "/disable.jpg",
-            title: "Bornes de recharge",
-            description: "Des bornes de recharge et de réparation pour les fauteuils électriques.",
-        },
-        {
-            id: 10,
-            image: "/disable.jpg",
-            title: "Mains courantes",
-            description: "Des mains courantes sur les zones à risque.",
-        },
-        {
-            id: 11,
-            image: "/disable.jpg",
-            title: "Points d'étape",
-            description: "Des espaces aménagés pour faire une pause à différents endroits du parcours.",
-        },
-        {
-            id: 12,
-            image: "/disable.jpg",
-            title: "Hébergements recencés",
-            description: "Un recensement des hébergements accessibles à proximité du site.",
-        },
+
+
     ];
 
     return (
@@ -105,22 +47,17 @@ export default function MotorDisabilityPage() {
 
                         <div className="w-full lg:w-1/2">
                             <h1 >
-                                Handicap <Highlight>Moteur</Highlight>
+                                Troubles <Highlight>du spectre autistiques</Highlight>
                             </h1>
 
+                            <p className="leading-relaxed">Les personnes atteintes de troubles du spectre autistique peuvent avoir des comportements inhabituels et d'importantes difficultés à établir des relations sociales considérées comme élémentaires, ou à comprendre ce qui n'est pas parfaitement explicite (sous-entendus, plaisanteries...).</p>
+                            <p className="leading-relaxed">Selon la Haute Autorité de Santé, elles sont plus de 100 000 jeunes de moins de 20 ans et 600 000 adultes en France.</p>
 
-                            <p className="leading-relaxed">
-                                Le handicap moteur regroupe plusieurs profils avec des besoins
-                                différents : des personnes en fauteuil roulant aux personnes à
-                                mobilité réduite utilisant une canne, des béquilles ou un
-                                déambulateur, en passant par celles qui se déplacent sans
-                                assistance mais manquent d'endurance ou de force.
-                            </p>
                         </div>
                         <div className="w-full lg:w-1/2">
                             <img
                                 src="/disable.jpg"
-                                alt="Handicaps moteur"
+                                alt="Troubles psychiques"
                                 className="w-full h-64 md:h-80 lg:h-96 object-cover rounded-lg shadow-lg"
                             />
                         </div>
@@ -137,7 +74,7 @@ export default function MotorDisabilityPage() {
                         <div className="w-full lg:w-1/2">
                             <img
                                 src="/disable.jpg"
-                                alt="Enjeux"
+                                alt="Troubles psychiques"
                                 className="w-full h-64 md:h-80 lg:h-96 object-cover rounded-lg shadow-lg"
                             />
                         </div>
@@ -147,29 +84,14 @@ export default function MotorDisabilityPage() {
                             </h2>
 
                             <p className="leading-relaxed">
-                                Sur un festival, les personnes à mobilité réduite expriment
-                                plusieurs besoins récurrents :
+                                Sur un festival, les personnes en situation de handicap cognitif expriment plusieurs besoins :
                             </p>
 
                             <ul className="list-disc pl-6 mt-4 space-y-2">
-                                <li>Des déplacements les plus courts possibles</li>
-                                <li>Des surfaces planes et non glissantes</li>
-                                <li>Un bon éclairage</li>
-                                <li>
-                                    Une signalétique visible, y compris pour les personnes se
-                                    déplaçant en fauteuil roulant
-                                </li>
-                                <li>
-                                    La possibilité de faire des pauses dans leurs parcours
-                                </li>
-                                <li>
-                                    La possibilité d’être autonomes dans leur expérience du
-                                    festival
-                                </li>
-                                <li>
-                                    Des places offrant une bonne visibilité aux personnes en
-                                    fauteuil roulant
-                                </li>
+                                <li>Un accès à des informations simples et claires</li>
+                                <li>Des contacts calmes et bienveillants</li>
+                                <li>Des espaces pour s'isoler et se calmer si besoin</li>
+                                <li>Un environnement avec des lumières et des sons peu agressifs</li>
                             </ul>
                         </div>
                     </div>
