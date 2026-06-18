@@ -144,22 +144,32 @@ export default function Header() {
                         : undefined
                     }
                   >
-                    <Link
-                      href={item.href}
-                      onClick={(e) => go(e, item.href)}
-                      aria-haspopup={hasMenu || undefined}
-                      aria-expanded={hasMenu ? open : undefined}
-                      className="inline-flex items-center gap-1.5 rounded-xl px-4 py-3 text-sm font-medium text-ink transition-colors duration-200 hover:bg-ink/5"
-                    >
-                      {item.label}
-                      {hasMenu && (
+                    {hasMenu ? (
+                      // « Handicaps » n'est qu'un libellé/déclencheur du menu : un
+                      // bouton (pas de lien) → aucune redirection au clic.
+                      <button
+                        type="button"
+                        onClick={() => setOpenHref(open ? null : item.href)}
+                        aria-haspopup="true"
+                        aria-expanded={open}
+                        className="inline-flex cursor-pointer items-center gap-1.5 rounded-xl px-4 py-3 text-sm font-medium text-ink transition-colors duration-200 hover:bg-ink/5"
+                      >
+                        {item.label}
                         <ChevronDown
                           className={`size-4 transition-transform duration-200 ${
                             open ? "rotate-180" : ""
                           }`}
                         />
-                      )}
-                    </Link>
+                      </button>
+                    ) : (
+                      <Link
+                        href={item.href}
+                        onClick={(e) => go(e, item.href)}
+                        className="inline-flex items-center gap-1.5 rounded-xl px-4 py-3 text-sm font-medium text-ink transition-colors duration-200 hover:bg-ink/5"
+                      >
+                        {item.label}
+                      </Link>
+                    )}
 
                     {hasMenu && (
                       // pt-3 = pont survolable entre le lien et le panneau.

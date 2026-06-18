@@ -1,39 +1,29 @@
+// Squelette de chargement de la page pictos (teintes de la D.A.).
 export default function Loading() {
-    return (
-        <main className="mx-auto max-w-7xl px-8 py-12 animate-pulse">
-            {/* Titre */}
-            <div className="h-10 w-96 rounded bg-gray-200 mb-4" />
+  return (
+    <div className="mx-auto max-w-[1280px] px-6 py-16 sm:px-8 lg:py-24">
+      <div className="mb-12 flex max-w-3xl flex-col gap-6 lg:mb-16">
+        <div className="h-12 w-2/3 animate-pulse rounded-lg bg-ink/10" />
+        <div className="h-20 w-full animate-pulse rounded-lg bg-ink/5" />
+      </div>
 
-            {/* Description */}
-            <div className="h-5 w-[500px] rounded bg-gray-200 mb-8" />
+      <div className="mb-8 flex flex-col gap-5">
+        <div className="h-14 w-full animate-pulse rounded-xl bg-ink/5" />
+        <div className="flex gap-2">
+          <div className="h-9 w-20 animate-pulse rounded-full bg-ink/5" />
+          <div className="h-9 w-28 animate-pulse rounded-full bg-ink/5" />
+          <div className="h-9 w-24 animate-pulse rounded-full bg-ink/5" />
+        </div>
+      </div>
 
-            {/* Bouton téléchargement */}
-            <div className="h-12 w-64 rounded-lg bg-gray-200 mb-10" />
-
-            {/* Grille des pictos */}
-            <div className="grid grid-cols-5 gap-6">
-                {Array.from({ length: 20 }).map((_, index) => (
-                    <div
-                        key={index}
-                        className="
-              rounded-xl
-              border
-              border-gray-100
-              bg-white
-              p-6
-              shadow-sm
-            "
-                    >
-                        <div className="flex flex-col items-center gap-4">
-                            {/* Picto */}
-                            <div className="h-20 w-20 rounded-lg bg-gray-200" />
-
-                            {/* Nom */}
-                            <div className="h-5 w-24 rounded bg-gray-200" />
-                        </div>
-                    </div>
-                ))}
-            </div>
-        </main>
-    );
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+        {Array.from({ length: 18 }).map((_, i) => (
+          <div
+            key={i}
+            className="aspect-square animate-pulse rounded-xl border border-line bg-white"
+          />
+        ))}
+      </div>
+    </div>
+  );
 }

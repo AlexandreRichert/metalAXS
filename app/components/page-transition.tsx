@@ -11,6 +11,7 @@ import {
 import { useRouter } from "next/navigation";
 import { motion, useReducedMotion } from "motion/react";
 import LoaderSequence from "@/app/components/loader-sequence";
+import { setCovered } from "@/app/components/app-ready";
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 // ~0,75 s au total : glissements courts + un maintien plus long, écran couvert,
@@ -53,6 +54,7 @@ export default function PageTransitionProvider({
       }
       if (phase !== "idle") return; // une transition est déjà en cours
       target.current = href;
+      setCovered(true);
       setPhase("cover");
     },
     [phase, reduce, router],
@@ -67,6 +69,7 @@ export default function PageTransitionProvider({
     } else if (phase === "reveal") {
       target.current = null;
       setPhase("idle");
+      setCovered(false);
     }
   }, [phase, router]);
 

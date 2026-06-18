@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import LoaderSequence from "@/app/components/loader-sequence";
-import { markAppReady } from "@/app/components/app-ready";
+import { markAppReady, setCovered } from "@/app/components/app-ready";
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 const HOLD_MS = 1000; // une boucle de loader (24 i/s) avant la révélation
@@ -18,8 +18,8 @@ export default function PageLoader() {
 
   useEffect(() => {
     if (reduce) {
-      setPhase("done");
       markAppReady();
+      setCovered(false);
       return;
     }
     const t = window.setTimeout(() => {
@@ -31,7 +31,7 @@ export default function PageLoader() {
     return () => window.clearTimeout(t);
   }, [reduce]);
 
-  if (phase === "done") return null;
+  if (reduce || phase === "done") return null;
 
   return (
     <motion.div
@@ -40,7 +40,10 @@ export default function PageLoader() {
       animate={{ y: phase === "reveal" ? "100%" : "0%" }}
       transition={{ duration: 0.9, ease: EASE }}
       onAnimationComplete={() => {
-        if (phase === "reveal") setPhase("done");
+        if (phase === "reveal") {
+          setPhase("done");
+          setCovered(false);
+        }
       }}
     >
       <LoaderSequence />

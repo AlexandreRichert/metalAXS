@@ -13,12 +13,17 @@ function isInternal(href: string) {
 }
 
 type ButtonProps = {
-  href: string;
   children: ReactNode;
   /** Petit picto optionnel affiché à droite du texte (ex: une flèche). */
   icon?: ReactNode;
   variant?: ButtonVariant;
   className?: string;
+  /** Fourni → rendu en <Link> (déclenche la transition de page). */
+  href?: string;
+  /** Fourni (sans href) → rendu en <button> (action : téléchargement, etc.). */
+  onClick?: () => void;
+  disabled?: boolean;
+  type?: "button" | "submit";
 };
 
 type VariantConfig = {
@@ -78,6 +83,9 @@ const variantConfig: Record<ButtonVariant, VariantConfig> = {
 
 export default function Button({
   href,
+  onClick,
+  disabled = false,
+  type = "button",
   children,
   icon,
   variant = "secondary",
@@ -86,6 +94,34 @@ export default function Button({
   const config = variantConfig[variant];
   const navigate = usePageTransition();
 
+  const classes = `${baseLink} ${config.link} ${config.focus} ${
+    disabled ? "pointer-events-none opacity-60" : ""
+  } ${className}`.trim();
+
+  const inner = (
+    <>
+      <span aria-hidden="true" className={`${baseFill} ${config.fill}`} />
+      <span className={`${baseContent} ${config.text}`}>
+        <span>{children}</span>
+        {icon ? (
+          <span aria-hidden="true" className="inline-flex shrink-0">
+            {icon}
+          </span>
+        ) : null}
+      </span>
+    </>
+  );
+
+  // Mode action : rendu en <button> (pas de navigation).
+  if (!href) {
+    return (
+      <button type={type} onClick={onClick} disabled={disabled} className={classes}>
+        {inner}
+      </button>
+    );
+  }
+
+  // Mode lien : déclenche la transition de page pour les liens internes.
   const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
     if (
       isInternal(href) &&
@@ -101,20 +137,8 @@ export default function Button({
   };
 
   return (
-    <Link
-      href={href}
-      onClick={handleClick}
-      className={`${baseLink} ${config.link} ${config.focus} ${className}`.trim()}
-    >
-      <span aria-hidden="true" className={`${baseFill} ${config.fill}`} />
-      <span className={`${baseContent} ${config.text}`}>
-        <span>{children}</span>
-        {icon ? (
-          <span aria-hidden="true" className="inline-flex shrink-0">
-            {icon}
-          </span>
-        ) : null}
-      </span>
+    <Link href={href} onClick={handleClick} className={classes}>
+      {inner}
     </Link>
   );
 }
