@@ -8,7 +8,7 @@ import Reveal from "@/app/components/animations/reveal";
 export default function Hero() {
   return (
     <section className="mx-auto -mt-24 max-w-[1440px] px-4 sm:px-8">
-      <div className="relative flex min-h-[640px] items-center justify-center overflow-hidden rounded-[32px] px-6 pb-20 pt-36 lg:min-h-[760px]">
+      <div className="relative flex min-h-[640px] items-center justify-center overflow-hidden rounded-lg px-6 pb-20 pt-36 lg:min-h-[760px]">
         <Image
           src="/home/hero.jpg"
           alt="Foule lors d'un festival de musique métal"
@@ -39,9 +39,6 @@ export default function Hero() {
           <Reveal delay={0.8} y={20} className="flex flex-wrap items-center justify-center gap-4">
             <Button href="/questionnaire" variant="primary" size="lg">
               Auditez-vous
-            </Button>
-            <Button href="/goodPractices" variant="secondary" size="lg">
-              Consulter les bonnes pratiques
             </Button>
           </Reveal>
         </div>

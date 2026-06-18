@@ -4,7 +4,7 @@ import Highlight from "@/app/components/home/highlight";
 const lorem =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
 
-// Trois blocs alternés présentant l'accessibilité (Figma « Frame 27 »).
+// Blocs alternés présentant l'accessibilité (Figma « Frame 27 »).
 export default function FeaturesSection() {
   return (
     <section className="mx-auto max-w-[1200px] px-6 py-20 sm:px-8 lg:py-28">
@@ -30,21 +30,6 @@ export default function FeaturesSection() {
           title={
             <>
               Comment <Highlight>débuter</Highlight> ?
-            </>
-          }
-          subtitle={lorem}
-          ctaLabel="Auditez-vous"
-          ctaHref="/questionnaire"
-        />
-
-        <FeatureRow
-          image="/home/stage.jpg"
-          imageAlt="Festivaliers devant la scène principale"
-          title={
-            <>
-              Retours
-              <br />
-              d’<Highlight>expériences</Highlight>
             </>
           }
           subtitle={lorem}

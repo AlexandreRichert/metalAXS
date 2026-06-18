@@ -2,6 +2,7 @@
 
 import { useRef, type ReactNode } from "react";
 import { motion, useInView, useReducedMotion } from "motion/react";
+import { useAppReady } from "@/app/components/app-ready";
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -11,7 +12,8 @@ export default function Highlight({ children }: { children: ReactNode }) {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: false, amount: 0.6 });
   const reduce = useReducedMotion();
-  const revealed = reduce || inView;
+  const ready = useAppReady();
+  const revealed = reduce || (inView && ready);
 
   return (
     <mark

@@ -5,6 +5,7 @@ import { motion, useReducedMotion } from "motion/react";
 import Link from "next/link";
 import Button from "@/app/components/button";
 import { ChevronDown } from "@/app/components/icons";
+import { useAppReady } from "@/app/components/app-ready";
 
 // Navigation principale (Figma « Navbar », états default / scroll).
 const navItems = [
@@ -20,6 +21,8 @@ const EASE = "[transition-timing-function:cubic-bezier(0.22,1,0.36,1)]";
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const reduce = useReducedMotion();
+  // L'en-tête glisse depuis le haut une fois le loader d'accueil disparu.
+  const ready = useAppReady();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -29,10 +32,21 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
+    <motion.header
+      className="fixed inset-x-0 top-0 z-50"
+      initial={{ y: -120, opacity: 0 }}
+      animate={
+        ready || reduce ? { y: 0, opacity: 1 } : { y: -120, opacity: 0 }
+      }
+      transition={{ duration: reduce ? 0 : 0.8, ease: [0.22, 1, 0.36, 1] }}
+    >
       {/* Conteneur aligné sur le héro (max 1440) ; l'inset horizontal plus large que
           celui du héro rend la nav ~24px plus étroite que la carte, comme sur Figma. */}
-      <div className="mx-auto max-w-[1440px] px-8 pt-10 sm:px-14 sm:pt-14">
+      <div
+        className={`mx-auto max-w-[1440px] px-8 transition-[padding] duration-500 sm:px-14 ${EASE} ${
+          scrolled ? "pt-4 sm:pt-6" : "pt-10 sm:pt-14"
+        }`}
+      >
         <nav
           className={`mx-auto flex w-full items-center justify-between gap-4 rounded-lg bg-white px-3 py-2.5 transition-[max-width,box-shadow] duration-500 ${EASE} sm:px-5 ${
             scrolled
@@ -90,6 +104,6 @@ export default function Header() {
           </Button>
         </nav>
       </div>
-    </header>
+    </motion.header>
   );
 }

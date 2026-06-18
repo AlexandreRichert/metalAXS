@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { animate, useInView, useReducedMotion } from "motion/react";
+import { useAppReady } from "@/app/components/app-ready";
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -33,13 +34,14 @@ export default function CountUp({
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: false, amount });
   const reduce = useReducedMotion();
+  const ready = useAppReady();
 
   const format = (value: number) =>
     `${prefix}${value.toFixed(decimals)}${suffix}`;
 
   useEffect(() => {
     const el = ref.current;
-    if (!el || reduce || !inView) return;
+    if (!el || reduce || !inView || !ready) return;
 
     const controls = animate(from, to, {
       duration,
@@ -51,7 +53,7 @@ export default function CountUp({
 
     return () => controls.stop();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inView, from, to, duration, reduce]);
+  }, [inView, ready, from, to, duration, reduce]);
 
   return (
     <span ref={ref} className={className}>

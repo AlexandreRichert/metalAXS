@@ -2,6 +2,7 @@
 
 import { useRef, type ElementType } from "react";
 import { motion, useInView, useReducedMotion } from "motion/react";
+import { useAppReady } from "@/app/components/app-ready";
 
 // Courbe de Bézier douce (ease-out expo) partagée par toutes les animations.
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -38,6 +39,7 @@ export default function SplitText({
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: false, amount });
   const reduce = useReducedMotion();
+  const ready = useAppReady();
 
   if (reduce) {
     return <Tag className={className}>{text}</Tag>;
@@ -62,7 +64,7 @@ export default function SplitText({
                       className="inline-block"
                       initial={{ opacity: 0, y: yOffset }}
                       animate={
-                        inView
+                        inView && ready
                           ? { opacity: 1, y: 0 }
                           : { opacity: 0, y: yOffset }
                       }

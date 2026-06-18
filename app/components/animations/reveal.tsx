@@ -1,7 +1,8 @@
 "use client";
 
-import { useMemo, type ComponentProps, type ElementType, type ReactNode } from "react";
-import { motion, useReducedMotion } from "motion/react";
+import { useMemo, useRef, type ElementType, type ReactNode } from "react";
+import { motion, useInView, useReducedMotion } from "motion/react";
+import { useAppReady } from "@/app/components/app-ready";
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -21,6 +22,7 @@ type RevealProps = {
 
 // Apparition au scroll (fondu + glissement) avec une courbe de Bézier douce.
 // Enveloppe sections, images ou blocs de texte tout en conservant leur balise.
+// Attend `useAppReady()` pour ne pas se déclencher derrière le loader.
 export default function Reveal({
   children,
   as = "div",
@@ -32,6 +34,9 @@ export default function Reveal({
   amount = 0.2,
 }: RevealProps) {
   const reduce = useReducedMotion();
+  const ready = useAppReady();
+  const ref = useRef<HTMLElement>(null);
+  const inView = useInView(ref, { once: false, amount });
   const MotionTag = useMemo(
     () => motion.create(as as ElementType) as ElementType,
     [as],
@@ -42,13 +47,17 @@ export default function Reveal({
     return <Tag className={className}>{children}</Tag>;
   }
 
-  const props: ComponentProps<typeof motion.div> = {
-    className,
-    initial: { opacity: 0, y, x },
-    whileInView: { opacity: 1, y: 0, x: 0 },
-    viewport: { once: false, amount },
-    transition: { duration, ease: EASE, delay },
-  };
-
-  return <MotionTag {...props}>{children}</MotionTag>;
+  return (
+    <MotionTag
+      ref={ref}
+      className={className}
+      initial={{ opacity: 0, y, x }}
+      animate={
+        inView && ready ? { opacity: 1, y: 0, x: 0 } : { opacity: 0, y, x }
+      }
+      transition={{ duration, ease: EASE, delay }}
+    >
+      {children}
+    </MotionTag>
+  );
 }
