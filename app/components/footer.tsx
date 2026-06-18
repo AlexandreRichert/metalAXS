@@ -130,13 +130,12 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Logotype : crème, droit, tracking serré, dimensionné en cqw pour remplir
-            la largeur de contenu sans déborder (conteneur de requête explicite). */}
-        <div className="mt-14 lg:mt-16" style={{ containerType: "inline-size" }}>
-          <span className="block whitespace-nowrap font-display text-[11cqw] font-extrabold uppercase leading-[0.8] tracking-tight text-cream">
-            all access metal
-          </span>
-        </div>
+        {/* Logotype : SVG pleine largeur du conteneur de contenu (1376×72). */}
+        <img
+          src="/allaccessmetalfooter.svg"
+          alt="All Access Metal"
+          className="mt-14 block h-auto w-full lg:mt-16"
+        />
 
         {/* Crédits */}
         <div className="mt-8 flex flex-col gap-2 text-sm font-medium text-muted sm:flex-row sm:items-center sm:justify-between">

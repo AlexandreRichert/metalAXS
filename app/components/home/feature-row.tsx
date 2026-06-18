@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Button from "@/app/components/button";
 import Grain from "@/app/components/home/grain";
+import BlurText from "@/app/components/animations/blur-text";
+import Reveal from "@/app/components/animations/reveal";
 
 type FeatureRowProps = {
   image: string;
@@ -25,7 +27,9 @@ export default function FeatureRow({
 }: FeatureRowProps) {
   return (
     <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-20">
-      <div
+      <Reveal
+        x={reversed ? 60 : -60}
+        y={0}
         className={`relative h-64 overflow-hidden rounded-lg sm:h-80 lg:h-[400px] ${
           reversed ? "lg:order-2" : ""
         }`}
@@ -38,18 +42,29 @@ export default function FeatureRow({
           className="object-cover"
         />
         <Grain sizes="(min-width: 1024px) 560px, 100vw" />
-      </div>
+      </Reveal>
 
       <div className="flex flex-col items-start gap-6">
         <div className="flex flex-col gap-4">
-          <h2 className="font-display text-4xl font-extrabold uppercase leading-[0.95] text-ink sm:text-5xl">
+          <Reveal
+            as="h2"
+            y={28}
+            className="font-display text-4xl font-extrabold uppercase leading-[0.95] text-ink sm:text-5xl"
+          >
             {title}
-          </h2>
-          <p className="max-w-xl text-base text-muted sm:text-lg">{subtitle}</p>
+          </Reveal>
+          <BlurText
+            as="p"
+            delay={0.15}
+            text={subtitle}
+            className="max-w-xl text-base text-muted sm:text-lg"
+          />
         </div>
-        <Button href={ctaHref} variant="secondary">
-          {ctaLabel}
-        </Button>
+        <Reveal delay={0.3} y={16}>
+          <Button href={ctaHref} variant="secondary">
+            {ctaLabel}
+          </Button>
+        </Reveal>
       </div>
     </div>
   );

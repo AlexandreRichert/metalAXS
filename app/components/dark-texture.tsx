@@ -1,16 +1,14 @@
-import Image from "next/image";
-
 // Fond texturé sombre (node Figma 3e29… sur aplat #2c1f00) des sections sombres.
-// À placer en premier enfant d'un conteneur `relative bg-ink`.
+// `bg-fixed` (background-attachment: fixed) cale la texture sur le viewport : deux
+// sections sombres adjacentes (AUDITEZ-VOUS + footer) partagent ainsi UNE seule
+// texture continue, comme dans le design Figma (Frame 35), au lieu d'un raccord.
+// À placer en premier enfant d'un conteneur `relative overflow-hidden bg-ink`.
 export default function DarkTexture() {
   return (
-    <Image
-      src="/home/dark-texture.jpg"
-      alt=""
+    <div
       aria-hidden="true"
-      fill
-      sizes="100vw"
-      className="pointer-events-none select-none object-cover opacity-60"
+      className="pointer-events-none absolute inset-0 select-none bg-cover bg-fixed bg-center opacity-60"
+      style={{ backgroundImage: "url('/home/dark-texture.jpg')" }}
     />
   );
 }

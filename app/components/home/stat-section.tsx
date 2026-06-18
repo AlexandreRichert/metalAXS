@@ -1,8 +1,10 @@
 import Image from "next/image";
-import Link from "next/link";
+import Button from "@/app/components/button";
 import Grain from "@/app/components/home/grain";
 import DarkTexture from "@/app/components/dark-texture";
-import { ArrowRight } from "@/app/components/icons";
+import CountUp from "@/app/components/animations/count-up";
+import BlurText from "@/app/components/animations/blur-text";
+import Reveal from "@/app/components/animations/reveal";
 
 type DisabilityCard = {
   title: string;
@@ -55,22 +57,25 @@ export default function StatSection() {
       <DarkTexture />
       <div className="relative mx-auto max-w-[1280px] px-6 py-20 sm:px-8 lg:py-28">
         <div className="mx-auto flex max-w-2xl flex-col items-center gap-4 text-center">
-          <p className="font-display text-7xl font-extrabold uppercase leading-none text-lime sm:text-8xl lg:text-[120px]">
-            75%
-          </p>
-          <p className="text-lg text-cream/90 sm:text-xl">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </p>
+          <CountUp
+            to={75}
+            suffix="%"
+            duration={2}
+            className="font-display text-7xl font-extrabold uppercase leading-none text-lime sm:text-8xl lg:text-[120px]"
+          />
+          <BlurText
+            as="p"
+            delay={0.2}
+            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            className="text-lg text-cream/90 sm:text-xl"
+          />
         </div>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4">
-          {cards.map((card) => (
-            <article
-              key={card.title}
-              className="flex flex-col gap-4 rounded-2xl bg-white p-6 text-ink"
-            >
-              <div className="relative h-48 overflow-hidden rounded-lg">
+          {cards.map((card, i) => (
+            <Reveal as="article" key={card.title} y={40} delay={i * 0.1} className="h-full">
+              <div className="flex h-full flex-col gap-4 rounded-lg bg-white p-6 text-ink transition duration-300 ease-out hover:-translate-y-2 hover:shadow-[0px_18px_40px_0px_rgba(0,0,0,0.3)]">
+              <div className="relative h-[200px] overflow-hidden rounded-lg">
                 <Image
                   src={card.image}
                   alt={`Handicap ${card.title.toLowerCase()}`}
@@ -80,31 +85,33 @@ export default function StatSection() {
                 />
                 <div className="absolute inset-0 bg-ink/50" />
                 <Grain sizes="(min-width: 1024px) 260px, (min-width: 640px) 50vw, 100vw" />
-                <span className="absolute inset-0 z-10 flex items-center justify-center font-display text-6xl font-extrabold uppercase text-lime">
+                <span className="absolute inset-0 z-10 flex items-center justify-center font-display text-7xl font-extrabold uppercase text-lime">
                   {card.stat}
                 </span>
               </div>
 
-              <div className="flex flex-1 flex-col gap-4">
-                <div className="flex flex-col gap-2">
-                  <div className="flex items-center gap-3">
-                    <h3 className="font-display text-2xl font-extrabold uppercase leading-none">
+              <div className="flex flex-1 flex-col gap-6">
+                <div className="flex flex-col gap-4">
+                  <div className="flex items-center gap-4">
+                    <h3 className="font-display text-3xl font-extrabold uppercase leading-none">
                       {card.title}
                     </h3>
-                    <i className={`${card.icon} text-xl text-ink`} aria-hidden="true" />
+                    <i className={`${card.icon} text-2xl text-ink`} aria-hidden="true" />
                   </div>
-                  <p className="text-sm text-muted">{card.subtitle}</p>
+                  <p className="text-lg leading-snug">{card.subtitle}</p>
                 </div>
 
-                <Link
+                <Button
                   href={card.href}
-                  aria-label={`En savoir plus sur les handicaps ${card.title.toLowerCase()}`}
-                  className="mt-auto inline-flex size-10 items-center justify-center self-start rounded-xl border border-ink/80 text-ink transition-colors hover:bg-ink hover:text-cream"
+                  variant="primary"
+                  size="md"
+                  className="mt-auto self-start"
                 >
-                  <ArrowRight className="size-4" />
-                </Link>
+                  Informez-vous
+                </Button>
               </div>
-            </article>
+              </div>
+            </Reveal>
           ))}
         </div>
       </div>
