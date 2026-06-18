@@ -1,8 +1,32 @@
 import { defineQuery } from "next-sanity";
 
+// Projection GROQ partagée pour les tags résolus (références cassées exclues).
+const POST_TAGS_PROJECTION = `
+  "tags": array::compact(tags[]->{
+    _id,
+    title,
+    "slug": slug.current,
+    "categoryId": category._ref
+  })[defined(title)]
+`;
+
 // ------------------------------------------------------------------
 // Articles de blog
 // ------------------------------------------------------------------
+
+// Groupes de tags avec leurs tags (panneau de filtres).
+export const FILTER_GROUPS_QUERY = defineQuery(`
+  *[_type == "category"] | order(order asc, title asc) {
+    _id,
+    title,
+    "slug": slug.current,
+    "tags": *[_type == "tag" && references(^._id)] | order(title asc) {
+      _id,
+      title,
+      "slug": slug.current
+    }
+  }
+`);
 
 // Liste des articles publiés, triés du plus récent au plus ancien.
 export const POSTS_QUERY = defineQuery(`
@@ -14,7 +38,7 @@ export const POSTS_QUERY = defineQuery(`
     description,
     publishedAt,
     mainImage,
-    tags,
+    ${POST_TAGS_PROJECTION},
     "author": author->{ name, "slug": slug.current, avatar }
   }
 `);
@@ -29,7 +53,7 @@ export const POST_QUERY = defineQuery(`
     publishedAt,
     mainImage,
     gallery,
-    tags,
+    ${POST_TAGS_PROJECTION},
     body,
     "author": author->{ name, "slug": slug.current, avatar, bio }
   }
@@ -44,7 +68,7 @@ export const LATEST_POST_QUERY = defineQuery(`
     description,
     publishedAt,
     mainImage,
-    tags,
+    ${POST_TAGS_PROJECTION},
     "author": author->{ name, "slug": slug.current, avatar, bio }
   }
 `);
@@ -58,7 +82,7 @@ export const POSTS_LIST_QUERY = defineQuery(`
     description,
     publishedAt,
     mainImage,
-    tags,
+    ${POST_TAGS_PROJECTION},
     "author": author->{ name, "slug": slug.current, avatar, bio }
   }
 `);

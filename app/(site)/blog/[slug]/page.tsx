@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 
 import PortableTextRenderer from "@/app/components/portable-text";
 import { client } from "@/sanity/lib/client";
+import { getPostTags } from "@/sanity/lib/post-tags";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { urlForImage } from "@/sanity/lib/image";
 import { POST_QUERY, POSTS_SLUGS_QUERY } from "@/sanity/lib/queries";
@@ -49,10 +50,12 @@ export default async function PostPage({ params }: PageProps) {
   const post = await sanityFetch<Post | null>({
     query: POST_QUERY,
     params: { slug },
-    tags: [`post:${slug}`, "author"],
+    tags: [`post:${slug}`, "author", "category", "tag"],
   });
 
   if (!post) notFound();
+
+  const postTags = getPostTags(post);
 
   return (
     <article className="mx-auto px-4 py-12">
@@ -64,14 +67,14 @@ export default async function PostPage({ params }: PageProps) {
       </Link>
 
       <header className="mt-4 mb-8">
-        {post.tags && post.tags.length > 0 ? (
+        {postTags.length > 0 ? (
           <div className="mb-3 flex flex-wrap gap-2">
-            {post.tags.map((tag) => (
+            {postTags.map((tag) => (
               <span
-                key={tag}
+                key={tag._id}
                 className="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-600"
               >
-                {tag}
+                {tag.title}
               </span>
             ))}
           </div>

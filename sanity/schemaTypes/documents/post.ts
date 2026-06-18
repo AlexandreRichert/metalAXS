@@ -78,8 +78,7 @@ export const post = defineType({
       title: "Tags",
       type: "array",
       group: "meta",
-      of: [{ type: "string" }],
-      options: { layout: "tags" },
+      of: [defineArrayMember({ type: "reference", to: [{ type: "tag" }] })],
     }),
     defineField({
       name: "author",
@@ -87,13 +86,6 @@ export const post = defineType({
       type: "reference",
       group: "meta",
       to: [{ type: "author" }],
-    }),
-    defineField({
-      name: "categories",
-      title: "Catégories",
-      type: "array",
-      group: "meta",
-      of: [defineArrayMember({ type: "reference", to: [{ type: "category" }] })],
     }),
     defineField({
       name: "publishedAt",

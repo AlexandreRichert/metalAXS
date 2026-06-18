@@ -14,7 +14,8 @@ export const structure: StructureResolver = (S) =>
             .items([
               S.documentTypeListItem("post").title("Articles"),
               S.documentTypeListItem("author").title("Auteurs"),
-              S.documentTypeListItem("category").title("Catégories"),
+              S.documentTypeListItem("category").title("Groupes de tags"),
+              S.documentTypeListItem("tag").title("Tags"),
             ])
         ),
       S.divider(),
