@@ -34,6 +34,7 @@ export const POSTS_QUERY = defineQuery(`
   | order(coalesce(publishedAt, _createdAt) desc) {
     _id,
     title,
+    titleHighlight,
     "slug": slug.current,
     description,
     publishedAt,
@@ -48,6 +49,7 @@ export const POST_QUERY = defineQuery(`
   *[_type == "post" && slug.current == $slug][0]{
     _id,
     title,
+    titleHighlight,
     "slug": slug.current,
     description,
     publishedAt,
@@ -64,6 +66,7 @@ export const LATEST_POST_QUERY = defineQuery(`
   | order(coalesce(publishedAt, _createdAt) desc, _createdAt desc)[0]{
     _id,
     title,
+    titleHighlight,
     "slug": slug.current,
     description,
     publishedAt,
@@ -78,6 +81,7 @@ export const POSTS_LIST_QUERY = defineQuery(`
   | order(coalesce(publishedAt, _createdAt) desc, _createdAt desc)[1...10]{
     _id,
     title,
+    titleHighlight,
     "slug": slug.current,
     description,
     publishedAt,

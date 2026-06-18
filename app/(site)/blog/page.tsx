@@ -3,6 +3,7 @@ import Image from "next/image";
 
 import Button from "@/app/components/button";
 import { BlogPostsSearch } from "@/app/components/blog-posts-search";
+import TitleWithHighlight from "@/app/components/title-with-highlight";
 import { getPostTags } from "@/sanity/lib/post-tags";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { urlForImage } from "@/sanity/lib/image";
@@ -70,7 +71,12 @@ export default async function BlogPage() {
                 ))}
               </ul>
             ) : null}
-            <h1 className="text-h3 text-primary font-black ">{latestPost?.title}</h1>
+            <TitleWithHighlight
+              title={latestPost?.title ?? ""}
+              highlight={latestPost?.titleHighlight}
+              as="h1"
+              className="text-h3 text-primary font-black"
+            />
             <p className="text-lg text-secondary">{latestPost?.description}</p>
           </div>
           <Button

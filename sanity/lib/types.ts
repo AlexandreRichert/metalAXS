@@ -45,6 +45,7 @@ export type FilterGroup = {
 export type PostListItem = {
   _id: string;
   title: string;
+  titleHighlight?: string;
   slug: string;
   description: string;
   publishedAt?: string;
@@ -56,6 +57,7 @@ export type PostListItem = {
 export type Post = {
   _id: string;
   title: string;
+  titleHighlight?: string;
   slug: string;
   description: string;
   publishedAt?: string;

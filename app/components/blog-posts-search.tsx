@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+import TitleWithHighlight from "@/app/components/title-with-highlight";
 import { urlForImage } from "@/sanity/lib/image";
 import { getPostTags } from "@/sanity/lib/post-tags";
 import type { FilterGroup, PostListItem } from "@/sanity/lib/types";
@@ -341,9 +342,12 @@ export function BlogPostsSearch({
                         ))}
                       </ul>
                     ) : null}
-                    <h2 className="mt-2 text-h3 font-black uppercase text-primary">
-                      {post.title}
-                    </h2>
+                    <TitleWithHighlight
+                      title={post.title}
+                      highlight={post.titleHighlight}
+                      as="h2"
+                      className="mt-2 text-h3 font-black uppercase text-primary"
+                    />
                     <p className="mt-2 text-lg text-secondary">
                       {post.description}
                     </p>

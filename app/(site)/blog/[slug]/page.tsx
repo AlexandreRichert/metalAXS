@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 
 import { ArrowRight } from "@/app/components/icons";
 import PortableTextRenderer from "@/app/components/portable-text";
+import TitleWithHighlight from "@/app/components/title-with-highlight";
 import { TableOfContents } from "@/app/components/table-of-contents";
 import { extractHeadings } from "@/app/lib/headings";
 import { client } from "@/sanity/lib/client";
@@ -86,9 +87,12 @@ export default async function PostPage({ params }: PageProps) {
             </div>
           ) : null}
 
-          <h1 className="font-display text-blog-title font-black uppercase leading-[0.9] text-ink">
-            {post.title}
-          </h1>
+          <TitleWithHighlight
+            title={post.title}
+            highlight={post.titleHighlight}
+            as="h1"
+            className="font-display text-blog-title font-black uppercase leading-[0.9] text-ink"
+          />
 
           {publishedDate ? (
             <p className="text-sm font-medium leading-[1.25] text-muted">
