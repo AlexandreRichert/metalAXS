@@ -50,11 +50,11 @@ function sortByDateRecent(posts: PostListItem[]) {
 }
 
 export function BlogPostsSearch({
-  defaultPosts,
+  latestPostId,
   allPosts,
   filterGroups,
 }: {
-  defaultPosts: PostListItem[];
+  latestPostId?: string;
   allPosts: PostListItem[];
   filterGroups: FilterGroup[];
 }) {
@@ -85,7 +85,11 @@ export function BlogPostsSearch({
 
   const visiblePosts = useMemo(() => {
     if (!isFiltered) {
-      return sortByDateRecent(defaultPosts);
+      // Tous les articles sauf l'article vedette (mis en avant en en-tête).
+      // Le bento se charge ensuite de les paginer par blocs de 6.
+      return sortByDateRecent(allPosts).filter(
+        (post) => post._id !== latestPostId
+      );
     }
 
     let posts = allPosts.filter((post) =>
@@ -118,7 +122,7 @@ export function BlogPostsSearch({
     isSearching,
     submittedQuery,
     allPosts,
-    defaultPosts,
+    latestPostId,
     appliedTagIds,
   ]);
 
@@ -162,7 +166,7 @@ export function BlogPostsSearch({
   }
 
   return (
-    <div className="mx-auto w-full max-w-[1200px]">
+    <div className="mx-auto w-full max-w-[1200px] overflow-visible">
       <div ref={containerRef} className="relative z-20 mb-10">
         <form
           onSubmit={handleSubmit}

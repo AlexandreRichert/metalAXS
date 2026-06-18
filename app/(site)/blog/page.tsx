@@ -10,7 +10,6 @@ import { urlForImage } from "@/sanity/lib/image";
 import {
   FILTER_GROUPS_QUERY,
   LATEST_POST_QUERY,
-  POSTS_LIST_QUERY,
   POSTS_QUERY,
 } from "@/sanity/lib/queries";
 import type { FilterGroup, PostListItem } from "@/sanity/lib/types";
@@ -36,10 +35,6 @@ export default async function BlogPage() {
     query: LATEST_POST_QUERY,
     tags: ["post", "author", "category", "tag"],
   });
-  const posts = await sanityFetch<PostListItem[]>({
-    query: POSTS_LIST_QUERY,
-    tags: ["post", "author", "category", "tag"],
-  });
   const allPosts = await sanityFetch<PostListItem[]>({
     query: POSTS_QUERY,
     tags: ["post", "author", "category", "tag"],
@@ -53,7 +48,7 @@ export default async function BlogPage() {
 
   return (
     <div className="mx-auto my-16 max-w-[1200px] lg:my-24">
-      <section className="mx-auto mb-10 flex w-full max-w-[1200px] items-stretch gap-20 p-6">
+      <section className="mx-auto flex w-full max-w-[1200px] items-stretch gap-20 p-6">
         <div className="flex w-1/2 flex-col gap-8">
           <div className="flex flex-col gap-4">
             <p className="font-sans text-sm font-medium uppercase text-ink">
@@ -126,11 +121,13 @@ export default async function BlogPage() {
         </div>
       </section>
 
-      <BlogPostsSearch
-        defaultPosts={posts}
-        allPosts={allPosts}
-        filterGroups={filterGroups}
-      />
+      <section className="mt-24 lg:mt-36">
+        <BlogPostsSearch
+          latestPostId={latestPost?._id}
+          allPosts={allPosts}
+          filterGroups={filterGroups}
+        />
+      </section>
     </div>
   );
 }
