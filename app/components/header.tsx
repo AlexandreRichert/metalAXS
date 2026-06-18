@@ -9,7 +9,7 @@ import { useAppReady } from "@/app/components/app-ready";
 
 // Navigation principale (Figma « Navbar », états default / scroll).
 const navItems = [
-  { label: "Bonnes pratiques", href: "/goodPractices", dropdown: true },
+  { label: "Bonnes pratiques", href: "/blog", dropdown: true },
   { label: "Handicaps", href: "/disabilitiesTypes", dropdown: true },
   { label: "Ressources", href: "/ressources", dropdown: true },
   { label: "La Fédé", href: "/federation", dropdown: false },
