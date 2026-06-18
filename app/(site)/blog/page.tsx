@@ -22,11 +22,13 @@ export const metadata: Metadata = {
 
 function formatDate(value?: string) {
   if (!value) return null;
-  return new Date(value).toLocaleDateString("fr-FR", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  return new Date(value)
+    .toLocaleDateString("fr-FR", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })
+    .toUpperCase();
 }
 
 export default async function BlogPage() {
@@ -51,33 +53,35 @@ export default async function BlogPage() {
 
   return (
     <div className="mx-auto max-w-[1200px]">
-      <section className="mx-auto mb-10 flex h-[450px] w-full max-w-[1200px] gap-20 p-6">
-        <div className="flex flex-col gap-8 w-1/3 pt-4">
+      <section className="mx-auto mb-10 flex w-full max-w-[1200px] items-stretch gap-20 p-6">
+        <div className="flex w-1/2 flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <p className="text-sm text-secondary">
+            <p className="font-sans text-sm font-medium uppercase text-ink">
               {[latestPost?.author?.name, formatDate(latestPost?.publishedAt)]
                 .filter(Boolean)
                 .join(" — ")}
             </p>
+            <TitleWithHighlight
+              title={latestPost?.title ?? ""}
+              highlight={latestPost?.titleHighlight}
+              as="h1"
+              className="font-display text-h2 font-black uppercase leading-[0.95] text-ink"
+            />
             {latestPostTags.length > 0 ? (
               <ul className="flex flex-wrap gap-2">
                 {latestPostTags.map((tag) => (
                   <li
                     key={tag._id}
-                    className="rounded-full bg-[#E3E1DC] px-3 py-1 text-xs text-primary"
+                    className="rounded-full bg-line px-3 py-1 text-xs font-medium uppercase text-ink"
                   >
                     {tag.title}
                   </li>
                 ))}
               </ul>
             ) : null}
-            <TitleWithHighlight
-              title={latestPost?.title ?? ""}
-              highlight={latestPost?.titleHighlight}
-              as="h1"
-              className="text-h3 text-primary font-black"
-            />
-            <p className="text-lg text-secondary">{latestPost?.description}</p>
+            <p className="font-sans text-[22px] font-medium leading-snug text-ink">
+              {latestPost?.description}
+            </p>
           </div>
           <Button
             href={`/blog/${latestPost?.slug}`}
@@ -104,7 +108,7 @@ export default async function BlogPage() {
             Lire l&apos;article
           </Button>
         </div>
-        <div className="h-full w-2/3">
+        <div className="relative w-1/2">
           {latestPost?.mainImage?.asset ? (
             <Image
               src={urlForImage(latestPost.mainImage)
@@ -113,9 +117,10 @@ export default async function BlogPage() {
                 .fit("max")
                 .url()}
               alt={latestPost.mainImage.alt || latestPost.title}
-              width={800}
-              height={450}
-              className="h-full w-full object-cover rounded-4xl"
+              fill
+              sizes="(max-width: 1200px) 50vw, 600px"
+              className="rounded-[32px] object-cover"
+              priority
             />
           ) : null}
         </div>

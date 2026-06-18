@@ -80,7 +80,7 @@ function makeComponents(counts: Record<string, number>): PortableTextComponents 
     },
     marks: {
       highlight: ({ children }) => (
-        <mark className="highlight-mark bg-transparent text-inherit">
+        <mark className="highlight-mark text-inherit">
           {children}
         </mark>
       ),

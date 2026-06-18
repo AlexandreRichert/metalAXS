@@ -54,26 +54,6 @@
   --font-hintdake-stamp: var(--font-hintdake-stamp-family);
 }
 
-@keyframes highlight-sweep {
-  from {
-    background-size: 0% 100%;
-  }
-  to {
-    background-size: 100% 100%;
-  }
-}
-
-.highlight-mark {
-  background-image: linear-gradient(var(--color-lime), var(--color-lime));
-  background-repeat: no-repeat;
-  background-position: left center;
-  background-size: 0% 100%;
-  animation: highlight-sweep 0.6s ease-out forwards;
-  animation-delay: 0.2s;
-  padding: 0 0.1em;
-  border-radius: 2px;
-}
-
 @layer base {
   :root {
     --background: #f2ede3;
@@ -137,4 +117,27 @@
   h6 {
     font-family: var(--font-heading), sans-serif;
   }
+}
+
+@keyframes highlight-sweep {
+  from {
+    background-size: 0% 1.08em;
+  }
+  to {
+    background-size: 100% 1.08em;
+  }
+}
+
+.highlight-mark {
+  background-color: transparent;
+  background-image: linear-gradient(var(--color-lime), var(--color-lime));
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 0% 1.05em;
+  animation: highlight-sweep 0.6s ease-out 0.2s forwards;
+  padding: 0 0.05em;
+  border-radius: 2px;
+  color: inherit;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }

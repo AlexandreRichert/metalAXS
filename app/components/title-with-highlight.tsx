@@ -22,7 +22,7 @@ export default function TitleWithHighlight({
   return (
     <Tag className={className}>
       {parts.before}
-      <mark className="highlight-mark bg-transparent text-inherit">
+      <mark className="highlight-mark text-inherit">
         {parts.match}
       </mark>
       {parts.after}
