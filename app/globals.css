@@ -1,5 +1,11 @@
 @import 'tailwindcss';
 
+:root {
+  /* Palette Metal AXS (issue des variables Figma) */
+  --background: #f2ede3; /* White / crème */
+  --foreground: #2c1f00; /* Brown / encre */
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -25,9 +31,21 @@
   --font-weight-bold: var(--weight-bold);
   --font-weight-extrabold: var(--weight-extrabold);
   --font-weight-black: var(--weight-black);
+
+  /* Couleurs de marque */
+  --color-cream: #f2ede3;
+  --color-ink: #2c1f00;
+  --color-muted: #807866;
+  --color-lime: #abf000;
+  --color-flame: #fc470d;
+  --color-wine: #610017;
+  --color-line: #e3e1dc;
+
+  /* Polices */
   --font-sans: var(--font-mark-pro);
   --font-heading: var(--font-afacad-flux);
   --default-font-family: var(--font-mark-pro);
+  --font-display: var(--font-afacad-flux);
   --font-mono: var(--font-geist-mono);
   --default-mono-font-family: var(--font-geist-mono);
   --font-hintdake-rough: var(--font-hintdake-rough-family);

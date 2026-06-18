@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist_Mono } from "next/font/google";
+import { Afacad_Flux, Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 
