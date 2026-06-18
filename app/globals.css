@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   /* Palette Metal AXS (issue des variables Figma) */
@@ -9,6 +9,28 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-amm-orange: var(--amm-orange);
+  --color-amm-green: var(--amm-green);
+  --text-hero: var(--text-hero);
+  --text-h1: var(--text-h1);
+  --text-h2: var(--text-h2);
+  --text-h3: var(--text-h3);
+  --text-h4: var(--text-h4);
+  --text-h5: var(--text-h5);
+  --text-sm: var(--text-sm);
+  --text-default: var(--text-default);
+  --text-lg: var(--text-lg);
+  --font-weight-thin: var(--weight-thin);
+  --font-weight-extralight: var(--weight-extralight);
+  --font-weight-light: var(--weight-light);
+  --font-weight-normal: var(--weight-normal);
+  --font-weight-medium: var(--weight-medium);
+  --font-weight-semibold: var(--weight-semibold);
+  --font-weight-bold: var(--weight-bold);
+  --font-weight-extrabold: var(--weight-extrabold);
+  --font-weight-black: var(--weight-black);
 
   /* Couleurs de marque */
   --color-cream: #f2ede3;
@@ -21,14 +43,75 @@
 
   /* Polices */
   --font-sans: var(--font-mark-pro);
+  --font-heading: var(--font-afacad-flux);
+  --default-font-family: var(--font-mark-pro);
   --font-display: var(--font-afacad-flux);
   --font-mono: var(--font-geist-mono);
-  --font-hintdake: var(--font-hintdake);
-  --font-hintdake-rough: var(--font-hintdake-rough);
-  --font-hintdake-stamp: var(--font-hintdake-stamp);
+  --default-mono-font-family: var(--font-geist-mono);
+  --font-hintdake-rough: var(--font-hintdake-rough-family);
+  --font-hintdake-stamp: var(--font-hintdake-stamp-family);
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
+@layer base {
+  :root {
+    --background: #f2ede3;
+    --foreground: #171717;
+    --primary: #2c1f00;
+    --secondary: #807866;
+    --amm-orange: #fc470d;
+    --amm-green: #abf000;
+
+    /* Display & titres */
+    --text-hero: 7.5rem;
+    --text-h1: 6rem;
+    --text-h2: 3.75rem;
+    --text-h3: 3rem;
+    --text-h4: 2.25rem;
+    --text-h5: 1.5rem;
+
+    /* Corps de texte */
+    --text-sm: 0.875rem;
+    --text-default: 1rem;
+    --text-lg: 1.125rem;
+
+    /* Graisses (Afacad Flux + Mark Pro) */
+    --weight-thin: 100;
+    --weight-extralight: 200;
+    --weight-light: 300;
+    --weight-normal: 400;
+    --weight-medium: 500;
+    --weight-semibold: 600;
+    --weight-bold: 700;
+    --weight-extrabold: 800;
+    --weight-black: 900;
+
+    /* Variantes corps de texte (taille + graisse) */
+    --typo-sm-normal-size: var(--text-sm);
+    --typo-sm-normal-weight: var(--weight-normal);
+    --typo-sm-bold-size: var(--text-sm);
+    --typo-sm-bold-weight: var(--weight-bold);
+    --typo-default-normal-size: var(--text-default);
+    --typo-default-normal-weight: var(--weight-normal);
+    --typo-default-bold-size: var(--text-default);
+    --typo-default-bold-weight: var(--weight-bold);
+    --typo-lg-normal-size: var(--text-lg);
+    --typo-lg-normal-weight: var(--weight-normal);
+    --typo-lg-bold-size: var(--text-lg);
+    --typo-lg-bold-weight: var(--weight-bold);
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-mark-pro), sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading), sans-serif;
+  }
 }

@@ -11,6 +11,14 @@ export type SanityImage = {
   alt?: string;
 };
 
+export type TextWithImage = {
+  _type: "textWithImage";
+  _key: string;
+  text?: PortableTextBlock[];
+  image?: SanityImage;
+  imagePosition?: "left" | "right";
+};
+
 export type Author = {
   name: string;
   slug: string;
@@ -29,12 +37,6 @@ export type PostListItem = {
   author?: Pick<Author, "name" | "slug" | "avatar">;
 };
 
-export type PostVideo = {
-  url?: string;
-  fileUrl?: string;
-  caption?: string;
-};
-
 export type Post = {
   _id: string;
   title: string;
@@ -43,7 +45,6 @@ export type Post = {
   publishedAt?: string;
   mainImage?: SanityImage;
   gallery?: SanityImage[];
-  video?: PostVideo;
   tags?: string[];
   body?: PortableTextBlock[];
   author?: Author;

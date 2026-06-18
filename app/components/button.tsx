@@ -1,57 +1,78 @@
 import Link from "next/link";
-import { ArrowRight } from "@/app/components/icons";
+import type { ReactNode } from "react";
+
+type ButtonVariant = "primary" | "secondary";
 
 type ButtonProps = {
   href: string;
-  children: React.ReactNode;
-  /** primary = fond encre / texte crème ; secondary = contour encre */
-  variant?: "primary" | "secondary";
-  size?: "sm" | "md" | "lg";
-  /** affiche la flèche en fin de bouton (par défaut oui) */
-  withArrow?: boolean;
-  /** occupe toute la largeur disponible */
-  fullWidth?: boolean;
+  children: ReactNode;
+  /** Petit picto optionnel affiché à droite du texte (ex: une flèche). */
+  icon?: ReactNode;
+  variant?: ButtonVariant;
   className?: string;
 };
 
-const sizes = {
-  sm: "px-4 py-2.5 text-sm gap-1.5",
-  md: "px-4 py-3 text-base gap-2",
-  lg: "px-5 py-3.5 text-lg gap-2.5",
+type VariantConfig = {
+  /** Classes appliquées au lien (bordure + éventuel fond de repos). */
+  link: string;
+  /** Halo (box-shadow) affiché au focus clavier. */
+  focus: string;
+  /** Couleur de l'overlay qui se déploie au focus/clic. */
+  fill: string;
+  /** Couleur du texte selon l'état (via group-*). */
+  text: string;
 };
 
-const arrowSizes = {
-  sm: "size-4",
-  md: "size-4",
-  lg: "size-5",
-};
+const baseLink =
+  "group relative inline-flex items-center overflow-hidden rounded-xl border p-4 outline-none transition-colors cursor-pointer";
 
-// États repris du composant Figma « Button v2 » (radius 8) :
-// - Primary : fond encre + contour crème → survol contour lime → clic fond lime/encre
-// - Secondary : contour encre → survol contour flamme → clic fond flamme/crème
-const variants = {
-  primary:
-    "bg-ink text-cream border border-cream hover:border-lime active:bg-lime active:text-ink active:border-ink focus-visible:outline-ink",
-  secondary:
-    "bg-transparent text-ink border border-ink hover:border-flame hover:text-flame active:bg-flame active:text-cream active:border-cream focus-visible:outline-ink",
+const baseContent =
+  "relative z-10 inline-flex items-center gap-1 font-sans text-base font-normal leading-none transition-colors";
+
+// L'overlay se remplit de la gauche vers la droite au focus clavier ET au clic.
+const baseFill =
+  "pointer-events-none absolute inset-0 origin-left scale-x-0 transition-transform duration-300 ease-out group-focus-visible:scale-x-100 group-active:scale-x-100";
+
+const variantConfig: Record<ButtonVariant, VariantConfig> = {
+  secondary: {
+    link: "border-primary bg-transparent hover:border-amm-orange focus-visible:border-amm-orange active:border-amm-orange",
+    focus:
+      "focus-visible:shadow-[0_0_8px_4px_color-mix(in_srgb,var(--color-amm-orange)_50%,transparent)]",
+    fill: "bg-amm-orange",
+    text: "text-primary group-hover:text-amm-orange group-focus-visible:text-background group-active:text-background",
+  },
+  primary: {
+    link: "border-primary bg-primary hover:border-amm-green focus-visible:border-amm-green active:border-amm-green",
+    focus:
+      "focus-visible:shadow-[0_0_8px_4px_color-mix(in_srgb,var(--color-amm-green)_50%,transparent)]",
+    fill: "bg-amm-green",
+    text: "text-background group-hover:text-amm-green group-focus-visible:text-primary group-active:text-primary",
+  },
 };
 
 export default function Button({
   href,
   children,
-  variant = "primary",
-  size = "md",
-  withArrow = true,
-  fullWidth = false,
+  icon,
+  variant = "secondary",
   className = "",
 }: ButtonProps) {
+  const config = variantConfig[variant];
+
   return (
     <Link
       href={href}
-      className={`inline-flex items-center justify-center whitespace-nowrap rounded-lg font-semibold transition-[color,background-color,border-color] duration-200 ease-out focus-visible:outline-2 focus-visible:outline-offset-2 ${sizes[size]} ${variants[variant]} ${fullWidth ? "w-full" : ""} ${className}`}
+      className={`${baseLink} ${config.link} ${config.focus} ${className}`.trim()}
     >
-      <span>{children}</span>
-      {withArrow && <ArrowRight className={`${arrowSizes[size]} shrink-0`} />}
+      <span aria-hidden="true" className={`${baseFill} ${config.fill}`} />
+      <span className={`${baseContent} ${config.text}`}>
+        <span>{children}</span>
+        {icon ? (
+          <span aria-hidden="true" className="inline-flex shrink-0">
+            {icon}
+          </span>
+        ) : null}
+      </span>
     </Link>
   );
 }

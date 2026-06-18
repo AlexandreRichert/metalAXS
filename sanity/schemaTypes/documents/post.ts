@@ -74,12 +74,6 @@ export const post = defineType({
       ],
     }),
     defineField({
-      name: "video",
-      title: "Vidéo",
-      type: "video",
-      group: "media",
-    }),
-    defineField({
       name: "tags",
       title: "Tags",
       type: "array",
