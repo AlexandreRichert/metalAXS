@@ -15,6 +15,8 @@ type ButtonProps = {
 type VariantConfig = {
   /** Classes appliquées au lien (bordure + éventuel fond de repos). */
   link: string;
+  /** Halo (box-shadow) affiché au focus clavier. */
+  focus: string;
   /** Couleur de l'overlay qui se déploie au focus/clic. */
   fill: string;
   /** Couleur du texte selon l'état (via group-*). */
@@ -34,13 +36,17 @@ const baseFill =
 const variantConfig: Record<ButtonVariant, VariantConfig> = {
   secondary: {
     link: "border-primary bg-transparent hover:border-amm-orange focus-visible:border-amm-orange active:border-amm-orange",
+    focus:
+      "focus-visible:shadow-[0_0_8px_4px_color-mix(in_srgb,var(--color-amm-orange)_50%,transparent)]",
     fill: "bg-amm-orange",
     text: "text-primary group-hover:text-amm-orange group-focus-visible:text-background group-active:text-background",
   },
   primary: {
-    link: "border-amm-orange bg-amm-orange hover:bg-transparent focus-visible:border-primary active:border-primary",
-    fill: "bg-primary",
-    text: "text-background group-hover:text-amm-orange group-focus-visible:text-background group-active:text-background",
+    link: "border-primary bg-primary hover:border-amm-green focus-visible:border-amm-green active:border-amm-green",
+    focus:
+      "focus-visible:shadow-[0_0_8px_4px_color-mix(in_srgb,var(--color-amm-green)_50%,transparent)]",
+    fill: "bg-amm-green",
+    text: "text-background group-hover:text-amm-green group-focus-visible:text-primary group-active:text-primary",
   },
 };
 
@@ -56,7 +62,7 @@ export default function Button({
   return (
     <Link
       href={href}
-      className={`${baseLink} ${config.link} ${className}`.trim()}
+      className={`${baseLink} ${config.link} ${config.focus} ${className}`.trim()}
     >
       <span aria-hidden="true" className={`${baseFill} ${config.fill}`} />
       <span className={`${baseContent} ${config.text}`}>

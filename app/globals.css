@@ -36,7 +36,7 @@
 
 @layer base {
   :root {
-    --background: #fffffd;
+    --background: #f2ede3;
     --foreground: #171717;
     --primary: #2c1f00;
     --secondary: #807866;
@@ -80,13 +80,6 @@
     --typo-lg-normal-weight: var(--weight-normal);
     --typo-lg-bold-size: var(--text-lg);
     --typo-lg-bold-weight: var(--weight-bold);
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --background: #0a0a0a;
-      --foreground: #ededed;
-    }
   }
 
   body {

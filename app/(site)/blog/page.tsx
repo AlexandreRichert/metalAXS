@@ -67,7 +67,7 @@ export default async function BlogPage() {
           </div>
           <Button
             href={`/blog/${latestPost?.slug}`}
-            variant="secondary"
+            variant="primary"
             className="self-start"
             icon={
               <svg
