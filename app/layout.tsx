@@ -3,13 +3,6 @@ import { Afacad_Flux, Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 
-// Police d'affichage des grands titres (variable, on l'utilise en ExtraBold/800).
-const afacadFlux = Afacad_Flux({
-  subsets: ["latin"],
-  variable: "--font-afacad-flux",
-  display: "swap",
-});
-
 const markPro = localFont({
   src: [
     {
