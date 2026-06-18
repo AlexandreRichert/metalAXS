@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { ArrowRight } from "@/app/components/icons";
 import PortableTextRenderer from "@/app/components/portable-text";
 import { client } from "@/sanity/lib/client";
 import { getPostTags } from "@/sanity/lib/post-tags";
@@ -56,52 +57,64 @@ export default async function PostPage({ params }: PageProps) {
   if (!post) notFound();
 
   const postTags = getPostTags(post);
+  const publishedDate = formatDate(post.publishedAt);
 
   return (
-    <article className="mx-auto px-4 py-12">
-      <Link
-        href="/blog"
-        className="text-sm text-gray-500 hover:text-gray-800"
-      >
-        ← Retour au blog
-      </Link>
+    <article className="mx-auto max-w-[1200px] px-4 pt-[72px]">
+      <header className="flex flex-col">
+        <Link
+          href="/blog"
+          aria-label="Retour au blog"
+          className="inline-flex size-10 items-center justify-center rounded-xl bg-line text-ink transition-colors hover:bg-line"
+        >
+          <ArrowRight className="size-4 rotate-180" />
+        </Link>
 
-      <header className="mt-4 mb-8">
-        {postTags.length > 0 ? (
-          <div className="mb-3 flex flex-wrap gap-2">
-            {postTags.map((tag) => (
-              <span
-                key={tag._id}
-                className="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-600"
-              >
-                {tag.title}
-              </span>
-            ))}
-          </div>
+        <div className="mt-[65px] flex flex-col gap-4">
+          {postTags.length > 0 ? (
+            <div className="flex flex-wrap gap-2">
+              {postTags.map((tag) => (
+                <span
+                  key={tag._id}
+                  className="inline-block rounded-[4px] bg-tag-bg px-2 py-0.5 text-sm uppercase text-ink"
+                >
+                  {tag.title}
+                </span>
+              ))}
+            </div>
+          ) : null}
+
+          <h1 className="font-display text-blog-title font-black uppercase leading-[0.9] text-ink">
+            {post.title}
+          </h1>
+
+          {publishedDate ? (
+            <p className="text-sm font-medium leading-[1.25] text-muted">
+              {publishedDate}
+            </p>
+          ) : null}
+        </div>
+
+        {post.mainImage?.asset ? (
+          <Image
+            src={urlForImage(post.mainImage)
+              .width(1200)
+              .height(450)
+              .fit("crop")
+              .url()}
+            alt={post.mainImage.alt || post.title}
+            width={1200}
+            height={450}
+            priority
+            className="mt-[40px] h-[450px] w-full rounded-[32px] object-cover opacity-80"
+          />
         ) : null}
-        {post.body ? (
-          <div className="prose-content">
-            <PortableTextRenderer value={post.body} />
-          </div>
-        ) : null}
-        <h1 className="text-4xl font-bold">{post.title}</h1>
-        <p className="mt-3 text-gray-500">
-          {[post.author?.name, formatDate(post.publishedAt)]
-            .filter(Boolean)
-            .join(" — ")}
-        </p>
-        <p className="mt-4 text-lg text-gray-700">{post.description}</p>
       </header>
 
-      {post.mainImage?.asset ? (
-        <Image
-          src={urlForImage(post.mainImage).width(1200).height(675).fit("crop").url()}
-          alt={post.mainImage.alt || post.title}
-          width={1200}
-          height={675}
-          priority
-          className="mb-8 h-auto w-full"
-        />
+      {post.body ? (
+        <div className="prose-content mt-10">
+          <PortableTextRenderer value={post.body} />
+        </div>
       ) : null}
 
       {post.gallery && post.gallery.length > 0 ? (

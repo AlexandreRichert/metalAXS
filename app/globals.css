@@ -19,6 +19,7 @@
   --text-h3: var(--text-h3);
   --text-h4: var(--text-h4);
   --text-h5: var(--text-h5);
+  --text-blog-title: var(--text-blog-title);
   --text-sm: var(--text-sm);
   --text-default: var(--text-default);
   --text-lg: var(--text-lg);
@@ -40,6 +41,7 @@
   --color-flame: #fc470d;
   --color-wine: #610017;
   --color-line: #e3e1dc;
+  --color-tag-bg: #cfcfcf;
 
   /* Polices */
   --font-sans: var(--font-mark-pro);
@@ -68,6 +70,7 @@
     --text-h3: 3rem;
     --text-h4: 2.25rem;
     --text-h5: 1.5rem;
+    --text-blog-title: 3.5rem;
 
     /* Corps de texte */
     --text-sm: 0.875rem;
