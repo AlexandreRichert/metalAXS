@@ -17,11 +17,12 @@ export async function GET() {
         }
 
         const content = await zip.generateAsync({
-            type: "uint8array",
+            type: "arraybuffer",
         });
 
-        return new Response(new Blob([content], { type: "application/zip" }), {
+        return new Response(content, {
             headers: {
+                "Content-Type": "application/zip",
                 "Content-Disposition": 'attachment; filename="pictos.zip"',
             },
         });
