@@ -1,4 +1,5 @@
 import { defineArrayMember, defineType } from "sanity";
+import React from "react";
 
 // Texte riche (Portable Text) : paragraphes, titres, listes, liens, images.
 export const blockContent = defineType({
@@ -22,6 +23,22 @@ export const blockContent = defineType({
         decorators: [
           { title: "Gras", value: "strong" },
           { title: "Italique", value: "em" },
+          {
+            title: "Surligné (vert)",
+            value: "highlight",
+            component: ({ children }: { children: React.ReactNode }) =>
+              React.createElement(
+                "span",
+                {
+                  style: {
+                    backgroundColor: "#abf000",
+                    borderRadius: "2px",
+                    padding: "0 0.1em",
+                  },
+                },
+                children,
+              ),
+          },
         ],
         annotations: [
           {

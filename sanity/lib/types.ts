@@ -26,6 +26,22 @@ export type Author = {
   bio?: string;
 };
 
+export type PostTag = {
+  _id: string;
+  title: string;
+  slug: string;
+  categoryId?: string;
+};
+
+export type FilterTag = Pick<PostTag, "_id" | "title" | "slug">;
+
+export type FilterGroup = {
+  _id: string;
+  title: string;
+  slug: string;
+  tags: FilterTag[];
+};
+
 export type PostListItem = {
   _id: string;
   title: string;
@@ -33,7 +49,7 @@ export type PostListItem = {
   description: string;
   publishedAt?: string;
   mainImage?: SanityImage;
-  tags?: string[];
+  tags?: PostTag[];
   author?: Pick<Author, "name" | "slug" | "avatar">;
 };
 
@@ -45,7 +61,7 @@ export type Post = {
   publishedAt?: string;
   mainImage?: SanityImage;
   gallery?: SanityImage[];
-  tags?: string[];
+  tags?: PostTag[];
   body?: PortableTextBlock[];
   author?: Author;
 };

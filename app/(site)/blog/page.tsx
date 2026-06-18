@@ -3,14 +3,16 @@ import Image from "next/image";
 
 import Button from "@/app/components/button";
 import { BlogPostsSearch } from "@/app/components/blog-posts-search";
+import { getPostTags } from "@/sanity/lib/post-tags";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { urlForImage } from "@/sanity/lib/image";
 import {
+  FILTER_GROUPS_QUERY,
   LATEST_POST_QUERY,
   POSTS_LIST_QUERY,
   POSTS_QUERY,
 } from "@/sanity/lib/queries";
-import type { PostListItem } from "@/sanity/lib/types";
+import type { FilterGroup, PostListItem } from "@/sanity/lib/types";
 
 export const metadata: Metadata = {
   title: "All access metal - blog",
@@ -29,16 +31,22 @@ function formatDate(value?: string) {
 export default async function BlogPage() {
   const latestPost = await sanityFetch<PostListItem>({
     query: LATEST_POST_QUERY,
-    tags: ["post", "author"],
+    tags: ["post", "author", "category", "tag"],
   });
   const posts = await sanityFetch<PostListItem[]>({
     query: POSTS_LIST_QUERY,
-    tags: ["post", "author"],
+    tags: ["post", "author", "category", "tag"],
   });
   const allPosts = await sanityFetch<PostListItem[]>({
     query: POSTS_QUERY,
-    tags: ["post", "author"],
+    tags: ["post", "author", "category", "tag"],
   });
+  const filterGroups = await sanityFetch<FilterGroup[]>({
+    query: FILTER_GROUPS_QUERY,
+    tags: ["category", "tag"],
+  });
+
+  const latestPostTags = latestPost ? getPostTags(latestPost) : [];
 
   return (
     <div className="mx-auto max-w-[1200px]">
@@ -50,19 +58,19 @@ export default async function BlogPage() {
                 .filter(Boolean)
                 .join(" — ")}
             </p>
-            {latestPost?.tags && latestPost.tags.length > 0 ? (
+            {latestPostTags.length > 0 ? (
               <ul className="flex flex-wrap gap-2">
-                {latestPost.tags.map((tag) => (
+                {latestPostTags.map((tag) => (
                   <li
-                    key={tag}
+                    key={tag._id}
                     className="rounded-full bg-[#E3E1DC] px-3 py-1 text-xs text-primary"
                   >
-                    {tag}
+                    {tag.title}
                   </li>
                 ))}
               </ul>
             ) : null}
-            <h1 className="text-h3 text-primary font-black italic">{latestPost?.title}</h1>
+            <h1 className="text-h3 text-primary font-black ">{latestPost?.title}</h1>
             <p className="text-lg text-secondary">{latestPost?.description}</p>
           </div>
           <Button
@@ -107,7 +115,11 @@ export default async function BlogPage() {
         </div>
       </section>
 
-      <BlogPostsSearch defaultPosts={posts} allPosts={allPosts} />
+      <BlogPostsSearch
+        defaultPosts={posts}
+        allPosts={allPosts}
+        filterGroups={filterGroups}
+      />
     </div>
   );
 }

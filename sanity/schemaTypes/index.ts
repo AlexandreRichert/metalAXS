@@ -4,6 +4,7 @@ import type { SchemaTypeDefinition } from "sanity";
 import { author } from "./documents/author";
 import { category } from "./documents/category";
 import { post } from "./documents/post";
+import { tag } from "./documents/tag";
 import { questionnaire } from "./documents/questionnaire";
 import { submission } from "./documents/submission";
 
@@ -20,6 +21,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   post,
   author,
   category,
+  tag,
   questionnaire,
   submission,
   // Objets
