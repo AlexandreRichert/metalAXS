@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import TitleWithHighlight from "@/app/components/title-with-highlight";
+import { BlogBento } from "@/app/components/blog-bento";
 import { urlForImage } from "@/sanity/lib/image";
 import { getPostTags } from "@/sanity/lib/post-tags";
 import type { FilterGroup, PostListItem } from "@/sanity/lib/types";
@@ -300,6 +301,8 @@ export function BlogPostsSearch({
             ? "Aucun article ne correspond à votre recherche."
             : "Aucun article pour le moment. Revenez bientôt !"}
         </p>
+      ) : !isFiltered ? (
+        <BlogBento posts={visiblePosts} />
       ) : (
         <ul className="relative z-0 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {visiblePosts.map((post) => {

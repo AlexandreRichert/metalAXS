@@ -78,7 +78,7 @@ export const LATEST_POST_QUERY = defineQuery(`
 
 export const POSTS_LIST_QUERY = defineQuery(`
   *[_type == "post" && defined(slug.current)]
-  | order(coalesce(publishedAt, _createdAt) desc, _createdAt desc)[1...10]{
+  | order(coalesce(publishedAt, _createdAt) desc, _createdAt desc)[1...7]{
     _id,
     title,
     titleHighlight,

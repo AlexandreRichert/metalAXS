@@ -52,7 +52,7 @@ export default async function BlogPage() {
   const latestPostTags = latestPost ? getPostTags(latestPost) : [];
 
   return (
-    <div className="mx-auto max-w-[1200px]">
+    <div className="mx-auto my-16 max-w-[1200px] lg:my-24">
       <section className="mx-auto mb-10 flex w-full max-w-[1200px] items-stretch gap-20 p-6">
         <div className="flex w-1/2 flex-col gap-8">
           <div className="flex flex-col gap-4">
