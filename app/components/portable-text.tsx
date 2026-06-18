@@ -62,6 +62,9 @@ const components: PortableTextComponents = {
     },
   },
   marks: {
+    highlight: ({ children }) => (
+      <mark className="highlight-mark bg-transparent text-inherit">{children}</mark>
+    ),
     link: ({ value, children }) => {
       const href = value?.href ?? "#";
       const external = href.startsWith("http");
