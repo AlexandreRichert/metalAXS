@@ -95,21 +95,67 @@ const markPro = localFont({
   display: "swap",
 });
 
-const hintdake = localFont({
-  src: "../public/fonts/Hintdake/Hintdake Sans Regular.otf",
-  variable: "--font-hintdake",
+const afacadFlux = localFont({
+  src: [
+    {
+      path: "../public/fonts/Afacad_Flux/Afacad_Flux/static/AfacadFlux-Thin.ttf",
+      weight: "100",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Afacad_Flux/Afacad_Flux/static/AfacadFlux-ExtraLight.ttf",
+      weight: "200",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Afacad_Flux/Afacad_Flux/static/AfacadFlux-Light.ttf",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Afacad_Flux/Afacad_Flux/static/AfacadFlux-Regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Afacad_Flux/Afacad_Flux/static/AfacadFlux-Medium.ttf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Afacad_Flux/Afacad_Flux/static/AfacadFlux-SemiBold.ttf",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Afacad_Flux/Afacad_Flux/static/AfacadFlux-Bold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Afacad_Flux/Afacad_Flux/static/AfacadFlux-ExtraBold.ttf",
+      weight: "800",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Afacad_Flux/Afacad_Flux/static/AfacadFlux-Black.ttf",
+      weight: "900",
+      style: "normal",
+    },
+  ],
+  variable: "--font-afacad-flux",
   display: "swap",
 });
 
 const hintdakeRough = localFont({
   src: "../public/fonts/Hintdake/Hintdake Sans Rough.otf",
-  variable: "--font-hintdake-rough",
+  variable: "--font-hintdake-rough-family",
   display: "swap",
 });
 
 const hintdakeStamp = localFont({
   src: "../public/fonts/Hintdake/Hintdake Sans Stamp.otf",
-  variable: "--font-hintdake-stamp",
+  variable: "--font-hintdake-stamp-family",
   display: "swap",
 });
 
@@ -135,9 +181,9 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={`${markPro.variable} ${hintdake.variable} ${hintdakeRough.variable} ${hintdakeStamp.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${markPro.variable} ${afacadFlux.variable} ${hintdakeRough.variable} ${hintdakeStamp.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full font-sans">{children}</body>
+      <body className={`${markPro.className} min-h-full`}>{children}</body>
     </html>
   );
 }

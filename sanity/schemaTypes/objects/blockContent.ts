@@ -54,5 +54,6 @@ export const blockContent = defineType({
         },
       ],
     }),
+    defineArrayMember({ type: "textWithImage" }),
   ],
 });

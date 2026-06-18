@@ -14,7 +14,7 @@ export default function Home() {
         <Cta href="/goodPractices">En savoir plus</Cta>
       </section>
       <section className="flex flex-col items-center justify-center bg-gray-100 p-10">
-        <h2 className="text-2xl font-bold">Les types de handicaps</h2>
+        <h2 className="text-2xl font-heading">Les types de handicaps</h2>
         <p className="text-lg">Les types de handicaps pour rendre un festival accessible.</p>
         <Cta href="/disabilitiesTypes">En savoir plus</Cta>
       </section>

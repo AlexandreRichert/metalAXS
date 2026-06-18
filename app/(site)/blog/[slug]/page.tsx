@@ -8,7 +8,7 @@ import { client } from "@/sanity/lib/client";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { urlForImage } from "@/sanity/lib/image";
 import { POST_QUERY, POSTS_SLUGS_QUERY } from "@/sanity/lib/queries";
-import type { Post, PostVideo } from "@/sanity/lib/types";
+import type { Post } from "@/sanity/lib/types";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -42,66 +42,6 @@ function formatDate(value?: string) {
     month: "long",
     day: "numeric",
   });
-}
-
-// Transforme un lien YouTube/Vimeo en URL d'intégration (embed).
-function toEmbedUrl(url: string): string | null {
-  try {
-    const u = new URL(url);
-    if (u.hostname.includes("youtube.com")) {
-      const id = u.searchParams.get("v");
-      return id ? `https://www.youtube.com/embed/${id}` : null;
-    }
-    if (u.hostname === "youtu.be") {
-      return `https://www.youtube.com/embed/${u.pathname.slice(1)}`;
-    }
-    if (u.hostname.includes("vimeo.com")) {
-      const id = u.pathname.split("/").filter(Boolean).pop();
-      return id ? `https://player.vimeo.com/video/${id}` : null;
-    }
-  } catch {
-    return null;
-  }
-  return null;
-}
-
-function VideoBlock({ video }: { video: PostVideo }) {
-  const embedUrl = video.url ? toEmbedUrl(video.url) : null;
-
-  return (
-    <figure className="my-8">
-      {embedUrl ? (
-        <div className="relative aspect-video w-full overflow-hidden rounded-lg">
-          <iframe
-            src={embedUrl}
-            title={video.caption || "Vidéo"}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            className="absolute inset-0 h-full w-full"
-          />
-        </div>
-      ) : video.fileUrl ? (
-        <video controls className="w-full rounded-lg">
-          <source src={video.fileUrl} />
-          Votre navigateur ne prend pas en charge la lecture vidéo.
-        </video>
-      ) : video.url ? (
-        <a
-          href={video.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-700 underline"
-        >
-          Voir la vidéo
-        </a>
-      ) : null}
-      {video.caption ? (
-        <figcaption className="mt-2 text-center text-sm text-gray-500">
-          {video.caption}
-        </figcaption>
-      ) : null}
-    </figure>
-  );
 }
 
 export default async function PostPage({ params }: PageProps) {
@@ -161,9 +101,6 @@ export default async function PostPage({ params }: PageProps) {
         />
       ) : null}
 
-      {post.video ? <VideoBlock video={post.video} /> : null}
-
-
       {post.gallery && post.gallery.length > 0 ? (
         <section className="mt-10">
           <h2 className="mb-4 text-2xl font-bold">Galerie</h2>
@@ -201,7 +138,6 @@ export default async function PostPage({ params }: PageProps) {
           </div>
         </footer>
       ) : null}
-      fguodgudnigjdrpi
     </article>
   );
 }

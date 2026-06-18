@@ -6,7 +6,7 @@ import {
 import Image from "next/image";
 
 import { urlForImage } from "@/sanity/lib/image";
-import type { SanityImage } from "@/sanity/lib/types";
+import type { SanityImage, TextWithImage } from "@/sanity/lib/types";
 
 const components: PortableTextComponents = {
   types: {
@@ -27,6 +27,37 @@ const components: PortableTextComponents = {
             </figcaption>
           ) : null}
         </figure>
+      );
+    },
+    textWithImage: ({ value }: { value: TextWithImage }) => {
+      if (!value?.image?.asset) return null;
+      const imageOnLeft = value.imagePosition === "left";
+      return (
+        <div
+          className={`my-8 flex flex-col gap-6 md:items-center ${
+            imageOnLeft ? "md:flex-row-reverse" : "md:flex-row"
+          }`}
+        >
+          <div className="md:w-1/2">
+            {value.text ? (
+              <PortableText value={value.text} components={components} />
+            ) : null}
+          </div>
+          <div className="md:w-1/2">
+            <Image
+              src={urlForImage(value.image).width(800).fit("max").url()}
+              alt={value.image.alt || ""}
+              width={800}
+              height={600}
+              className="h-auto w-full rounded-lg"
+            />
+            {value.image.alt ? (
+              <figcaption className="mt-2 text-center text-sm text-gray-500">
+                {value.image.alt}
+              </figcaption>
+            ) : null}
+          </div>
+        </div>
       );
     },
   },
