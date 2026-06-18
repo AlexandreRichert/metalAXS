@@ -341,7 +341,7 @@ export function BlogPostsSearch({
                         ))}
                       </ul>
                     ) : null}
-                    <h2 className="mt-2 text-h3 font-black uppercase italic text-primary">
+                    <h2 className="mt-2 text-h3 font-black uppercase text-primary">
                       {post.title}
                     </h2>
                     <p className="mt-2 text-lg text-secondary">

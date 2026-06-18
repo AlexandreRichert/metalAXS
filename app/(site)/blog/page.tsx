@@ -70,7 +70,7 @@ export default async function BlogPage() {
                 ))}
               </ul>
             ) : null}
-            <h1 className="text-h3 text-primary font-black italic">{latestPost?.title}</h1>
+            <h1 className="text-h3 text-primary font-black ">{latestPost?.title}</h1>
             <p className="text-lg text-secondary">{latestPost?.description}</p>
           </div>
           <Button

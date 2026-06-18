@@ -5,6 +5,8 @@ import { notFound } from "next/navigation";
 
 import { ArrowRight } from "@/app/components/icons";
 import PortableTextRenderer from "@/app/components/portable-text";
+import { TableOfContents } from "@/app/components/table-of-contents";
+import { extractHeadings } from "@/app/lib/headings";
 import { client } from "@/sanity/lib/client";
 import { getPostTags } from "@/sanity/lib/post-tags";
 import { sanityFetch } from "@/sanity/lib/fetch";
@@ -111,11 +113,21 @@ export default async function PostPage({ params }: PageProps) {
         ) : null}
       </header>
 
-      {post.body ? (
-        <div className="prose-content mt-10">
-          <PortableTextRenderer value={post.body} />
-        </div>
-      ) : null}
+      {post.body ? (() => {
+        const headings = extractHeadings(post.body!);
+        return (
+          <div className="mt-10 flex items-start gap-10">
+            {headings.length > 0 ? (
+              <aside className="hidden xl:block w-52 shrink-0">
+                <TableOfContents headings={headings} />
+              </aside>
+            ) : null}
+            <div className="min-w-0 flex-1 prose-content">
+              <PortableTextRenderer value={post.body!} />
+            </div>
+          </div>
+        );
+      })() : null}
 
       {post.gallery && post.gallery.length > 0 ? (
         <section className="mt-10">
