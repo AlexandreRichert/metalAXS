@@ -29,10 +29,10 @@ const ressources: Ressource[] = [
     image: "/home/cognitifs.jpg",
   },
   {
-    title: "Dossiers chiffrés",
+    title: "Chiffres",
     subtitle:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et",
-    cta: "Consulter les dossiers",
+    cta: "Aller voir les chiffres",
     href: "/ressources",
     image: "/home/cognitifs.jpg",
   },
@@ -40,7 +40,7 @@ const ressources: Ressource[] = [
     title: "Partenaires",
     subtitle:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et",
-    cta: "Découvrir les partenaires",
+    cta: "Voir nos partenaires",
     href: "/federation",
     image: "/home/cognitifs.jpg",
   },

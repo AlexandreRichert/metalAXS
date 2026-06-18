@@ -15,38 +15,56 @@ type DisabilityCard = {
   href: string;
 };
 
+const lorem = "Lorem ipsum dolor sit amet, consectetur";
+
 const cards: DisabilityCard[] = [
   {
     title: "Moteurs",
-    stat: "00%",
-    subtitle: "Lorem ipsum dolor sit amet, consectetur",
+    stat: "5,8%",
+    subtitle: lorem,
     image: "/home/moteurs.jpg",
     icon: "fa-solid fa-wheelchair",
     href: "/disabilitiesTypes/motor",
   },
   {
     title: "Visuels",
-    stat: "00%",
-    subtitle: "Lorem ipsum dolor sit amet, consectetur",
+    stat: "3%",
+    subtitle: lorem,
     image: "/home/festival-crowd.jpg",
     icon: "fa-solid fa-eye",
-    href: "/disabilitiesTypes/view",
+    href: "/disabilitiesTypes/visuel",
   },
   {
     title: "Auditifs",
-    stat: "00%",
-    subtitle: "Lorem ipsum dolor sit amet, consectetur",
+    stat: "16%",
+    subtitle: lorem,
     image: "/home/stage.jpg",
     icon: "fa-solid fa-ear-listen",
-    href: "/disabilitiesTypes/audio",
+    href: "/disabilitiesTypes/auditif",
   },
   {
-    title: "Cognitifs",
-    stat: "00%",
-    subtitle: "Lorem ipsum dolor sit amet, consectetur",
+    title: "Déficiences intellectuelles",
+    stat: "2%",
+    subtitle: lorem,
     image: "/home/cognitifs.jpg",
+    icon: "fa-solid fa-puzzle-piece",
+    href: "/disabilitiesTypes/intellectuelle",
+  },
+  {
+    title: "Troubles psychiques",
+    stat: "20%",
+    subtitle: lorem,
+    image: "/home/accessibilite.jpg",
     icon: "fa-solid fa-brain",
-    href: "/disabilitiesTypes/cognitif",
+    href: "/disabilitiesTypes/psychique",
+  },
+  {
+    title: "Maladies invalidantes",
+    stat: "20%",
+    subtitle: lorem,
+    image: "/home/debuter.jpg",
+    icon: "fa-solid fa-heart-pulse",
+    href: "/disabilitiesTypes",
   },
 ];
 
@@ -66,12 +84,12 @@ export default function StatSection() {
           <BlurText
             as="p"
             delay={0.2}
-            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            text="des festivals n’ont aujourd’hui aucun dispositif d’accessibilité dédié aux personnes en situation de handicap."
             className="text-lg text-cream/90 sm:text-xl"
           />
         </div>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4">
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3">
           {cards.map((card, i) => (
             <Reveal as="article" key={card.title} y={40} delay={i * 0.1} className="h-full">
               <div className="flex h-full flex-col gap-4 rounded-lg bg-white p-6 text-ink transition duration-300 ease-out hover:-translate-y-2 hover:shadow-[0px_18px_40px_0px_rgba(0,0,0,0.3)]">
@@ -104,7 +122,6 @@ export default function StatSection() {
                 <Button
                   href={card.href}
                   variant="primary"
-                  size="md"
                   className="mt-auto self-start"
                 >
                   Informez-vous

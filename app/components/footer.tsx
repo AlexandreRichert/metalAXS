@@ -23,8 +23,8 @@ const linkColumns = [
 
 const handicaps = [
   { label: "Moteurs", href: "/disabilitiesTypes/motor" },
-  { label: "Visuels", href: "/disabilitiesTypes/view" },
-  { label: "Auditifs", href: "/disabilitiesTypes/audio" },
+  { label: "Visuels", href: "/disabilitiesTypes/visuel" },
+  { label: "Auditifs", href: "/disabilitiesTypes/auditif" },
   { label: "Cognitifs", href: "/disabilitiesTypes/cognitif" },
 ];
 

@@ -1,44 +1,46 @@
-import Image from "next/image";
+import HeroRive from "@/app/components/home/hero-rive";
+import HeroShaders from "@/app/components/home/hero-shaders";
 import Button from "@/app/components/button";
-import SplitText from "@/app/components/animations/split-text";
 import BlurText from "@/app/components/animations/blur-text";
 import Reveal from "@/app/components/animations/reveal";
+import { ArrowRight } from "@/app/components/icons";
 
-// Section héro (Figma « Site / Header ») : grande carte image + titre d'affichage.
+// Héro : fond interactif Rive (le titre « METAL POUR TOUS » est intégré au .riv)
+// + paragraphe et CTA en surimpression, en teintes claires lisibles sur le fond
+// sombre. Le pointeur traverse les calques pour garder le fond Rive interactif.
 export default function Hero() {
   return (
     <section className="mx-auto -mt-24 max-w-[1440px] px-4 sm:px-8">
-      <div className="relative flex min-h-[640px] items-center justify-center overflow-hidden rounded-lg px-6 pb-20 pt-36 lg:min-h-[760px]">
-        <Image
-          src="/home/hero.jpg"
-          alt="Foule lors d'un festival de musique métal"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-        />
-        {/* Voile crème 50 % (design : fill #f2ede3 @ 0.5) pour la lisibilité */}
-        <div className="absolute inset-0 bg-cream/50" />
+      <div className="relative flex min-h-[640px] flex-col justify-end overflow-hidden rounded-lg lg:min-h-[760px]">
+        {/* Fond animé interactif (reçoit le pointeur) */}
+        <HeroRive />
 
-        <div className="relative z-10 flex max-w-3xl flex-col items-center gap-8 text-center">
-          <div className="flex flex-col gap-4">
-            <SplitText
-              as="h1"
-              text={"Devenez\naccessible"}
-              delay={0.15}
-              className="font-display text-6xl font-extrabold uppercase leading-[0.9] text-ink sm:text-7xl lg:text-8xl xl:text-[7.5rem]"
-            />
-            <BlurText
-              as="p"
-              delay={0.5}
-              text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-              className="mx-auto max-w-2xl text-lg text-ink sm:text-xl"
-            />
-          </div>
+        {/* Shaders Paper (grain + dither) par-dessus le .riv, sans capter le pointeur */}
+        <HeroShaders />
 
-          <Reveal delay={0.8} y={20} className="flex flex-wrap items-center justify-center gap-4">
-            <Button href="/questionnaire" variant="primary" size="lg">
-              Auditez-vous
+        {/* Voile dégradé en bas : garantit le contraste du texte/bouton clair
+            quel que soit l'état du fond. Ne capte pas le pointeur. */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-ink/85 via-ink/40 to-transparent" />
+
+        {/* Surimpression : transparente au pointeur, sauf le bouton. */}
+        <div className="pointer-events-none relative z-10 flex flex-col items-center gap-8 px-6 pb-16 text-center lg:pb-20">
+          <BlurText
+            as="p"
+            delay={0.4}
+            text="Découvrez les bonnes pratiques, les normes et les outils pour rendre votre festival accessible à tous les publics."
+            className="mx-auto max-w-2xl text-lg text-background drop-shadow-[0_1px_8px_rgba(0,0,0,0.45)] sm:text-xl"
+          />
+          <Reveal
+            delay={0.7}
+            y={20}
+            className="pointer-events-auto flex flex-wrap items-center justify-center gap-4"
+          >
+            <Button
+              href="/goodPractices"
+              variant="light"
+              icon={<ArrowRight className="size-4" />}
+            >
+              Consulter les bonnes pratiques
             </Button>
           </Reveal>
         </div>

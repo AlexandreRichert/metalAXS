@@ -1,7 +1,16 @@
-import Link from "next/link";
-import type { ReactNode } from "react";
+"use client";
 
-type ButtonVariant = "primary" | "secondary";
+import Link from "next/link";
+import type { MouseEvent, ReactNode } from "react";
+import { usePageTransition } from "@/app/components/page-transition";
+
+type ButtonVariant = "primary" | "secondary" | "light" | "ghost";
+
+// Un lien interne déclenche la transition de page (le loader couvre puis révèle).
+// Les liens externes / mailto et les clics modifiés gardent le comportement natif.
+function isInternal(href: string) {
+  return href.startsWith("/") && !href.startsWith("//");
+}
 
 type ButtonProps = {
   href: string;
@@ -48,6 +57,23 @@ const variantConfig: Record<ButtonVariant, VariantConfig> = {
     fill: "bg-amm-green",
     text: "text-background group-hover:text-amm-green group-focus-visible:text-primary group-active:text-primary",
   },
+  // CTA principal sur fond sombre : pavé crème + texte encre (le remplissage
+  // encre se déploie au focus/clic, le texte passe alors en crème).
+  light: {
+    link: "border-background bg-background hover:border-amm-green focus-visible:border-amm-green active:border-amm-green",
+    focus:
+      "focus-visible:shadow-[0_0_8px_4px_color-mix(in_srgb,var(--color-amm-green)_50%,transparent)]",
+    fill: "bg-primary",
+    text: "text-primary group-focus-visible:text-background group-active:text-background",
+  },
+  // Secondaire sur fond sombre : contour + texte crème, remplissage orange au clic.
+  ghost: {
+    link: "border-background bg-transparent hover:border-amm-orange focus-visible:border-amm-orange active:border-amm-orange",
+    focus:
+      "focus-visible:shadow-[0_0_8px_4px_color-mix(in_srgb,var(--color-amm-orange)_50%,transparent)]",
+    fill: "bg-amm-orange",
+    text: "text-background group-hover:text-amm-orange group-focus-visible:text-primary group-active:text-primary",
+  },
 };
 
 export default function Button({
@@ -58,10 +84,26 @@ export default function Button({
   className = "",
 }: ButtonProps) {
   const config = variantConfig[variant];
+  const navigate = usePageTransition();
+
+  const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
+    if (
+      isInternal(href) &&
+      e.button === 0 &&
+      !e.metaKey &&
+      !e.ctrlKey &&
+      !e.shiftKey &&
+      !e.altKey
+    ) {
+      e.preventDefault();
+      navigate(href);
+    }
+  };
 
   return (
     <Link
       href={href}
+      onClick={handleClick}
       className={`${baseLink} ${config.link} ${config.focus} ${className}`.trim()}
     >
       <span aria-hidden="true" className={`${baseFill} ${config.fill}`} />
