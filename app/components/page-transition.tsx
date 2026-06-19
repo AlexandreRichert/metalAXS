@@ -10,6 +10,7 @@ import {
 } from "react";
 import { useRouter } from "next/navigation";
 import { motion, useReducedMotion } from "motion/react";
+import { useLenis } from "lenis/react";
 import LoaderSequence from "@/app/components/loader-sequence";
 import { setCovered } from "@/app/components/app-ready";
 
@@ -43,13 +44,22 @@ export default function PageTransitionProvider({
 }) {
   const router = useRouter();
   const reduce = useReducedMotion();
+  const lenis = useLenis();
   const [phase, setPhase] = useState<Phase>("idle");
   const target = useRef<string | null>(null);
+
+  // Remet la vue tout en haut. Lenis gère le scroll : window.scrollTo seul est
+  // ignoré, il faut passer par l'instance Lenis.
+  const scrollTop = useCallback(() => {
+    if (lenis) lenis.scrollTo(0, { immediate: true });
+    else if (typeof window !== "undefined") window.scrollTo(0, 0);
+  }, [lenis]);
 
   const navigate = useCallback(
     (href: string) => {
       if (reduce) {
         router.push(href);
+        window.setTimeout(scrollTop, 50);
         return;
       }
       if (phase !== "idle") return; // une transition est déjà en cours
@@ -57,7 +67,7 @@ export default function PageTransitionProvider({
       setCovered(true);
       setPhase("cover");
     },
-    [phase, reduce, router],
+    [phase, reduce, router, scrollTop],
   );
 
   const handleComplete = useCallback(() => {
@@ -65,13 +75,17 @@ export default function PageTransitionProvider({
       // Écran couvert : on charge la nouvelle page sous le voile, puis on tient
       // une boucle de loader avant de révéler.
       if (target.current) router.push(target.current);
-      window.setTimeout(() => setPhase("reveal"), LOOP_MS);
+      // Réancre en haut sous le voile, après le rendu de la nouvelle page.
+      window.setTimeout(() => {
+        scrollTop();
+        setPhase("reveal");
+      }, LOOP_MS);
     } else if (phase === "reveal") {
       target.current = null;
       setPhase("idle");
       setCovered(false);
     }
-  }, [phase, router]);
+  }, [phase, router, scrollTop]);
 
   return (
     <TransitionContext.Provider value={navigate}>
