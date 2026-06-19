@@ -186,4 +186,42 @@
   h6 {
     font-family: var(--font-heading), sans-serif;
   }
+
+  /* Shake léger pour emoji */
+  .emoji-shake {
+    display: inline-block;
+    animation: emoji-shake 0.4s infinite ease-in-out;
+  }
+
+  @keyframes emoji-shake {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    25% {
+      transform: rotate(2deg);
+    }
+
+    50% {
+      transform: rotate(-2deg);
+    }
+
+    75% {
+      transform: rotate(1deg);
+    }
+
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+}
+
+@layer components {
+  .bg-lime {
+    @apply bg-[#abf000];
+  }
+
+  .text-ink {
+    @apply text-[#2c1f00];
+  }
 }

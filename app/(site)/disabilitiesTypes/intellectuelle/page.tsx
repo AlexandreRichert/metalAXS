@@ -16,8 +16,8 @@ interface Card {
 export default function IntellectuelleDisabilityPage() {
     const sectionRef = useRef(null);
     const isInView = useInView(sectionRef, {
-        once: true,
-        amount: 0.3,
+        once: false,
+        amount: 0.1,
     });
     const [selectedCard, setSelectedCard] = useState<Card | null>(null);
 
