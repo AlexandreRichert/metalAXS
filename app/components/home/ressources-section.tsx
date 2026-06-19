@@ -23,7 +23,7 @@ const ressources: Ressource[] = [
   {
     title: "Banque d’icônes",
     subtitle:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et",
+      "Une bibliothèque de pictogrammes d’accessibilité prêts à poser sur vos plans, votre signalétique et vos supports.",
     cta: "Téléchargez les pictogrammes",
     href: "/pictos",
     image: "/home/cognitifs.jpg",
@@ -31,7 +31,7 @@ const ressources: Ressource[] = [
   {
     title: "Chiffres",
     subtitle:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et",
+      "Les données qui posent le sujet : combien de festivaliers concernés, quels besoins, et pourquoi ça compte.",
     cta: "Aller voir les chiffres",
     href: "/ressources",
     image: "/home/cognitifs.jpg",
@@ -39,7 +39,7 @@ const ressources: Ressource[] = [
   {
     title: "Partenaires",
     subtitle:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et",
+      "Les associations et structures spécialisées prêtes à vous épauler, du diagnostic jusqu’au jour J.",
     cta: "Voir nos partenaires",
     href: "/federation",
     image: "/home/cognitifs.jpg",
@@ -89,7 +89,7 @@ export default function RessourcesSection() {
         <BlurText
           as="p"
           delay={0.2}
-          text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et"
+          text="Tout ce qu’il faut pour rendre votre festival accessible, des outils prêts à l’emploi aux partenaires qui connaissent le terrain."
           className="text-lg text-ink sm:text-xl"
         />
       </div>

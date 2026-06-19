@@ -10,7 +10,7 @@ import { ArrowRight } from "@/app/components/icons";
 // sombre. Le pointeur traverse les calques pour garder le fond Rive interactif.
 export default function Hero() {
   return (
-    <section className="mx-auto -mt-24 max-w-[1440px] px-4 sm:px-8">
+    <section className="mx-auto -mt-24 max-w-[1440px] px-2 sm:px-4">
       <div className="relative flex min-h-[640px] flex-col justify-end overflow-hidden rounded-lg lg:min-h-[760px]">
         {/* Fond animé interactif (reçoit le pointeur) */}
         <HeroRive />
@@ -37,7 +37,7 @@ export default function Hero() {
           >
             <Button
               href="/goodPractices"
-              variant="light"
+              variant="primary"
               icon={<ArrowRight className="size-4" />}
             >
               Consulter les bonnes pratiques

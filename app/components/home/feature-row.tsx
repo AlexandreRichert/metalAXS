@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Button from "@/app/components/button";
+import { ArrowRight } from "@/app/components/icons";
 import Grain from "@/app/components/home/grain";
 import BlurText from "@/app/components/animations/blur-text";
 import Reveal from "@/app/components/animations/reveal";
@@ -67,7 +68,11 @@ export default function FeatureRow({
           </div>
         </div>
         <Reveal delay={0.3} y={16}>
-          <Button href={ctaHref} variant="secondary">
+          <Button
+            href={ctaHref}
+            variant="secondary"
+            icon={<ArrowRight className="size-4" />}
+          >
             {ctaLabel}
           </Button>
         </Reveal>

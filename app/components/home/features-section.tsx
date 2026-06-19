@@ -15,8 +15,8 @@ export default function FeaturesSection() {
             </>
           }
           subtitle="L’accessibilité, c’est permettre à chaque festivalier de vivre l’événement dans de bonnes conditions, quel que soit son handicap : moteur, visuel, auditif ou cognitif. Cela passe par des aménagements concrets, mais aussi par une organisation et un accueil pensés en amont."
-          ctaLabel="Auditez-vous"
-          ctaHref="/questionnaire"
+          ctaLabel="Lire l’article"
+          ctaHref="/blog/accessibilite-en-festival-de-metal-les-5-chantiers-qui-changent-tout"
         />
 
         <FeatureRow
@@ -32,8 +32,8 @@ export default function FeaturesSection() {
             "Pas besoin de tout changer du jour au lendemain. Identifiez les actions essentielles, évaluez votre festival, et avancez par étapes vers une accessibilité toujours plus large.",
             "En adoptant une approche par jalons, nourrie par les retours d’expérience de vos publics et des experts concernés, vous transformez progressivement l’infrastructure de votre événement en un espace véritablement universel, où l’audace créative se conjugue enfin avec la responsabilité sociale.",
           ]}
-          ctaLabel="Auditez-vous"
-          ctaHref="/questionnaire"
+          ctaLabel="En savoir plus"
+          ctaHref="/blog"
         />
       </div>
     </section>

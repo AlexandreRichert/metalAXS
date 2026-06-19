@@ -64,7 +64,7 @@ const variantConfig: Record<ButtonVariant, VariantConfig> = {
     text: "text-primary group-hover:text-amm-orange group-focus-visible:text-background group-active:text-background",
   },
   primary: {
-    link: "border-primary bg-primary hover:border-amm-green focus-visible:border-amm-green active:border-amm-green",
+    link: "border-background bg-primary hover:border-amm-green focus-visible:border-amm-green active:border-amm-green",
     focus:
       "focus-visible:shadow-[0_0_8px_4px_color-mix(in_srgb,var(--color-amm-green)_50%,transparent)]",
     fill: "bg-amm-green",

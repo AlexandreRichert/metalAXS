@@ -204,6 +204,7 @@ export default function Header() {
           {/* Appel à l'action */}
           <Button
             href="mailto:contact@fedemetal.com"
+            variant="primary"
             icon={<ArrowRight className="size-4" />}
             className="shrink-0"
           >

@@ -15,13 +15,12 @@ type DisabilityCard = {
   href: string;
 };
 
-const lorem = "Lorem ipsum dolor sit amet, consectetur";
-
 const cards: DisabilityCard[] = [
   {
     title: "Moteurs",
     stat: "5,8%",
-    subtitle: lorem,
+    subtitle:
+      "Circuler sur un site de festival vire vite au parcours d’obstacles quand on est en fauteuil ou vite fatigué.",
     image: "/home/moteurs.jpg",
     icon: "fa-solid fa-wheelchair",
     href: "/disabilitiesTypes/motor",
@@ -29,7 +28,8 @@ const cards: DisabilityCard[] = [
   {
     title: "Visuels",
     stat: "3%",
-    subtitle: lorem,
+    subtitle:
+      "De la malvoyance à la cécité, profiter d’un concert passe par le son et le toucher, pas seulement par la vue.",
     image: "/home/festival-crowd.jpg",
     icon: "fa-solid fa-eye",
     href: "/disabilitiesTypes/visuel",
@@ -37,7 +37,8 @@ const cards: DisabilityCard[] = [
   {
     title: "Auditifs",
     stat: "16%",
-    subtitle: lorem,
+    subtitle:
+      "Sourd ou malentendant, on vit la musique autrement, par les vibrations et le regard.",
     image: "/home/stage.jpg",
     icon: "fa-solid fa-ear-listen",
     href: "/disabilitiesTypes/auditif",
@@ -45,7 +46,8 @@ const cards: DisabilityCard[] = [
   {
     title: "Déficiences intellectuelles",
     stat: "2%",
-    subtitle: lorem,
+    subtitle:
+      "Une signalétique claire et un accueil patient suffisent souvent à rendre le festival accessible.",
     image: "/home/cognitifs.jpg",
     icon: "fa-solid fa-puzzle-piece",
     href: "/disabilitiesTypes/intellectuelle",
@@ -53,7 +55,8 @@ const cards: DisabilityCard[] = [
   {
     title: "Troubles psychiques",
     stat: "20%",
-    subtitle: lorem,
+    subtitle:
+      "Entre la foule, le bruit et l’imprévu, un festival peut vite devenir trop intense sans espace de répit.",
     image: "/home/accessibilite.jpg",
     icon: "fa-solid fa-brain",
     href: "/disabilitiesTypes/psychique",
@@ -61,7 +64,8 @@ const cards: DisabilityCard[] = [
   {
     title: "Maladies invalidantes",
     stat: "20%",
-    subtitle: lorem,
+    subtitle:
+      "Douleurs, fatigue ou traitements lourds : des contraintes invisibles qui demandent des aménagements bien réels.",
     image: "/home/debuter.jpg",
     icon: "fa-solid fa-heart-pulse",
     href: "/disabilitiesTypes",
