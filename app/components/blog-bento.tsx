@@ -71,17 +71,6 @@ const LAYOUT: CardConfig[] = [
   },
 ];
 
-function formatDate(value?: string) {
-  if (!value) return null;
-  return new Date(value)
-    .toLocaleDateString("fr-FR", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    })
-    .toUpperCase();
-}
-
 const readArrow = (
   <svg
     width="16"
@@ -142,7 +131,7 @@ function BentoCard({ post, config }: { post: PostListItem; config: CardConfig })
   const image = post.mainImage?.asset ? (
     <Link
       href={href}
-      className={`group relative block shrink-0 overflow-hidden rounded-[24px] bg-line ${imageShape}`}
+      className={`group relative block shrink-0 overflow-hidden rounded-[6px] bg-line ${imageShape}`}
     >
       <Image
         src={urlForImage(post.mainImage)
@@ -157,12 +146,12 @@ function BentoCard({ post, config }: { post: PostListItem; config: CardConfig })
       />
     </Link>
   ) : (
-    <div className={`shrink-0 rounded-[24px] bg-line ${imageShape}`} />
+    <div className={`shrink-0 rounded-[6px] bg-line ${imageShape}`} />
   );
 
   return (
     <div
-      className={`flex h-full gap-4 rounded-[32px] bg-white p-3 ${
+      className={`flex h-full gap-4 rounded-[8px] bg-white p-3 ${
         isHorizontal ? "flex-col lg:flex-row" : "flex-col"
       }`}
     >
@@ -173,9 +162,6 @@ function BentoCard({ post, config }: { post: PostListItem; config: CardConfig })
           isHorizontal ? "flex-1 lg:justify-center" : ""
         }`}
       >
-        <p className="font-sans text-sm font-medium uppercase text-ink/70">
-          {formatDate(post.publishedAt)}
-        </p>
         <Link href={href} className="transition-opacity hover:opacity-80">
           <TitleWithHighlight
             title={post.title}
@@ -194,7 +180,7 @@ function BentoCard({ post, config }: { post: PostListItem; config: CardConfig })
         </p>
         <div className="pt-1">
           <Button href={href} variant="primary" size="sm" icon={readArrow}>
-            Lire l&apos;article
+            Voir la pratique
           </Button>
         </div>
       </div>

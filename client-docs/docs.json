@@ -1,8 +1,8 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "All Access Metal — Guide blog",
-  "description": "Guide d'administration du blog All Access Metal via Sanity Studio",
+  "name": "All Access Metal — Guide bonnes pratiques",
+  "description": "Guide d'administration du site All Access Metal via Sanity Studio",
   "colors": {
     "primary": "#2C1F00",
     "light": "#ABF000",
@@ -17,17 +17,17 @@
     "links": [
       {
         "label": "Site public",
-        "href": "https://all-access-metal-38bhaa4w5-all-access-metal.vercel.app"
+        "href": "https://all-access-metal.vercel.app"
       },
       {
         "label": "Studio Sanity",
-        "href": "https://all-access-metal-38bhaa4w5-all-access-metal.vercel.app/studio"
+        "href": "https://all-access-metal.vercel.app/studio"
       }
     ],
     "primary": {
       "type": "button",
       "label": "Ouvrir le Studio",
-      "href": "https://all-access-metal-38bhaa4w5-all-access-metal.vercel.app/studio"
+      "href": "https://all-access-metal.vercel.app/studio"
     }
   },
   "navigation": {
@@ -65,7 +65,7 @@
   },
   "footer": {
     "socials": {
-      "website": "https://all-access-metal-38bhaa4w5-all-access-metal.vercel.app"
+      "website": "https://all-access-metal.vercel.app"
     }
   }
 }

@@ -4,7 +4,13 @@ Guide d'administration du blog All Access Metal, publié via [Mintlify](https://
 
 ## Prévisualisation locale
 
-Depuis la racine du projet :
+Première fois (installation de Mintlify dans `client-docs/`) :
+
+```bash
+npm run docs:install
+```
+
+Puis, depuis la racine du projet :
 
 ```bash
 npm run docs:dev
@@ -25,6 +31,7 @@ Ouvre la doc sur **http://localhost:3333** (port distinct du serveur Next.js sur
 ```
 client-docs/
 ├── docs.json          # Configuration Mintlify (navigation, couleurs, liens)
+├── images/            # Captures d'écran et visuels pour la doc
 ├── index.mdx          # Page d'accueil
 ├── studio/            # Accès et vue d'ensemble
 └── guide/             # Contenu du guide client
