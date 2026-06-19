@@ -1,8 +1,8 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "All Access Metal — Guide blog",
-  "description": "Guide d'administration du blog All Access Metal via Sanity Studio",
+  "name": "All Access Metal — Guide bonnes pratiques",
+  "description": "Guide d'administration du site All Access Metal via Sanity Studio",
   "colors": {
     "primary": "#2C1F00",
     "light": "#ABF000",

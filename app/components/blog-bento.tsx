@@ -131,7 +131,7 @@ function BentoCard({ post, config }: { post: PostListItem; config: CardConfig })
   const image = post.mainImage?.asset ? (
     <Link
       href={href}
-      className={`group relative block shrink-0 overflow-hidden rounded-[24px] bg-line ${imageShape}`}
+      className={`group relative block shrink-0 overflow-hidden rounded-[6px] bg-line ${imageShape}`}
     >
       <Image
         src={urlForImage(post.mainImage)
@@ -146,12 +146,12 @@ function BentoCard({ post, config }: { post: PostListItem; config: CardConfig })
       />
     </Link>
   ) : (
-    <div className={`shrink-0 rounded-[24px] bg-line ${imageShape}`} />
+    <div className={`shrink-0 rounded-[6px] bg-line ${imageShape}`} />
   );
 
   return (
     <div
-      className={`flex h-full gap-4 rounded-[32px] bg-white p-3 ${
+      className={`flex h-full gap-4 rounded-[8px] bg-white p-3 ${
         isHorizontal ? "flex-col lg:flex-row" : "flex-col"
       }`}
     >

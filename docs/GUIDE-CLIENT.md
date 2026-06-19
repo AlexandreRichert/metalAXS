@@ -264,20 +264,39 @@ Dans l'éditeur de contenu, la barre d'outils propose **Surligné (vert)** (à c
 | Contexte | Recommandation |
 | --- | --- |
 | **Titre de l'article** | **Privilégiez** le surlignage ici. Ciblez **1 à 3 mots** (ou une courte expression) porteurs de sens : chiffre clé, promesse, angle éditorial |
-| **Titres internes (H2, H3)** | Possible avec parcimonie pour un mot très important |
-| **Paragraphes** | À utiliser **avec modération** — 1 occurrence par section au maximum |
-| **En général** | Le surlignage perd son impact s'il est partout. Moins = plus lisible, plus élégant |
+| **Titres internes (Titre 2, Titre 3)** | **Un seul surlignage vert par sous-titre** — sur un mot ou plusieurs mots qui résument l'idée clé de la section |
+| **Paragraphes** | **Pas de surlignage vert** : utilisez plutôt le **gras** sur quelques mots importants pour guider la lecture |
+| **Ensemble de l'article** | Combinez surlignage vert (titres) + gras (corps) : le vert structure les sections, le gras fait ressortir les informations essentielles au survol |
+
+**Bonne combinaison surlignage + gras**
+
+1. **Surlignez en vert** le mot ou l'expression clé de chaque **Titre 2** ou **Titre 3** (une seule fois par sous-titre).
+2. **Mettez en gras** dans les paragraphes quelques termes ou courtes expressions importantes — dates, chiffres, notions clés, conclusions — pour que le lecteur puisse **parcourir l'article** et repérer l'essentiel sans tout lire.
+
+> Le surlignage vert et le gras ne jouent pas le même rôle : le vert marque la **structure** (titres), le gras souligne le **contenu** (paragraphes). Évitez de cumuler les deux sur les mêmes mots.
 
 **Exemples de bons usages dans le titre**
 
 - `Comment **préparer** votre festival accessible` → surligner `préparer`
 - `**3 erreurs** à éviter sur l'accès PMR` → surligner `3 erreurs`
 
+**Exemples de bons usages dans le corps**
+
+- Titre 2 : `Comprendre la diversité des situations de handicap` → surligner `Comprendre`
+- Titre 2 : `Les bénéfices d'une formation adaptée` → surligner `bénéfices`
+- Dans le paragraphe suivant : mettre en **gras** `démarche d'inclusion`, `première image renvoyée au public`, etc.
+
 **Exemples à éviter**
 
-- Surligner chaque phrase importante dans un long paragraphe
-- Surligner plus de la moitié du titre
-- Utiliser le surlignage ET le gras sur les mêmes mots (redondant visuellement)
+- Plus d'un surlignage vert dans le même sous-titre (Titre 2 ou Titre 3)
+- Surligner du texte dans les paragraphes (réservez le vert aux titres)
+- Surligner plus de la moitié d'un titre
+- Utiliser le surlignage vert ET le gras sur les mêmes mots (redondant visuellement)
+- Mettre en gras des phrases entières ou trop de mots (le gras perd son effet de balise)
+
+![Exemple : un surlignage vert par sous-titre (Titre 2) et du gras dans les paragraphes](../client-docs/images/surlignage-exemple-article.png)
+
+*Exemple sur le site : surlignage vert sur les titres de section, gras dans les paragraphes pour les informations clés.*
 
 ---
 
@@ -420,8 +439,8 @@ Comprendre le rendu public aide à mieux préparer le contenu dans le Studio.
 
 ### Surlignage vert
 
-- **Priorité au titre** : c'est l'endroit le plus visible (vedette, cartes, page article).
-- Dans le contenu, une **touche ponctuelle** vaut mieux qu'une sur-utilisation.
+- **Priorité au titre** : c'est l'endroit le plus visible (vedette, cartes, page article)
+- Dans le corps : **un surlignage vert par Titre 2 ou Titre 3**, puis du **gras** dans les paragraphes pour les infos clés — voir [§7](#7-le-surlignage-vert)
 
 ### Images et accessibilité
 
@@ -477,6 +496,7 @@ Ce guide est rédigé pour fonctionner **sans images**. Pour une version illustr
 | `05-tags-filtres.png` | Fiche Tag + panneau Filtres sur `/blog` |
 | `06-publication.png` | Bouton Publish et statut brouillon / publié |
 | `07-rendu-site.png` | Page article avec titre surligné et sommaire |
+| `08-surlignage-exemple-article.png` | Exemple : surlignage vert par Titre 2 + gras dans les paragraphes (voir `client-docs/images/surlignage-exemple-article.png`) |
 
 > **Note pour l'équipe technique :** le Studio nécessite une connexion ; les captures doivent être prises manuellement ou via un outil d'enregistrement d'écran (voir ci-dessous).
 
