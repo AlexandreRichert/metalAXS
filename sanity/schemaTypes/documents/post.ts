@@ -1,6 +1,8 @@
 import { DocumentTextIcon } from "@sanity/icons";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
+import { titleContainsHighlight } from "../../lib/title-highlight";
+
 // Article de blog.
 export const post = defineType({
   name: "post",
@@ -12,13 +14,72 @@ export const post = defineType({
     { name: "media", title: "Médias" },
     { name: "meta", title: "Métadonnées" },
   ],
+  validation: (rule) =>
+    rule.custom((document) => {
+      const { title, titleHighlight } = document as {
+        title?: string;
+        titleHighlight?: string;
+      };
+      const highlight = titleHighlight?.trim();
+      if (!highlight) return true;
+
+      if (typeof title !== "string" || !title.trim()) {
+        return {
+          message: "Renseignez le titre avant le surlignage.",
+          path: ["titleHighlight"],
+        };
+      }
+
+      if (!titleContainsHighlight(title, highlight)) {
+        return {
+          message: `« ${highlight} » ne correspond à aucune partie du titre.`,
+          path: ["titleHighlight"],
+        };
+      }
+
+      return true;
+    }),
   fields: [
     defineField({
       name: "title",
       title: "Titre",
       type: "string",
       group: "content",
-      validation: (rule) => rule.required().max(120),
+      validation: (rule) =>
+        rule
+          .required()
+          .max(120)
+          .custom((title, context) => {
+            const highlight = context.document?.titleHighlight;
+            if (typeof title !== "string" || typeof highlight !== "string") {
+              return true;
+            }
+            if (!highlight.trim()) return true;
+            if (!titleContainsHighlight(title, highlight)) {
+              return "Le surlignage ne correspond plus au titre. Mettez à jour « Mot(s) à surligner ».";
+            }
+            return true;
+          }),
+    }),
+    defineField({
+      name: "titleHighlight",
+      title: "Mot(s) à surligner",
+      type: "string",
+      group: "content",
+      description:
+        "Mot ou expression exacte du titre à surligner en vert sur le site. Laissez vide pour ne surligner aucun mot. La validation s'applique à la publication.",
+      validation: (rule) =>
+        rule.custom((value, context) => {
+          if (!value?.trim()) return true;
+          const title = context.document?.title;
+          if (typeof title !== "string" || !title.trim()) {
+            return "Renseignez d'abord le titre de l'article.";
+          }
+          if (!titleContainsHighlight(title, value)) {
+            return `« ${value.trim()} » ne correspond à aucune partie du titre.`;
+          }
+          return true;
+        }),
     }),
     defineField({
       name: "slug",
@@ -78,8 +139,7 @@ export const post = defineType({
       title: "Tags",
       type: "array",
       group: "meta",
-      of: [{ type: "string" }],
-      options: { layout: "tags" },
+      of: [defineArrayMember({ type: "reference", to: [{ type: "tag" }] })],
     }),
     defineField({
       name: "author",
@@ -87,13 +147,6 @@ export const post = defineType({
       type: "reference",
       group: "meta",
       to: [{ type: "author" }],
-    }),
-    defineField({
-      name: "categories",
-      title: "Catégories",
-      type: "array",
-      group: "meta",
-      of: [defineArrayMember({ type: "reference", to: [{ type: "category" }] })],
     }),
     defineField({
       name: "publishedAt",

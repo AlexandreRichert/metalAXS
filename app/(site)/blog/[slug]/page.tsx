@@ -3,12 +3,18 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { ArrowRight } from "@/app/components/icons";
 import PortableTextRenderer from "@/app/components/portable-text";
+import TitleWithHighlight from "@/app/components/title-with-highlight";
+import { SimilarArticles } from "@/app/components/similar-articles";
+import { TableOfContents } from "@/app/components/table-of-contents";
+import { extractHeadings } from "@/app/lib/headings";
 import { client } from "@/sanity/lib/client";
+import { getPostTags } from "@/sanity/lib/post-tags";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { urlForImage } from "@/sanity/lib/image";
-import { POST_QUERY, POSTS_SLUGS_QUERY } from "@/sanity/lib/queries";
-import type { Post } from "@/sanity/lib/types";
+import { POST_QUERY, POSTS_SLUGS_QUERY, SIMILAR_POSTS_QUERY } from "@/sanity/lib/queries";
+import type { Post, PostListItem } from "@/sanity/lib/types";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -49,57 +55,95 @@ export default async function PostPage({ params }: PageProps) {
   const post = await sanityFetch<Post | null>({
     query: POST_QUERY,
     params: { slug },
-    tags: [`post:${slug}`, "author"],
+    tags: [`post:${slug}`, "author", "category", "tag"],
   });
 
   if (!post) notFound();
 
-  return (
-    <article className="mx-auto px-4 py-12">
-      <Link
-        href="/blog"
-        className="text-sm text-gray-500 hover:text-gray-800"
-      >
-        ← Retour au blog
-      </Link>
+  const postTags = getPostTags(post);
+  const publishedDate = formatDate(post.publishedAt);
+  const tagIds = postTags.map((tag) => tag._id);
+  const similarPosts = await sanityFetch<PostListItem[]>({
+    query: SIMILAR_POSTS_QUERY,
+    params: {
+      slug,
+      tagIds,
+      authorId: post.authorId ?? null,
+    },
+    tags: ["post", "category", "tag"],
+  });
 
-      <header className="mt-4 mb-8">
-        {post.tags && post.tags.length > 0 ? (
-          <div className="mb-3 flex flex-wrap gap-2">
-            {post.tags.map((tag) => (
-              <span
-                key={tag}
-                className="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-600"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
+  return (
+    <>
+    <article className="mx-auto max-w-[1200px] px-4 pt-[72px]">
+      <header className="flex flex-col">
+        <Link
+          href="/blog"
+          aria-label="Retour au blog"
+          className="inline-flex size-10 items-center justify-center rounded-xl bg-line text-ink transition-colors hover:bg-line"
+        >
+          <ArrowRight className="size-4 rotate-180" />
+        </Link>
+
+        <div className="mt-[65px] flex flex-col gap-4">
+          {postTags.length > 0 ? (
+            <div className="flex flex-wrap gap-2">
+              {postTags.map((tag) => (
+                <span
+                  key={tag._id}
+                  className="inline-block rounded-[4px] bg-tag-bg px-2 py-0.5 text-sm uppercase text-ink"
+                >
+                  {tag.title}
+                </span>
+              ))}
+            </div>
+          ) : null}
+
+          <TitleWithHighlight
+            title={post.title}
+            highlight={post.titleHighlight}
+            as="h1"
+            className="font-display text-blog-title font-black uppercase leading-[0.9] text-ink"
+          />
+
+          {publishedDate ? (
+            <p className="text-sm font-medium leading-[1.25] text-muted">
+              {publishedDate}
+            </p>
+          ) : null}
+        </div>
+
+        {post.mainImage?.asset ? (
+          <Image
+            src={urlForImage(post.mainImage)
+              .width(1200)
+              .height(450)
+              .fit("crop")
+              .url()}
+            alt={post.mainImage.alt || post.title}
+            width={1200}
+            height={450}
+            priority
+            className="mt-[40px] h-[450px] w-full rounded-[32px] object-cover opacity-80"
+          />
         ) : null}
-        {post.body ? (
-          <div className="prose-content">
-            <PortableTextRenderer value={post.body} />
-          </div>
-        ) : null}
-        <h1 className="text-4xl font-bold">{post.title}</h1>
-        <p className="mt-3 text-gray-500">
-          {[post.author?.name, formatDate(post.publishedAt)]
-            .filter(Boolean)
-            .join(" — ")}
-        </p>
-        <p className="mt-4 text-lg text-gray-700">{post.description}</p>
       </header>
 
-      {post.mainImage?.asset ? (
-        <Image
-          src={urlForImage(post.mainImage).width(1200).height(675).fit("crop").url()}
-          alt={post.mainImage.alt || post.title}
-          width={1200}
-          height={675}
-          priority
-          className="mb-8 h-auto w-full"
-        />
-      ) : null}
+      {post.body ? (() => {
+        const headings = extractHeadings(post.body!);
+        return (
+          <div className="mt-10 flex gap-24">
+            {headings.length > 0 ? (
+              <aside className="hidden xl:block w-52 shrink-0">
+                <TableOfContents headings={headings} />
+              </aside>
+            ) : null}
+            <div className="prose-content min-w-0 flex-1 text-primary">
+              <PortableTextRenderer value={post.body!} />
+            </div>
+          </div>
+        );
+      })() : null}
 
       {post.gallery && post.gallery.length > 0 ? (
         <section className="mt-10">
@@ -120,24 +164,9 @@ export default async function PostPage({ params }: PageProps) {
           </div>
         </section>
       ) : null}
-
-      {post.author?.bio ? (
-        <footer className="mt-12 flex items-start gap-4 border-t border-gray-200 pt-6">
-          {post.author.avatar?.asset ? (
-            <Image
-              src={urlForImage(post.author.avatar).width(96).height(96).fit("crop").url()}
-              alt={post.author.name}
-              width={48}
-              height={48}
-              className="h-12 w-12 rounded-full object-cover"
-            />
-          ) : null}
-          <div>
-            <p className="font-semibold">{post.author.name}</p>
-            <p className="text-sm text-gray-600">{post.author.bio}</p>
-          </div>
-        </footer>
-      ) : null}
     </article>
+
+    <SimilarArticles posts={similarPosts} />
+  </>
   );
 }

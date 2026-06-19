@@ -4,15 +4,10 @@ import type { SchemaTypeDefinition } from "sanity";
 import { author } from "./documents/author";
 import { category } from "./documents/category";
 import { post } from "./documents/post";
-import { questionnaire } from "./documents/questionnaire";
-import { submission } from "./documents/submission";
+import { tag } from "./documents/tag";
 
 // Objets réutilisables
-import { answer } from "./objects/answer";
 import { blockContent } from "./objects/blockContent";
-import { question } from "./objects/question";
-import { questionOption } from "./objects/questionOption";
-import { step } from "./objects/step";
 import { textWithImage } from "./objects/textWithImage";
 
 export const schemaTypes: SchemaTypeDefinition[] = [
@@ -20,13 +15,8 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   post,
   author,
   category,
-  questionnaire,
-  submission,
+  tag,
   // Objets
   blockContent,
   textWithImage,
-  step,
-  question,
-  questionOption,
-  answer,
 ];
