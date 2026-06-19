@@ -15,7 +15,7 @@ import {
 import type { FilterGroup, PostListItem } from "@/sanity/lib/types";
 
 export const metadata: Metadata = {
-  title: "All access metal - blog",
+  title: "All Access Metal — Blog",
   description: "Articles et actualités autour de l'accessibilité des festivals.",
 };
 

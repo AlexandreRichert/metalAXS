@@ -5,7 +5,7 @@ type LogoProps = {
   title?: string;
 };
 
-export default function Logo({ className, title = "Metal AXS" }: LogoProps) {
+export default function Logo({ className, title = "All Access Metal" }: LogoProps) {
   return (
     <svg
       viewBox="0 0 28 28"

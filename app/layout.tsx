@@ -165,9 +165,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Metalaxs",
+  title: "All Access Metal",
   description:
-    "Metalaxs est une plateforme qui permet de rendre les festivals accessibles à tous.",
+    "All Access Metal est une plateforme qui permet de rendre les festivals accessibles à tous.",
 };
 
 // Layout racine minimal : il fournit uniquement <html>/<body> et les polices.

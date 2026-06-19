@@ -1,4 +1,4 @@
-# Guide d'administration du blog Metalaxs
+# Guide d'administration du blog All Access Metal
 
 Bienvenue ! Ce document explique, **sans connaissances techniques**, comment gérer le contenu du blog depuis votre espace d'administration **Sanity Studio**.
 
@@ -236,7 +236,7 @@ Le formulaire est organisé en **trois onglets**.
 
 ## 7. Le surlignage vert
 
-Le surlignage vert (#ABF000, couleur lime Metalaxs) est un **élément de signature** du site. Il attire l'œil sur les mots clés. Deux mécanismes existent :
+Le surlignage vert (#ABF000, couleur lime All Access Metal) est un **élément de signature** du site. Il attire l'œil sur les mots clés. Deux mécanismes existent :
 
 ### A. Surlignage du titre (recommandé)
 
@@ -329,7 +329,7 @@ Pour un texte et une illustration alignés horizontalement :
 
 - Format **paysage** recommandé (rendu optimal en 16:9).
 - Utilisez le **point focal** pour indiquer la zone importante si l'image est recadrée sur mobile.
-- **Texte alternatif obligatoire** : décrivez brièvement ce que montre l'image (accessibilité — cœur de la mission Metalaxs).
+- **Texte alternatif obligatoire** : décrivez brièvement ce que montre l'image (accessibilité — cœur de la mission All Access Metal).
 
 ### Galerie
 
@@ -508,10 +508,10 @@ Ce fichier Markdown convient pour le versionnement et la maintenance. Pour une *
 | Outil | Intérêt | Idéal si… |
 | --- | --- | --- |
 | **[Notion](https://notion.so)** | Mise en page soignée, partage par lien, commentaires | Le client utilise déjà Notion |
-| **[GitBook](https://gitbook.com)** ou **[Mintlify](https://mintlify.com)** | Documentation en ligne professionnelle à partir du Markdown | Vous voulez une URL dédiée « docs.metalaxs.fr » |
+| **[GitBook](https://gitbook.com)** ou **[Mintlify](https://mintlify.com)** | Documentation en ligne professionnelle à partir du Markdown | Vous voulez une URL dédiée « docs.all-access-metal.fr » |
 | **Google Docs / Word → PDF** | Familier, export PDF branded | Livraison ponctuelle, pas de mise à jour fréquente |
 | **[Scribe](https://scribehow.com)** ou **[Tango](https://tango.us)** | Génère automatiquement un tutoriel pas-à-pas **avec captures** en enregistrant vos clics dans le Studio | Vous voulez des screenshots sans effort manuel |
 | **[Loom](https://loom.com)** | Vidéo courte commentée du parcours | Le client préfère une démo vidéo à la lecture |
-| **Canva** | Mise en page PDF premium (charte graphique Metalaxs) | Livrable « guide brandé » unique |
+| **Canva** | Mise en page PDF premium (charte graphique All Access Metal) | Livrable « guide brandé » unique |
 
 **Recommandation :** conserver ce Markdown comme **source de vérité**, et publier une version Notion ou Scribe pour le client avec les captures — Scribe/Tango sont particulièrement efficaces pour documenter Sanity car ils capturent chaque clic dans le navigateur.
