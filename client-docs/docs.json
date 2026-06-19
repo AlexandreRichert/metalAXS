@@ -1,0 +1,71 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "Metalaxs — Guide blog",
+  "description": "Guide d'administration du blog All Access Metal via Sanity Studio",
+  "colors": {
+    "primary": "#2C1F00",
+    "light": "#ABF000",
+    "dark": "#610017"
+  },
+  "background": {
+    "color": {
+      "light": "#F2EDE3"
+    }
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Site public",
+        "href": "https://all-access-metal-38bhaa4w5-all-access-metal.vercel.app"
+      },
+      {
+        "label": "Studio Sanity",
+        "href": "https://all-access-metal-38bhaa4w5-all-access-metal.vercel.app/studio"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Ouvrir le Studio",
+      "href": "https://all-access-metal-38bhaa4w5-all-access-metal.vercel.app/studio"
+    }
+  },
+  "navigation": {
+    "groups": [
+      {
+        "group": "Démarrer",
+        "pages": [
+          "index",
+          "studio/acces",
+          "studio/vue-ensemble",
+          "guide/parcours"
+        ]
+      },
+      {
+        "group": "Contenu",
+        "pages": [
+          "guide/tags",
+          "guide/auteurs",
+          "guide/rediger-article",
+          "guide/surlignage",
+          "guide/editeur",
+          "guide/medias"
+        ]
+      },
+      {
+        "group": "Publication",
+        "pages": [
+          "guide/publication",
+          "guide/site-public",
+          "guide/bonnes-pratiques",
+          "guide/faq"
+        ]
+      }
+    ]
+  },
+  "footer": {
+    "socials": {
+      "website": "https://all-access-metal-38bhaa4w5-all-access-metal.vercel.app"
+    }
+  }
+}
