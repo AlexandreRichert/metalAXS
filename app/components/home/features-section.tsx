@@ -20,7 +20,7 @@ export default function FeaturesSection() {
           }
           subtitle={lorem}
           ctaLabel="Auditez-vous"
-          ctaHref="/questionnaire"
+          ctaHref="/goodPractices"
         />
 
         <FeatureRow
@@ -34,7 +34,7 @@ export default function FeaturesSection() {
           }
           subtitle={lorem}
           ctaLabel="Auditez-vous"
-          ctaHref="/questionnaire"
+          ctaHref="/goodPractices"
         />
       </div>
     </section>

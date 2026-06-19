@@ -37,7 +37,7 @@ export default function Hero() {
           </div>
 
           <Reveal delay={0.8} y={20} className="flex flex-wrap items-center justify-center gap-4">
-            <Button href="/questionnaire" variant="primary" size="lg">
+            <Button href="/goodPractices" variant="primary" size="lg">
               Auditez-vous
             </Button>
           </Reveal>

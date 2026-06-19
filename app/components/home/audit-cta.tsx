@@ -37,7 +37,7 @@ export default function AuditCta() {
             </div>
 
             <Reveal delay={0.5} y={20} className="flex flex-wrap items-center justify-center gap-4">
-              <Button href="/questionnaire" variant="primary" size="lg">
+              <Button href="/goodPractices" variant="primary" size="lg">
                 Accédez à votre audit gratuit
               </Button>
               <Button href="/goodPractices" variant="secondary" size="lg">

@@ -68,38 +68,3 @@ export type Post = {
   author?: Author;
   authorId?: string;
 };
-
-export type QuestionType =
-  | "text"
-  | "textarea"
-  | "radio"
-  | "checkbox"
-  | "select"
-  | "boolean"
-  | "rating";
-
-export type QuestionOption = { label: string; value: string };
-
-export type Question = {
-  _key: string;
-  label: string;
-  type: QuestionType;
-  helpText?: string;
-  required?: boolean;
-  options?: QuestionOption[];
-};
-
-export type Step = {
-  _key: string;
-  title: string;
-  description?: string;
-  questions: Question[];
-};
-
-export type Questionnaire = {
-  _id: string;
-  title: string;
-  slug: string;
-  description?: string;
-  steps: Step[];
-};

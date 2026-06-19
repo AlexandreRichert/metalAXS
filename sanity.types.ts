@@ -15,50 +15,6 @@
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: schema.json
-export type Answer = {
-  _type: "answer";
-  questionKey?: string;
-  questionLabel?: string;
-  values?: Array<string>;
-};
-
-export type QuestionOption = {
-  _type: "questionOption";
-  label?: string;
-  value?: string;
-};
-
-export type Question = {
-  _type: "question";
-  label?: string;
-  type?:
-    | "text"
-    | "textarea"
-    | "radio"
-    | "checkbox"
-    | "select"
-    | "boolean"
-    | "rating";
-  helpText?: string;
-  required?: boolean;
-  options?: Array<
-    {
-      _key: string;
-    } & QuestionOption
-  >;
-};
-
-export type Step = {
-  _type: "step";
-  title?: string;
-  description?: string;
-  questions?: Array<
-    {
-      _key: string;
-    } & Question
-  >;
-};
-
 export type SanityImageAssetReference = {
   _ref: string;
   _type: "reference";
@@ -130,54 +86,6 @@ export type BlockContent = Array<
     } & TextWithImage)
 >;
 
-export type QuestionnaireReference = {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "questionnaire";
-};
-
-export type Submission = {
-  _id: string;
-  _type: "submission";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  questionnaire?: QuestionnaireReference;
-  respondentName?: string;
-  respondentEmail?: string;
-  submittedAt?: string;
-  answers?: Array<
-    {
-      _key: string;
-    } & Answer
-  >;
-  reviewed?: boolean;
-  notes?: string;
-};
-
-export type Questionnaire = {
-  _id: string;
-  _type: "questionnaire";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  slug?: Slug;
-  description?: string;
-  steps?: Array<
-    {
-      _key: string;
-    } & Step
-  >;
-};
-
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
-};
-
 export type CategoryReference = {
   _ref: string;
   _type: "reference";
@@ -194,6 +102,12 @@ export type Tag = {
   title?: string;
   slug?: Slug;
   category?: CategoryReference;
+};
+
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
 };
 
 export type Category = {
@@ -229,6 +143,7 @@ export type Post = {
   _updatedAt: string;
   _rev: string;
   title?: string;
+  titleHighlight?: string;
   slug?: Slug;
   description?: string;
   body?: BlockContent;
@@ -390,19 +305,12 @@ export type Geopoint = {
 };
 
 export type AllSanitySchemaTypes =
-  | Answer
-  | QuestionOption
-  | Question
-  | Step
   | SanityImageAssetReference
   | TextWithImage
   | BlockContent
-  | QuestionnaireReference
-  | Submission
-  | Questionnaire
-  | Slug
   | CategoryReference
   | Tag
+  | Slug
   | Category
   | TagReference
   | AuthorReference
@@ -435,10 +343,11 @@ export type FILTER_GROUPS_QUERY_RESULT = Array<{
 
 // Source: sanity/lib/queries.ts
 // Variable: POSTS_QUERY
-// Query: *[_type == "post" && defined(slug.current)]  | order(coalesce(publishedAt, _createdAt) desc) {    _id,    title,    "slug": slug.current,    description,    publishedAt,    mainImage,      tags[]->{    _id,    title,    "slug": slug.current,    "categoryId": category._ref  },    "author": author->{ name, "slug": slug.current, avatar }  }
+// Query: *[_type == "post" && defined(slug.current)]  | order(coalesce(publishedAt, _createdAt) desc) {    _id,    title,    titleHighlight,    "slug": slug.current,    description,    publishedAt,    mainImage,      "tags": array::compact(tags[]->{    _id,    title,    "slug": slug.current,    "categoryId": category._ref  })[defined(title)],    "author": author->{ name, "slug": slug.current, avatar }  }
 export type POSTS_QUERY_RESULT = Array<{
   _id: string;
   title: string | null;
+  titleHighlight: string | null;
   slug: string | null;
   description: string | null;
   publishedAt: string | null;
@@ -452,7 +361,7 @@ export type POSTS_QUERY_RESULT = Array<{
   } | null;
   tags: Array<{
     _id: string;
-    title: string | null;
+    title: string;
     slug: string | null;
     categoryId: string | null;
   }> | null;
@@ -471,10 +380,11 @@ export type POSTS_QUERY_RESULT = Array<{
 
 // Source: sanity/lib/queries.ts
 // Variable: POST_QUERY
-// Query: *[_type == "post" && slug.current == $slug][0]{    _id,    title,    "slug": slug.current,    description,    publishedAt,    mainImage,    gallery,      tags[]->{    _id,    title,    "slug": slug.current,    "categoryId": category._ref  },    body,    "author": author->{ name, "slug": slug.current, avatar, bio }  }
+// Query: *[_type == "post" && slug.current == $slug][0]{    _id,    title,    titleHighlight,    "slug": slug.current,    description,    publishedAt,    mainImage,    gallery,      "tags": array::compact(tags[]->{    _id,    title,    "slug": slug.current,    "categoryId": category._ref  })[defined(title)],    body,    "authorId": author._ref,    "author": author->{ name, "slug": slug.current, avatar, bio }  }
 export type POST_QUERY_RESULT = {
   _id: string;
   title: string | null;
+  titleHighlight: string | null;
   slug: string | null;
   description: string | null;
   publishedAt: string | null;
@@ -497,11 +407,12 @@ export type POST_QUERY_RESULT = {
   }> | null;
   tags: Array<{
     _id: string;
-    title: string | null;
+    title: string;
     slug: string | null;
     categoryId: string | null;
   }> | null;
   body: BlockContent | null;
+  authorId: string | null;
   author: {
     name: string | null;
     slug: string | null;
@@ -518,10 +429,11 @@ export type POST_QUERY_RESULT = {
 
 // Source: sanity/lib/queries.ts
 // Variable: LATEST_POST_QUERY
-// Query: *[_type == "post" && defined(slug.current)]  | order(coalesce(publishedAt, _createdAt) desc, _createdAt desc)[0]{    _id,    title,    "slug": slug.current,    description,    publishedAt,    mainImage,      tags[]->{    _id,    title,    "slug": slug.current,    "categoryId": category._ref  },    "author": author->{ name, "slug": slug.current, avatar, bio }  }
+// Query: *[_type == "post" && defined(slug.current)]  | order(coalesce(publishedAt, _createdAt) desc, _createdAt desc)[0]{    _id,    title,    titleHighlight,    "slug": slug.current,    description,    publishedAt,    mainImage,      "tags": array::compact(tags[]->{    _id,    title,    "slug": slug.current,    "categoryId": category._ref  })[defined(title)],    "author": author->{ name, "slug": slug.current, avatar, bio }  }
 export type LATEST_POST_QUERY_RESULT = {
   _id: string;
   title: string | null;
+  titleHighlight: string | null;
   slug: string | null;
   description: string | null;
   publishedAt: string | null;
@@ -535,7 +447,7 @@ export type LATEST_POST_QUERY_RESULT = {
   } | null;
   tags: Array<{
     _id: string;
-    title: string | null;
+    title: string;
     slug: string | null;
     categoryId: string | null;
   }> | null;
@@ -555,10 +467,11 @@ export type LATEST_POST_QUERY_RESULT = {
 
 // Source: sanity/lib/queries.ts
 // Variable: POSTS_LIST_QUERY
-// Query: *[_type == "post" && defined(slug.current)]  | order(coalesce(publishedAt, _createdAt) desc, _createdAt desc)[1...10]{    _id,    title,    "slug": slug.current,    description,    publishedAt,    mainImage,      tags[]->{    _id,    title,    "slug": slug.current,    "categoryId": category._ref  },    "author": author->{ name, "slug": slug.current, avatar, bio }  }
+// Query: *[_type == "post" && defined(slug.current)]  | order(coalesce(publishedAt, _createdAt) desc, _createdAt desc)[1...7]{    _id,    title,    titleHighlight,    "slug": slug.current,    description,    publishedAt,    mainImage,      "tags": array::compact(tags[]->{    _id,    title,    "slug": slug.current,    "categoryId": category._ref  })[defined(title)],    "author": author->{ name, "slug": slug.current, avatar, bio }  }
 export type POSTS_LIST_QUERY_RESULT = Array<{
   _id: string;
   title: string | null;
+  titleHighlight: string | null;
   slug: string | null;
   description: string | null;
   publishedAt: string | null;
@@ -572,7 +485,7 @@ export type POSTS_LIST_QUERY_RESULT = Array<{
   } | null;
   tags: Array<{
     _id: string;
-    title: string | null;
+    title: string;
     slug: string | null;
     categoryId: string | null;
   }> | null;
@@ -598,84 +511,54 @@ export type POSTS_SLUGS_QUERY_RESULT = Array<{
 }>;
 
 // Source: sanity/lib/queries.ts
-// Variable: QUESTIONNAIRE_QUERY
-// Query: *[_type == "questionnaire" && slug.current == $slug][0]{    _id,    title,    "slug": slug.current,    description,    steps[]{      _key,      title,      description,      questions[]{        _key,        label,        type,        helpText,        required,        options[]{ label, value }      }    }  }
-export type QUESTIONNAIRE_QUERY_RESULT = {
+// Variable: SIMILAR_POSTS_QUERY
+// Query: *[_type == "post" && slug.current != $slug && defined(slug.current)] {    _id,    title,    titleHighlight,    "slug": slug.current,    description,    publishedAt,    mainImage,      "tags": array::compact(tags[]->{    _id,    title,    "slug": slug.current,    "categoryId": category._ref  })[defined(title)],    "author": author->{ name, "slug": slug.current, avatar },    "sharedTagCount": count(tags[@._ref in $tagIds]),    "sameAuthor": author._ref == $authorId  }  [sharedTagCount > 0 || sameAuthor]  | order(sharedTagCount desc, sameAuthor desc)  [0...6]
+export type SIMILAR_POSTS_QUERY_RESULT = Array<{
   _id: string;
   title: string | null;
+  titleHighlight: string | null;
   slug: string | null;
   description: string | null;
-  steps: Array<{
-    _key: string;
-    title: string | null;
-    description: string | null;
-    questions: Array<{
-      _key: string;
-      label: string | null;
-      type:
-        | "boolean"
-        | "checkbox"
-        | "radio"
-        | "rating"
-        | "select"
-        | "text"
-        | "textarea"
-        | null;
-      helpText: string | null;
-      required: boolean | null;
-      options: Array<{
-        label: string | null;
-        value: string | null;
-      }> | null;
-    }> | null;
+  publishedAt: string | null;
+  mainImage: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  } | null;
+  tags: Array<{
+    _id: string;
+    title: string;
+    slug: string | null;
+    categoryId: string | null;
   }> | null;
-} | null;
-
-// Source: sanity/lib/queries.ts
-// Variable: DEFAULT_QUESTIONNAIRE_QUERY
-// Query: *[_type == "questionnaire"] | order(_createdAt asc)[0]{    _id,    title,    "slug": slug.current,    description,    steps[]{      _key,      title,      description,      questions[]{        _key,        label,        type,        helpText,        required,        options[]{ label, value }      }    }  }
-export type DEFAULT_QUESTIONNAIRE_QUERY_RESULT = {
-  _id: string;
-  title: string | null;
-  slug: string | null;
-  description: string | null;
-  steps: Array<{
-    _key: string;
-    title: string | null;
-    description: string | null;
-    questions: Array<{
-      _key: string;
-      label: string | null;
-      type:
-        | "boolean"
-        | "checkbox"
-        | "radio"
-        | "rating"
-        | "select"
-        | "text"
-        | "textarea"
-        | null;
-      helpText: string | null;
-      required: boolean | null;
-      options: Array<{
-        label: string | null;
-        value: string | null;
-      }> | null;
-    }> | null;
-  }> | null;
-} | null;
+  author: {
+    name: string | null;
+    slug: string | null;
+    avatar: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+  } | null;
+  sharedTagCount: number | null;
+  sameAuthor: boolean;
+}>;
 
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     '\n  *[_type == "category"] | order(order asc, title asc) {\n    _id,\n    title,\n    "slug": slug.current,\n    "tags": *[_type == "tag" && references(^._id)] | order(title asc) {\n      _id,\n      title,\n      "slug": slug.current\n    }\n  }\n': FILTER_GROUPS_QUERY_RESULT;
-    '\n  *[_type == "post" && defined(slug.current)]\n  | order(coalesce(publishedAt, _createdAt) desc) {\n    _id,\n    title,\n    "slug": slug.current,\n    description,\n    publishedAt,\n    mainImage,\n    \n  tags[]->{\n    _id,\n    title,\n    "slug": slug.current,\n    "categoryId": category._ref\n  }\n,\n    "author": author->{ name, "slug": slug.current, avatar }\n  }\n': POSTS_QUERY_RESULT;
-    '\n  *[_type == "post" && slug.current == $slug][0]{\n    _id,\n    title,\n    "slug": slug.current,\n    description,\n    publishedAt,\n    mainImage,\n    gallery,\n    \n  tags[]->{\n    _id,\n    title,\n    "slug": slug.current,\n    "categoryId": category._ref\n  }\n,\n    body,\n    "author": author->{ name, "slug": slug.current, avatar, bio }\n  }\n': POST_QUERY_RESULT;
-    '\n  *[_type == "post" && defined(slug.current)]\n  | order(coalesce(publishedAt, _createdAt) desc, _createdAt desc)[0]{\n    _id,\n    title,\n    "slug": slug.current,\n    description,\n    publishedAt,\n    mainImage,\n    \n  tags[]->{\n    _id,\n    title,\n    "slug": slug.current,\n    "categoryId": category._ref\n  }\n,\n    "author": author->{ name, "slug": slug.current, avatar, bio }\n  }\n': LATEST_POST_QUERY_RESULT;
-    '\n  *[_type == "post" && defined(slug.current)]\n  | order(coalesce(publishedAt, _createdAt) desc, _createdAt desc)[1...10]{\n    _id,\n    title,\n    "slug": slug.current,\n    description,\n    publishedAt,\n    mainImage,\n    \n  tags[]->{\n    _id,\n    title,\n    "slug": slug.current,\n    "categoryId": category._ref\n  }\n,\n    "author": author->{ name, "slug": slug.current, avatar, bio }\n  }\n': POSTS_LIST_QUERY_RESULT;
+    '\n  *[_type == "post" && defined(slug.current)]\n  | order(coalesce(publishedAt, _createdAt) desc) {\n    _id,\n    title,\n    titleHighlight,\n    "slug": slug.current,\n    description,\n    publishedAt,\n    mainImage,\n    \n  "tags": array::compact(tags[]->{\n    _id,\n    title,\n    "slug": slug.current,\n    "categoryId": category._ref\n  })[defined(title)]\n,\n    "author": author->{ name, "slug": slug.current, avatar }\n  }\n': POSTS_QUERY_RESULT;
+    '\n  *[_type == "post" && slug.current == $slug][0]{\n    _id,\n    title,\n    titleHighlight,\n    "slug": slug.current,\n    description,\n    publishedAt,\n    mainImage,\n    gallery,\n    \n  "tags": array::compact(tags[]->{\n    _id,\n    title,\n    "slug": slug.current,\n    "categoryId": category._ref\n  })[defined(title)]\n,\n    body,\n    "authorId": author._ref,\n    "author": author->{ name, "slug": slug.current, avatar, bio }\n  }\n': POST_QUERY_RESULT;
+    '\n  *[_type == "post" && defined(slug.current)]\n  | order(coalesce(publishedAt, _createdAt) desc, _createdAt desc)[0]{\n    _id,\n    title,\n    titleHighlight,\n    "slug": slug.current,\n    description,\n    publishedAt,\n    mainImage,\n    \n  "tags": array::compact(tags[]->{\n    _id,\n    title,\n    "slug": slug.current,\n    "categoryId": category._ref\n  })[defined(title)]\n,\n    "author": author->{ name, "slug": slug.current, avatar, bio }\n  }\n': LATEST_POST_QUERY_RESULT;
+    '\n  *[_type == "post" && defined(slug.current)]\n  | order(coalesce(publishedAt, _createdAt) desc, _createdAt desc)[1...7]{\n    _id,\n    title,\n    titleHighlight,\n    "slug": slug.current,\n    description,\n    publishedAt,\n    mainImage,\n    \n  "tags": array::compact(tags[]->{\n    _id,\n    title,\n    "slug": slug.current,\n    "categoryId": category._ref\n  })[defined(title)]\n,\n    "author": author->{ name, "slug": slug.current, avatar, bio }\n  }\n': POSTS_LIST_QUERY_RESULT;
     '\n  *[_type == "post" && defined(slug.current)]{ "slug": slug.current }\n': POSTS_SLUGS_QUERY_RESULT;
-    '\n  *[_type == "questionnaire" && slug.current == $slug][0]{\n    _id,\n    title,\n    "slug": slug.current,\n    description,\n    steps[]{\n      _key,\n      title,\n      description,\n      questions[]{\n        _key,\n        label,\n        type,\n        helpText,\n        required,\n        options[]{ label, value }\n      }\n    }\n  }\n': QUESTIONNAIRE_QUERY_RESULT;
-    '\n  *[_type == "questionnaire"] | order(_createdAt asc)[0]{\n    _id,\n    title,\n    "slug": slug.current,\n    description,\n    steps[]{\n      _key,\n      title,\n      description,\n      questions[]{\n        _key,\n        label,\n        type,\n        helpText,\n        required,\n        options[]{ label, value }\n      }\n    }\n  }\n': DEFAULT_QUESTIONNAIRE_QUERY_RESULT;
+    '\n  *[_type == "post" && slug.current != $slug && defined(slug.current)] {\n    _id,\n    title,\n    titleHighlight,\n    "slug": slug.current,\n    description,\n    publishedAt,\n    mainImage,\n    \n  "tags": array::compact(tags[]->{\n    _id,\n    title,\n    "slug": slug.current,\n    "categoryId": category._ref\n  })[defined(title)]\n,\n    "author": author->{ name, "slug": slug.current, avatar },\n    "sharedTagCount": count(tags[@._ref in $tagIds]),\n    "sameAuthor": author._ref == $authorId\n  }\n  [sharedTagCount > 0 || sameAuthor]\n  | order(sharedTagCount desc, sameAuthor desc)\n  [0...6]\n': SIMILAR_POSTS_QUERY_RESULT;
   }
 }

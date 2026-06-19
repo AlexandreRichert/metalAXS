@@ -1,223 +1,5 @@
 [
   {
-    "name": "answer",
-    "type": "type",
-    "value": {
-      "type": "object",
-      "attributes": {
-        "_type": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string",
-            "value": "answer"
-          }
-        },
-        "questionKey": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          },
-          "optional": true
-        },
-        "questionLabel": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          },
-          "optional": true
-        },
-        "values": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "array",
-            "of": {
-              "type": "string"
-            }
-          },
-          "optional": true
-        }
-      }
-    }
-  },
-  {
-    "name": "questionOption",
-    "type": "type",
-    "value": {
-      "type": "object",
-      "attributes": {
-        "_type": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string",
-            "value": "questionOption"
-          }
-        },
-        "label": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          },
-          "optional": true
-        },
-        "value": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          },
-          "optional": true
-        }
-      }
-    }
-  },
-  {
-    "name": "question",
-    "type": "type",
-    "value": {
-      "type": "object",
-      "attributes": {
-        "_type": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string",
-            "value": "question"
-          }
-        },
-        "label": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          },
-          "optional": true
-        },
-        "type": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "union",
-            "of": [
-              {
-                "type": "string",
-                "value": "text"
-              },
-              {
-                "type": "string",
-                "value": "textarea"
-              },
-              {
-                "type": "string",
-                "value": "radio"
-              },
-              {
-                "type": "string",
-                "value": "checkbox"
-              },
-              {
-                "type": "string",
-                "value": "select"
-              },
-              {
-                "type": "string",
-                "value": "boolean"
-              },
-              {
-                "type": "string",
-                "value": "rating"
-              }
-            ]
-          },
-          "optional": true
-        },
-        "helpText": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          },
-          "optional": true
-        },
-        "required": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "boolean"
-          },
-          "optional": true
-        },
-        "options": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "array",
-            "of": {
-              "type": "object",
-              "attributes": {
-                "_key": {
-                  "type": "objectAttribute",
-                  "value": {
-                    "type": "string"
-                  }
-                }
-              },
-              "rest": {
-                "type": "inline",
-                "name": "questionOption"
-              }
-            }
-          },
-          "optional": true
-        }
-      }
-    }
-  },
-  {
-    "name": "step",
-    "type": "type",
-    "value": {
-      "type": "object",
-      "attributes": {
-        "_type": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string",
-            "value": "step"
-          }
-        },
-        "title": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          },
-          "optional": true
-        },
-        "description": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          },
-          "optional": true
-        },
-        "questions": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "array",
-            "of": {
-              "type": "object",
-              "attributes": {
-                "_key": {
-                  "type": "objectAttribute",
-                  "value": {
-                    "type": "string"
-                  }
-                }
-              },
-              "rest": {
-                "type": "inline",
-                "name": "question"
-              }
-            }
-          },
-          "optional": true
-        }
-      }
-    }
-  },
-  {
     "type": "type",
     "name": "sanity.imageAsset.reference",
     "value": {
@@ -735,249 +517,6 @@
   },
   {
     "type": "type",
-    "name": "questionnaire.reference",
-    "value": {
-      "type": "object",
-      "attributes": {
-        "_ref": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          }
-        },
-        "_type": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string",
-            "value": "reference"
-          }
-        },
-        "_weak": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "boolean"
-          },
-          "optional": true
-        }
-      },
-      "dereferencesTo": "questionnaire"
-    }
-  },
-  {
-    "name": "submission",
-    "type": "document",
-    "attributes": {
-      "_id": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_type": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string",
-          "value": "submission"
-        }
-      },
-      "_createdAt": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_updatedAt": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_rev": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "questionnaire": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "questionnaire.reference"
-        },
-        "optional": true
-      },
-      "respondentName": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "respondentEmail": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "submittedAt": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "answers": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "array",
-          "of": {
-            "type": "object",
-            "attributes": {
-              "_key": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "string"
-                }
-              }
-            },
-            "rest": {
-              "type": "inline",
-              "name": "answer"
-            }
-          }
-        },
-        "optional": true
-      },
-      "reviewed": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "boolean"
-        },
-        "optional": true
-      },
-      "notes": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      }
-    }
-  },
-  {
-    "name": "questionnaire",
-    "type": "document",
-    "attributes": {
-      "_id": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_type": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string",
-          "value": "questionnaire"
-        }
-      },
-      "_createdAt": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_updatedAt": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_rev": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "title": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "slug": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "slug"
-        },
-        "optional": true
-      },
-      "description": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "steps": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "array",
-          "of": {
-            "type": "object",
-            "attributes": {
-              "_key": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "string"
-                }
-              }
-            },
-            "rest": {
-              "type": "inline",
-              "name": "step"
-            }
-          }
-        },
-        "optional": true
-      }
-    }
-  },
-  {
-    "name": "slug",
-    "type": "type",
-    "value": {
-      "type": "object",
-      "attributes": {
-        "_type": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string",
-            "value": "slug"
-          }
-        },
-        "current": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          },
-          "optional": true
-        },
-        "source": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          },
-          "optional": true
-        }
-      }
-    }
-  },
-  {
-    "type": "type",
     "name": "category.reference",
     "value": {
       "type": "object",
@@ -1063,6 +602,36 @@
           "name": "category.reference"
         },
         "optional": true
+      }
+    }
+  },
+  {
+    "name": "slug",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "slug"
+          }
+        },
+        "current": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "source": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        }
       }
     }
   },
@@ -1228,6 +797,13 @@
         }
       },
       "title": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "titleHighlight": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
