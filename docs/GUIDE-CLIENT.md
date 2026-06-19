@@ -33,13 +33,13 @@ L'espace d'administration s'appelle le **Studio**. C'est l'interface dans laquel
 
 | Environnement | Site public | Studio (administration) |
 | --- | --- | --- |
-| **Production** | [all-access-metal-38bhaa4w5-all-access-metal.vercel.app](https://all-access-metal-38bhaa4w5-all-access-metal.vercel.app) | […vercel.app/studio](https://all-access-metal-38bhaa4w5-all-access-metal.vercel.app/studio) |
+| **Production** | [all-access-metal.vercel.app](https://all-access-metal.vercel.app) | […vercel.app/studio](https://all-access-metal.vercel.app/studio) |
 | **Local** (tests techniques) | `http://localhost:3000` | `http://localhost:3000/studio` |
 
 Pour accéder au Studio en production, ajoutez simplement **`/studio`** à la fin de l'URL du site :
 
 ```
-https://all-access-metal-38bhaa4w5-all-access-metal.vercel.app/studio
+https://all-access-metal.vercel.app/studio
 ```
 
 > **Astuce.** Mettez cette adresse en favori dans votre navigateur : c'est votre point d'entrée quotidien pour gérer le blog.
@@ -99,7 +99,7 @@ Consultez **Blog → Tags** pour vous familiariser avec la liste. N'ajoutez un n
 1. **Blog → Articles → +**
 2. Remplissez les onglets **Contenu**, **Médias**, **Métadonnées**.
 3. Cliquez sur **Publish**.
-4. Vérifiez le rendu sur [la page blog](https://all-access-metal-38bhaa4w5-all-access-metal.vercel.app/blog) puis sur la page de l'article.
+4. Vérifiez le rendu sur [la page blog](https://all-access-metal.vercel.app/blog) puis sur la page de l'article.
 
 ### Étape 4 — Entretien courant
 
@@ -486,7 +486,7 @@ Ce guide est rédigé pour fonctionner **sans images**. Pour une version illustr
 
 Contactez votre équipe technique en précisant :
 
-- la page concernée ([Studio](https://all-access-metal-38bhaa4w5-all-access-metal.vercel.app/studio), [Blog](https://all-access-metal-38bhaa4w5-all-access-metal.vercel.app/blog), ou l'URL de l'article),
+- la page concernée ([Studio](https://all-access-metal.vercel.app/studio), [Blog](https://all-access-metal.vercel.app/blog), ou l'URL de l'article),
 - ce que vous essayiez de faire,
 - une capture d'écran si possible.
 
