@@ -4,9 +4,9 @@ import Image from "next/image";
 import type { Picto } from "@/types/picto";
 import { pictos } from "@/lib/pictos";
 import PictosLibrary from "./components/pictos-library";
-import SplitText from "@/app/components/animations/split-text";
 import Reveal from "@/app/components/animations/reveal";
 import Grain from "@/app/components/home/grain";
+import Highlight from "@/app/components/home/highlight";
 
 const INTRO =
   "Cette banque de pictogrammes a été conçue pour aider les organisateurs à identifier, orienter et informer l’ensemble des publics grâce à des repères visuels simples, cohérents et facilement reconnaissables.";
@@ -33,11 +33,13 @@ export default async function PictosPage() {
     <div className="mx-auto max-w-[1280px] px-6 py-16 sm:px-8 lg:py-24">
       <header className="mb-12 grid items-center gap-10 lg:mb-16 lg:grid-cols-2 lg:gap-16">
         <div className="flex flex-col gap-6">
-          <SplitText
+          <Reveal
             as="h1"
-            text="Banque de pictogrammes"
+            y={28}
             className="font-display text-5xl font-extrabold uppercase leading-[0.95] text-ink sm:text-6xl lg:text-7xl"
-          />
+          >
+            Banque de <Highlight>pictogrammes</Highlight>
+          </Reveal>
           <Reveal as="p" delay={0.15} className="text-base leading-relaxed text-ink sm:text-lg">
             {INTRO}
           </Reveal>
