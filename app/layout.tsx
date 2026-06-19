@@ -168,6 +168,9 @@ export const metadata: Metadata = {
   title: "All Access Metal",
   description:
     "All Access Metal est une plateforme qui permet de rendre les festivals accessibles à tous.",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 // Layout racine minimal : il fournit uniquement <html>/<body> et les polices.
