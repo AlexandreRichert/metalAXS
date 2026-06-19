@@ -22,10 +22,12 @@ const linkColumns = [
 ];
 
 const handicaps = [
-  { label: "Moteurs", href: "/disabilitiesTypes/motor" },
+  { label: "Moteurs", href: "/disabilitiesTypes/moteur" },
   { label: "Visuels", href: "/disabilitiesTypes/visuel" },
   { label: "Auditifs", href: "/disabilitiesTypes/auditif" },
-  { label: "Cognitifs", href: "/disabilitiesTypes/cognitif" },
+  { label: "Déficience intellectuelle", href: "/disabilitiesTypes/intellectuelle" },
+  { label: "Troubles psychiques", href: "/disabilitiesTypes/psychique" },
+  { label: "Maladies invalidantes", href: "/disabilitiesTypes/invalidate" },
 ];
 
 const contacts = [
@@ -144,7 +146,7 @@ export default function Footer() {
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="size-4">
               <path d="M12 21s-7.5-4.7-10-9.3C.6 9 1.4 5.6 4.3 4.6 6.4 3.9 8.5 4.8 12 8c3.5-3.2 5.6-4.1 7.7-3.4 2.9 1 3.7 4.4 2.3 7.1C19.5 16.3 12 21 12 21Z" />
             </svg>
-            by Elie, Audrey, Valentine, Alex, Julie, Ethan, Julien, Clément, Yoann, Alexandre, Izia, Violette, Maxanne, Éloïse
+            by Elie, Audrey, Valentine, Alex, Julie, Ethan, Julien, Clément, Yoann, Izia, Violette, Maxanne, Éloïse
           </p>
           <p>©2026 — Tous droits réservés</p>
         </div>

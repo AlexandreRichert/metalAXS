@@ -59,9 +59,10 @@ export default function federationPage() {
             <section className="py-5 px-6 lg:px-8">
                 <div className="w-full lg:w-1/2 space-y-6">
 
-                    <h2>Nos partenaires</h2>
+
 
                     <div className="flex flex-col gap-10">
+                        <h2>Nos partenaires</h2>
 
                         {/* CNM */}
                         <div className="space-y-3">
