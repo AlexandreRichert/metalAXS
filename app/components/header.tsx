@@ -25,7 +25,7 @@ const navItems: NavItem[] = [
       { label: "Visuel", href: "/disabilitiesTypes/visuel" },
       { label: "Déficience intellectuelle", href: "/disabilitiesTypes/intellectuelle" },
       { label: "Troubles psychiques", href: "/disabilitiesTypes/psychique" },
-      { label: "Troubles autistiques", href: "/disabilitiesTypes/autistique" },
+      { label: "Maladies invalidantes", href: "/disabilitiesTypes/invalidante" },
     ],
   },
   { label: "Ressources", href: "/pictos" },
