@@ -27,7 +27,7 @@ const handicaps = [
   { label: "Auditifs", href: "/disabilitiesTypes/auditif" },
   { label: "Déficience intellectuelle", href: "/disabilitiesTypes/intellectuelle" },
   { label: "Troubles psychiques", href: "/disabilitiesTypes/psychique" },
-  { label: "Maladies invalidantes", href: "/disabilitiesTypes/invalidate" },
+  { label: "Maladies invalidantes", href: "/disabilitiesTypes/invalidante" },
 ];
 
 const contacts = [
