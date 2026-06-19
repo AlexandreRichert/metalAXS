@@ -34,6 +34,7 @@ export const POSTS_QUERY = defineQuery(`
   | order(coalesce(publishedAt, _createdAt) desc) {
     _id,
     title,
+    titleHighlight,
     "slug": slug.current,
     description,
     publishedAt,
@@ -48,6 +49,7 @@ export const POST_QUERY = defineQuery(`
   *[_type == "post" && slug.current == $slug][0]{
     _id,
     title,
+    titleHighlight,
     "slug": slug.current,
     description,
     publishedAt,
@@ -55,6 +57,7 @@ export const POST_QUERY = defineQuery(`
     gallery,
     ${POST_TAGS_PROJECTION},
     body,
+    "authorId": author._ref,
     "author": author->{ name, "slug": slug.current, avatar, bio }
   }
 `);
@@ -64,6 +67,7 @@ export const LATEST_POST_QUERY = defineQuery(`
   | order(coalesce(publishedAt, _createdAt) desc, _createdAt desc)[0]{
     _id,
     title,
+    titleHighlight,
     "slug": slug.current,
     description,
     publishedAt,
@@ -75,9 +79,10 @@ export const LATEST_POST_QUERY = defineQuery(`
 
 export const POSTS_LIST_QUERY = defineQuery(`
   *[_type == "post" && defined(slug.current)]
-  | order(coalesce(publishedAt, _createdAt) desc, _createdAt desc)[1...10]{
+  | order(coalesce(publishedAt, _createdAt) desc, _createdAt desc)[1...7]{
     _id,
     title,
+    titleHighlight,
     "slug": slug.current,
     description,
     publishedAt,
@@ -92,52 +97,23 @@ export const POSTS_SLUGS_QUERY = defineQuery(`
   *[_type == "post" && defined(slug.current)]{ "slug": slug.current }
 `);
 
-// ------------------------------------------------------------------
-// Questionnaires
-// ------------------------------------------------------------------
-
-// Questionnaire complet (étapes + questions) identifié par son slug.
-export const QUESTIONNAIRE_QUERY = defineQuery(`
-  *[_type == "questionnaire" && slug.current == $slug][0]{
+// Articles similaires : tags communs, puis même auteur.
+// Aucune correspondance : la section n'est pas affichée.
+export const SIMILAR_POSTS_QUERY = defineQuery(`
+  *[_type == "post" && slug.current != $slug && defined(slug.current)] {
     _id,
     title,
+    titleHighlight,
     "slug": slug.current,
     description,
-    steps[]{
-      _key,
-      title,
-      description,
-      questions[]{
-        _key,
-        label,
-        type,
-        helpText,
-        required,
-        options[]{ label, value }
-      }
-    }
+    publishedAt,
+    mainImage,
+    ${POST_TAGS_PROJECTION},
+    "author": author->{ name, "slug": slug.current, avatar },
+    "sharedTagCount": count(tags[@._ref in $tagIds]),
+    "sameAuthor": author._ref == $authorId
   }
-`);
-
-// Questionnaire par défaut : le plus ancien (premier créé).
-export const DEFAULT_QUESTIONNAIRE_QUERY = defineQuery(`
-  *[_type == "questionnaire"] | order(_createdAt asc)[0]{
-    _id,
-    title,
-    "slug": slug.current,
-    description,
-    steps[]{
-      _key,
-      title,
-      description,
-      questions[]{
-        _key,
-        label,
-        type,
-        helpText,
-        required,
-        options[]{ label, value }
-      }
-    }
-  }
+  [sharedTagCount > 0 || sameAuthor]
+  | order(sharedTagCount desc, sameAuthor desc)
+  [0...6]
 `);

@@ -4,6 +4,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+import TitleWithHighlight from "@/app/components/title-with-highlight";
+import { BlogBento } from "@/app/components/blog-bento";
 import { urlForImage } from "@/sanity/lib/image";
 import { getPostTags } from "@/sanity/lib/post-tags";
 import type { FilterGroup, PostListItem } from "@/sanity/lib/types";
@@ -48,11 +50,11 @@ function sortByDateRecent(posts: PostListItem[]) {
 }
 
 export function BlogPostsSearch({
-  defaultPosts,
+  latestPostId,
   allPosts,
   filterGroups,
 }: {
-  defaultPosts: PostListItem[];
+  latestPostId?: string;
   allPosts: PostListItem[];
   filterGroups: FilterGroup[];
 }) {
@@ -83,7 +85,11 @@ export function BlogPostsSearch({
 
   const visiblePosts = useMemo(() => {
     if (!isFiltered) {
-      return sortByDateRecent(defaultPosts);
+      // Tous les articles sauf l'article vedette (mis en avant en en-tête).
+      // Le bento se charge ensuite de les paginer par blocs de 6.
+      return sortByDateRecent(allPosts).filter(
+        (post) => post._id !== latestPostId
+      );
     }
 
     let posts = allPosts.filter((post) =>
@@ -116,7 +122,7 @@ export function BlogPostsSearch({
     isSearching,
     submittedQuery,
     allPosts,
-    defaultPosts,
+    latestPostId,
     appliedTagIds,
   ]);
 
@@ -160,7 +166,7 @@ export function BlogPostsSearch({
   }
 
   return (
-    <div className="mx-auto w-full max-w-[1200px]">
+    <div className="mx-auto w-full max-w-[1200px] overflow-visible">
       <div ref={containerRef} className="relative z-20 mb-10">
         <form
           onSubmit={handleSubmit}
@@ -299,6 +305,8 @@ export function BlogPostsSearch({
             ? "Aucun article ne correspond à votre recherche."
             : "Aucun article pour le moment. Revenez bientôt !"}
         </p>
+      ) : !isFiltered ? (
+        <BlogBento posts={visiblePosts} />
       ) : (
         <ul className="relative z-0 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {visiblePosts.map((post) => {
@@ -341,9 +349,12 @@ export function BlogPostsSearch({
                         ))}
                       </ul>
                     ) : null}
-                    <h2 className="mt-2 text-h3 font-black uppercase text-primary">
-                      {post.title}
-                    </h2>
+                    <TitleWithHighlight
+                      title={post.title}
+                      highlight={post.titleHighlight}
+                      as="h2"
+                      className="mt-2 text-h3 font-black uppercase text-primary"
+                    />
                     <p className="mt-2 text-lg text-secondary">
                       {post.description}
                     </p>

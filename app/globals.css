@@ -56,26 +56,6 @@
   --font-hintdake-stamp: var(--font-hintdake-stamp-family);
 }
 
-@keyframes highlight-sweep {
-  from {
-    background-size: 0% 100%;
-  }
-  to {
-    background-size: 100% 100%;
-  }
-}
-
-.highlight-mark {
-  background-image: linear-gradient(var(--color-lime), var(--color-lime));
-  background-repeat: no-repeat;
-  background-position: left center;
-  background-size: 0% 100%;
-  animation: highlight-sweep 0.6s ease-out forwards;
-  animation-delay: 0.2s;
-  padding: 0 0.1em;
-  border-radius: 2px;
-}
-
 @layer base {
   :root {
     --background: #f2ede3;
@@ -164,7 +144,6 @@
     text-transform: uppercase;
   }
 
-
   h2 {
     font-family: var(--font-heading), sans-serif;
     font-size: 56px;
@@ -183,7 +162,6 @@
     /* 100% */
     text-transform: uppercase;
   }
-
 
   h3 {
     font-family: var(--font-heading), sans-serif;
@@ -223,6 +201,92 @@
   h6 {
     font-family: var(--font-heading), sans-serif;
   }
+
+  /* Shake léger pour emoji */
+  .emoji-shake {
+    display: inline-block;
+    animation:x emoji-shake 0.4s infinite ease-in-out;
+  }
+
+  @keyframes emoji-shake {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    25% {
+      transform: rotate(2deg);
+    }
+
+    50% {
+      transform: rotate(-2deg);
+    }
+
+    75% {
+      transform: rotate(1deg);
+    }
+
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+}
+
+@layer components {
+  .bg-lime {
+    @apply bg-[#abf000];
+  }
+
+  .text-ink {
+    @apply text-[#2c1f00];
+  }
+}
+
+@keyframes highlight-sweep {
+  from {
+    background-size: 0% 1.08em;
+  }
+
+  to {
+    background-size: 100% 1.08em;
+  }
+}
+
+.highlight-mark {
+  background-color: transparent;
+  background-image: linear-gradient(var(--color-lime), var(--color-lime));
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 0% 1.05em;
+  animation: highlight-sweep 0.6s ease-out 0.2s forwards;
+  padding: 0 0.05em;
+  border-radius: 2px;
+  color: inherit;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+@keyframes highlight-sweep {
+  from {
+    background-size: 0% 1.08em;
+  }
+
+  to {
+    background-size: 100% 1.08em;
+  }
+}
+
+.highlight-mark {
+  background-color: transparent;
+  background-image: linear-gradient(var(--color-lime), var(--color-lime));
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 0% 1.05em;
+  animation: highlight-sweep 0.6s ease-out 0.2s forwards;
+  padding: 0 0.05em;
+  border-radius: 2px;
+  color: inherit;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 /* Color picker (react-colorful) intégré à la D.A. */
 .amm-colorpicker .react-colorful {

@@ -10,7 +10,7 @@ import GrainOverlay from "@/app/components/grain-overlay";
 import PageTransitionProvider from "@/app/components/page-transition";
 
 // Layout du site public : en-tête + contenu + pied de page.
-// Toutes les pages publiques (accueil, blog, questionnaire, etc.) vivent ici.
+// Toutes les pages publiques (accueil, blog, etc.) vivent ici.
 export default function SiteLayout({
   children,
 }: Readonly<{
