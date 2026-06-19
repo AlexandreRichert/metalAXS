@@ -11,7 +11,7 @@ import { structure } from "./sanity/structure";
 // Configuration du Studio Sanity (back-office) monté sur /studio.
 export default defineConfig({
   name: "default",
-  title: "Metalaxs — Administration",
+  title: "All Access Metal — Administration",
   basePath: "/studio",
 
   projectId,

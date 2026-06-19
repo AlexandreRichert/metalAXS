@@ -1,7 +1,7 @@
 # Implémentation du back-office Sanity
 
 Ce document explique l'architecture technique mise en place pour gérer le blog
-et les questionnaires de Metalaxs avec **Sanity** (CMS headless) intégré à
+et les questionnaires d'All Access Metal avec **Sanity** (CMS headless) intégré à
 **Next.js 16** (App Router, React 19).
 
 ---

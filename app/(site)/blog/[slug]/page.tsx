@@ -34,9 +34,9 @@ export async function generateMetadata({
     params: { slug },
     tags: [`post:${slug}`],
   });
-  if (!post) return { title: "Article introuvable — Metalaxs" };
+  if (!post) return { title: "Article introuvable — All Access Metal" };
   return {
-    title: `${post.title} — Metalaxs`,
+    title: `${post.title} — All Access Metal`,
     description: post.description,
   };
 }

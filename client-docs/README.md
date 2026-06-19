@@ -1,6 +1,6 @@
 # Documentation client Mintlify
 
-Guide d'administration du blog Metalaxs, publié via [Mintlify](https://mintlify.com).
+Guide d'administration du blog All Access Metal, publié via [Mintlify](https://mintlify.com).
 
 ## Prévisualisation locale
 
@@ -18,7 +18,7 @@ Ouvre la doc sur **http://localhost:3333** (port distinct du serveur Next.js sur
 2. **New project** → connectez le dépôt GitHub `metalaxs`
 3. Dans les paramètres du projet, définissez le **docs root** (ou *content directory*) sur : **`client-docs`**
 4. Chaque push sur la branche principale déclenche un déploiement automatique
-5. Mintlify vous attribue une URL du type `https://votre-projet.mintlify.app` — personnalisable avec un domaine (`docs.metalaxs.fr`)
+5. Mintlify vous attribue une URL du type `https://votre-projet.mintlify.app` — personnalisable avec un domaine (`docs.all-access-metal.fr`)
 
 ## Structure
 
