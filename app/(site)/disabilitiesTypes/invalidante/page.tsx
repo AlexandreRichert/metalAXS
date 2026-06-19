@@ -13,11 +13,11 @@ interface Card {
     description: string;
 }
 
-export default function AutisticDisabilityPage() {
+export default function InvalidanteDisabilityPage() {
     const sectionRef = useRef(null);
     const isInView = useInView(sectionRef, {
-        once: true,
-        amount: 0.3,
+        once: false,
+        amount: 0.1,
     });
     const [selectedCard, setSelectedCard] = useState<Card | null>(null);
 
@@ -26,7 +26,7 @@ export default function AutisticDisabilityPage() {
             id: 1,
             image: "/disable.jpg",
             title: "Ambiance apaisée",
-            description: "Lorem ipsum dolor sit amet consectetur. Diam maecenas dignissim proin quam tincidunt sapien sit. Ut neque ultricies elementum nec sapien donec lacus. Eget est massa id arcu suspendisse fermentum sit egestas sed. Lectus in vel tempor netus accumsan facilisis. Placerat urna eros hendrerit vel turpis pretium. Nisl dictum eu egestas pellentesque adipiscing tincidunt. Et bibendum velit pellentesque facilisi donec congue amet orci. Posuere in ut semper quam pharetra at purus scelerisque. Orci turpis elementum urna dolor fringilla quam tempor egestas. Nisl in duis cras vitae a adipiscing. Imperdiet augue pellentesque elementum mi.",
+            description: "Lorem ipsum dolor sit amet consectetur Test. Diam maecenas dignissim proin quam tincidunt sapien sit. Ut neque ultricies elementum nec sapien donec lacus. Eget est massa id arcu suspendisse fermentum sit egestas sed. Lectus in vel tempor netus accumsan facilisis. Placerat urna eros hendrerit vel turpis pretium. Nisl dictum eu egestas pellentesque adipiscing tincidunt. Et bibendum velit pellentesque facilisi donec congue amet orci. Posuere in ut semper quam pharetra at purus scelerisque. Orci turpis elementum urna dolor fringilla quam tempor egestas. Nisl in duis cras vitae a adipiscing. Imperdiet augue pellentesque elementum mi.",
         },
         {
             id: 2,
@@ -47,11 +47,11 @@ export default function AutisticDisabilityPage() {
 
                         <div className="w-full lg:w-1/2">
                             <h1 >
-                                Troubles <Highlight>du spectre autistiques</Highlight>
+                                Maladies <Highlight>invalidantes</Highlight>
                             </h1>
 
-                            <p className="leading-relaxed">Les personnes atteintes de troubles du spectre autistique peuvent avoir des comportements inhabituels et d'importantes difficultés à établir des relations sociales considérées comme élémentaires, ou à comprendre ce qui n'est pas parfaitement explicite (sous-entendus, plaisanteries...).</p>
-                            <p className="leading-relaxed">Selon la Haute Autorité de Santé, elles sont plus de 100 000 jeunes de moins de 20 ans et 600 000 adultes en France.</p>
+                            <p className="leading-relaxed">Les maladies invalidantes regroupent un large spectre de pathologies chroniques ou évolutives qui affectent durablement la vie quotidienne : cancer, épilepsie, fibromyalgie, sclérose en plaques, maladies rares, troubles cardiaques ou respiratoires...</p>
+                            <p className="leading-relaxed">Souvent invisibles, elles ne se voient pas au premier regard, mais peuvent rendre l'expérience d'un festival physiquement ou médicalement risquée sans les aménagements adaptés. En France, on estime à plus de 10 millions le nombre de personnes atteintes d'une maladie chronique invalidante.</p>
 
                         </div>
                         <div className="w-full lg:w-1/2">
@@ -84,7 +84,7 @@ export default function AutisticDisabilityPage() {
                             </h2>
 
                             <p className="leading-relaxed">
-                                Sur un festival, les personnes en situation de handicap cognitif expriment plusieurs besoins :
+                                Sur un festival, les personnes atteintes de maladies invalidantes expriment plusieurs besoins récurrents :
                             </p>
 
                             <ul className="list-disc pl-6 mt-4 space-y-2">

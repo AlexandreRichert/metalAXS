@@ -6,26 +6,19 @@ const linkColumns = [
   {
     title: "Accessibilité",
     links: [
-      { label: "Qu’est ce que c’est ?", href: "/goodPractices" },
-      { label: "Comment débuter ?", href: "/goodPractices" },
-      { label: "Retours d’expériences", href: "/blog" },
-    ],
-  },
-  {
-    title: "Ressources",
-    links: [
-      { label: "Banque d’icônes", href: "/pictos" },
-      { label: "Dossiers chiffrés", href: "/ressources" },
-      { label: "Partenaires", href: "/federation" },
+      { label: "Bonnes pratiques", href: "/blog" },
+      { label: "Ressources", href: "/pictos" },
     ],
   },
 ];
 
 const handicaps = [
-  { label: "Moteurs", href: "/disabilitiesTypes/motor" },
-  { label: "Visuels", href: "/disabilitiesTypes/view" },
-  { label: "Auditifs", href: "/disabilitiesTypes/audio" },
-  { label: "Cognitifs", href: "/disabilitiesTypes/cognitif" },
+  { label: "Moteurs", href: "/disabilitiesTypes/moteur" },
+  { label: "Visuels", href: "/disabilitiesTypes/visuel" },
+  { label: "Auditifs", href: "/disabilitiesTypes/auditif" },
+  { label: "Déficience intellectuelle", href: "/disabilitiesTypes/intellectuelle" },
+  { label: "Troubles psychiques", href: "/disabilitiesTypes/psychique" },
+  { label: "Maladies invalidantes", href: "/disabilitiesTypes/invalidante" },
 ];
 
 const contacts = [
@@ -95,7 +88,6 @@ export default function Footer() {
         <div className="flex flex-col gap-12 lg:flex-row lg:justify-between">
           <div className="flex flex-wrap gap-12 sm:gap-20 lg:gap-24">
             <Column {...linkColumns[0]} />
-            <Column {...linkColumns[1]} />
             <div className="flex flex-col gap-4">
               <span className="text-sm font-medium text-lime">Handicaps</span>
               <ul className="grid grid-cols-2 gap-x-12 gap-y-3">
@@ -144,7 +136,7 @@ export default function Footer() {
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="size-4">
               <path d="M12 21s-7.5-4.7-10-9.3C.6 9 1.4 5.6 4.3 4.6 6.4 3.9 8.5 4.8 12 8c3.5-3.2 5.6-4.1 7.7-3.4 2.9 1 3.7 4.4 2.3 7.1C19.5 16.3 12 21 12 21Z" />
             </svg>
-            by Elie, Audrey, Valentine, Alex, Julie, Ethan, Julien et les autres
+            by Elie, Audrey, Valentine, Alex, Julie, Ethan, Julien, Clément, Yoann, Izia, Violette, Maxanne, Éloïse
           </p>
           <p>©2026 — Tous droits réservés</p>
         </div>

@@ -18,35 +18,57 @@ type DisabilityCard = {
 const cards: DisabilityCard[] = [
   {
     title: "Moteurs",
-    stat: "00%",
-    subtitle: "Lorem ipsum dolor sit amet, consectetur",
+    stat: "5,8%",
+    subtitle:
+      "Circuler sur un site de festival vire vite au parcours d’obstacles quand on est en fauteuil ou vite fatigué.",
     image: "/home/moteurs.jpg",
-    icon: "fa-solid fa-wheelchair",
-    href: "/disabilitiesTypes/motor",
+    icon: "/Handicap_Moteur.svg",
+    href: "/disabilitiesTypes/moteur",
   },
   {
     title: "Visuels",
-    stat: "00%",
-    subtitle: "Lorem ipsum dolor sit amet, consectetur",
+    stat: "3%",
+    subtitle:
+      "De la malvoyance à la cécité, profiter d’un concert passe par le son et le toucher, pas seulement par la vue.",
     image: "/home/festival-crowd.jpg",
-    icon: "fa-solid fa-eye",
-    href: "/disabilitiesTypes/view",
+    icon: "/Handicap_Visuel.svg",
+    href: "/disabilitiesTypes/visuel",
   },
   {
     title: "Auditifs",
-    stat: "00%",
-    subtitle: "Lorem ipsum dolor sit amet, consectetur",
+    stat: "16%",
+    subtitle:
+      "Sourd ou malentendant, on vit la musique autrement, par les vibrations et le regard.",
     image: "/home/stage.jpg",
-    icon: "fa-solid fa-ear-listen",
-    href: "/disabilitiesTypes/audio",
+    icon: "/Handicap_Auditif.svg",
+    href: "/disabilitiesTypes/auditif",
   },
   {
-    title: "Cognitifs",
-    stat: "00%",
-    subtitle: "Lorem ipsum dolor sit amet, consectetur",
+    title: "Déficiences intellectuelles",
+    stat: "2%",
+    subtitle:
+      "Une signalétique claire et un accueil patient suffisent souvent à rendre le festival accessible.",
     image: "/home/cognitifs.jpg",
-    icon: "fa-solid fa-brain",
-    href: "/disabilitiesTypes/cognitif",
+    icon: "/Handicap_Autisme.svg",
+    href: "/disabilitiesTypes/intellectuelle",
+  },
+  {
+    title: "Troubles psychiques",
+    stat: "20%",
+    subtitle:
+      "Entre la foule, le bruit et l’imprévu, un festival peut vite devenir trop intense sans espace de répit.",
+    image: "/home/accessibilite.jpg",
+    icon: "/Handicap_Intellect.svg",
+    href: "/disabilitiesTypes/psychique",
+  },
+  {
+    title: "Maladies invalidantes",
+    stat: "20%",
+    subtitle:
+      "Douleurs, fatigue ou traitements lourds : des contraintes invisibles qui demandent des aménagements bien réels.",
+    image: "/home/debuter.jpg",
+    icon: "/Handicap_Invalidantes.svg",
+    href: "/disabilitiesTypes",
   },
 ];
 
@@ -66,12 +88,12 @@ export default function StatSection() {
           <BlurText
             as="p"
             delay={0.2}
-            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            text="des festivals n’ont aujourd’hui aucun dispositif d’accessibilité dédié aux personnes en situation de handicap."
             className="text-lg text-cream/90 sm:text-xl"
           />
         </div>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4">
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3">
           {cards.map((card, i) => (
             <Reveal as="article" key={card.title} y={40} delay={i * 0.1} className="h-full">
               <div className="flex h-full flex-col gap-4 rounded-lg bg-white p-6 text-ink transition duration-300 ease-out hover:-translate-y-2 hover:shadow-[0px_18px_40px_0px_rgba(0,0,0,0.3)]">
@@ -96,7 +118,13 @@ export default function StatSection() {
                     <h3 className="font-display text-3xl font-extrabold uppercase leading-none">
                       {card.title}
                     </h3>
-                    <i className={`${card.icon} text-2xl text-ink`} aria-hidden="true" />
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={card.icon}
+                      alt=""
+                      aria-hidden="true"
+                      className="size-8 shrink-0 object-contain"
+                    />
                   </div>
                   <p className="text-lg leading-snug">{card.subtitle}</p>
                 </div>
@@ -104,7 +132,6 @@ export default function StatSection() {
                 <Button
                   href={card.href}
                   variant="primary"
-                  size="md"
                   className="mt-auto self-start"
                 >
                   Informez-vous

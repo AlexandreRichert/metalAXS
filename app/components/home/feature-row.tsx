@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Button from "@/app/components/button";
+import { ArrowRight } from "@/app/components/icons";
 import Grain from "@/app/components/home/grain";
 import BlurText from "@/app/components/animations/blur-text";
 import Reveal from "@/app/components/animations/reveal";
@@ -8,7 +9,8 @@ type FeatureRowProps = {
   image: string;
   imageAlt: string;
   title: React.ReactNode;
-  subtitle: string;
+  /** Un paragraphe, ou plusieurs (rendus l'un sous l'autre). */
+  subtitle: string | string[];
   ctaLabel: string;
   ctaHref: string;
   /** image à droite (texte à gauche) */
@@ -53,15 +55,24 @@ export default function FeatureRow({
           >
             {title}
           </Reveal>
-          <BlurText
-            as="p"
-            delay={0.15}
-            text={subtitle}
-            className="max-w-xl text-base text-muted sm:text-lg"
-          />
+          <div className="flex max-w-xl flex-col gap-3">
+            {(Array.isArray(subtitle) ? subtitle : [subtitle]).map((para, i) => (
+              <BlurText
+                key={i}
+                as="p"
+                delay={0.15 + i * 0.1}
+                text={para}
+                className="text-base text-ink sm:text-lg"
+              />
+            ))}
+          </div>
         </div>
         <Reveal delay={0.3} y={16}>
-          <Button href={ctaHref} variant="secondary">
+          <Button
+            href={ctaHref}
+            variant="secondary"
+            icon={<ArrowRight className="size-4" />}
+          >
             {ctaLabel}
           </Button>
         </Reveal>

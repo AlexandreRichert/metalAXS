@@ -1,10 +1,20 @@
-import Link from "next/link";
-import type { ButtonHTMLAttributes, ComponentProps, ReactNode } from "react";
+"use client";
 
-type ButtonVariant = "primary" | "secondary";
+import Link from "next/link";
+import type { ButtonHTMLAttributes, ComponentProps, MouseEvent, ReactNode } from "react";
+import { usePageTransition } from "@/app/components/page-transition";
+
+type ButtonVariant = "primary" | "secondary" | "light" | "ghost";
 type ButtonSize = "sm" | "md" | "lg";
 
+// Un lien interne déclenche la transition de page (le loader couvre puis révèle).
+// Les liens externes / mailto et les clics modifiés gardent le comportement natif.
+function isInternal(href: string) {
+  return href.startsWith("/") && !href.startsWith("//");
+}
+
 type CommonButtonProps = {
+type ButtonProps = {
   children: ReactNode;
   /** Petit picto optionnel affiché à droite du texte (ex: une flèche). */
   icon?: ReactNode;
@@ -58,15 +68,35 @@ const variantConfig: Record<ButtonVariant, VariantConfig> = {
     text: "text-primary group-hover:text-amm-orange group-focus-visible:text-background group-active:text-background",
   },
   primary: {
-    link: "border-primary bg-primary hover:border-amm-green focus-visible:border-amm-green active:border-amm-green",
+    link: "border-background bg-primary hover:border-amm-green focus-visible:border-amm-green active:border-amm-green",
     focus:
       "focus-visible:shadow-[0_0_8px_4px_color-mix(in_srgb,var(--color-amm-green)_50%,transparent)]",
     fill: "bg-amm-green",
     text: "text-background group-hover:text-amm-green group-focus-visible:text-primary group-active:text-primary",
   },
+  // CTA principal sur fond sombre : pavé crème + texte encre (le remplissage
+  // encre se déploie au focus/clic, le texte passe alors en crème).
+  light: {
+    link: "border-background bg-background hover:border-amm-green focus-visible:border-amm-green active:border-amm-green",
+    focus:
+      "focus-visible:shadow-[0_0_8px_4px_color-mix(in_srgb,var(--color-amm-green)_50%,transparent)]",
+    fill: "bg-primary",
+    text: "text-primary group-focus-visible:text-background group-active:text-background",
+  },
+  // Secondaire sur fond sombre : contour + texte crème, remplissage orange au clic.
+  ghost: {
+    link: "border-background bg-transparent hover:border-amm-orange focus-visible:border-amm-orange active:border-amm-orange",
+    focus:
+      "focus-visible:shadow-[0_0_8px_4px_color-mix(in_srgb,var(--color-amm-orange)_50%,transparent)]",
+    fill: "bg-amm-orange",
+    text: "text-background group-hover:text-amm-orange group-focus-visible:text-primary group-active:text-primary",
+  },
 };
 
 function ButtonContent({
+  onClick,
+  disabled = false,
+  type = "button",
   children,
   icon,
   variant,
@@ -79,8 +109,13 @@ function ButtonContent({
 }) {
   const config = variantConfig[variant];
   const sizeClasses = sizeConfig[size];
+  const navigate = usePageTransition();
 
-  return (
+  const classes = `${baseLink} ${sizeClasses.link} ${config.link} ${config.focus} ${
+    disabled ? "pointer-events-none opacity-60" : ""
+  } ${className}`.trim();
+
+  const inner = (
     <>
       <span aria-hidden="true" className={`${baseFill} ${config.fill}`} />
       <span className={`${baseContent} ${sizeClasses.text} ${config.text}`}>
@@ -118,7 +153,37 @@ export default function Button(props: ButtonProps) {
         <ButtonContent icon={icon} size={size} variant={variant}>
           {children}
         </ButtonContent>
-      </Link>
+      </>
+  );
+
+  // Mode action : rendu en <button> (pas de navigation).
+  if (!href) {
+    return (
+      <button type={type} onClick={onClick} disabled={disabled} className={classes}>
+        {inner}
+      </button>
+    );
+  }
+
+  // Mode lien : déclenche la transition de page pour les liens internes.
+  const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
+    if (
+      isInternal(href) &&
+      e.button === 0 &&
+      !e.metaKey &&
+      !e.ctrlKey &&
+      !e.shiftKey &&
+      !e.altKey
+    ) {
+      e.preventDefault();
+      navigate(href);
+    }
+  };
+
+  return (
+    <Link href={href} onClick={handleClick} className={classes}>
+      {inner}
+    </Link>
     );
   }
 
