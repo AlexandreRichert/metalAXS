@@ -16,8 +16,8 @@ interface Card {
 export default function AutisticDisabilityPage() {
     const sectionRef = useRef(null);
     const isInView = useInView(sectionRef, {
-        once: true,
-        amount: 0.3,
+        once: false,
+        amount: 0.1,
     });
     const [selectedCard, setSelectedCard] = useState<Card | null>(null);
 
@@ -26,7 +26,7 @@ export default function AutisticDisabilityPage() {
             id: 1,
             image: "/disable.jpg",
             title: "Ambiance apaisée",
-            description: "Lorem ipsum dolor sit amet consectetur. Diam maecenas dignissim proin quam tincidunt sapien sit. Ut neque ultricies elementum nec sapien donec lacus. Eget est massa id arcu suspendisse fermentum sit egestas sed. Lectus in vel tempor netus accumsan facilisis. Placerat urna eros hendrerit vel turpis pretium. Nisl dictum eu egestas pellentesque adipiscing tincidunt. Et bibendum velit pellentesque facilisi donec congue amet orci. Posuere in ut semper quam pharetra at purus scelerisque. Orci turpis elementum urna dolor fringilla quam tempor egestas. Nisl in duis cras vitae a adipiscing. Imperdiet augue pellentesque elementum mi.",
+            description: "Lorem ipsum dolor sit amet consectetur Test. Diam maecenas dignissim proin quam tincidunt sapien sit. Ut neque ultricies elementum nec sapien donec lacus. Eget est massa id arcu suspendisse fermentum sit egestas sed. Lectus in vel tempor netus accumsan facilisis. Placerat urna eros hendrerit vel turpis pretium. Nisl dictum eu egestas pellentesque adipiscing tincidunt. Et bibendum velit pellentesque facilisi donec congue amet orci. Posuere in ut semper quam pharetra at purus scelerisque. Orci turpis elementum urna dolor fringilla quam tempor egestas. Nisl in duis cras vitae a adipiscing. Imperdiet augue pellentesque elementum mi.",
         },
         {
             id: 2,
