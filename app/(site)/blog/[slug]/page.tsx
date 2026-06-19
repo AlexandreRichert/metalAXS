@@ -6,14 +6,15 @@ import { notFound } from "next/navigation";
 import { ArrowRight } from "@/app/components/icons";
 import PortableTextRenderer from "@/app/components/portable-text";
 import TitleWithHighlight from "@/app/components/title-with-highlight";
+import { SimilarArticles } from "@/app/components/similar-articles";
 import { TableOfContents } from "@/app/components/table-of-contents";
 import { extractHeadings } from "@/app/lib/headings";
 import { client } from "@/sanity/lib/client";
 import { getPostTags } from "@/sanity/lib/post-tags";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { urlForImage } from "@/sanity/lib/image";
-import { POST_QUERY, POSTS_SLUGS_QUERY } from "@/sanity/lib/queries";
-import type { Post } from "@/sanity/lib/types";
+import { POST_QUERY, POSTS_SLUGS_QUERY, SIMILAR_POSTS_QUERY } from "@/sanity/lib/queries";
+import type { Post, PostListItem } from "@/sanity/lib/types";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -61,8 +62,19 @@ export default async function PostPage({ params }: PageProps) {
 
   const postTags = getPostTags(post);
   const publishedDate = formatDate(post.publishedAt);
+  const tagIds = postTags.map((tag) => tag._id);
+  const similarPosts = await sanityFetch<PostListItem[]>({
+    query: SIMILAR_POSTS_QUERY,
+    params: {
+      slug,
+      tagIds,
+      authorId: post.authorId ?? null,
+    },
+    tags: ["post", "category", "tag"],
+  });
 
   return (
+    <>
     <article className="mx-auto max-w-[1200px] px-4 pt-[72px]">
       <header className="flex flex-col">
         <Link
@@ -120,13 +132,13 @@ export default async function PostPage({ params }: PageProps) {
       {post.body ? (() => {
         const headings = extractHeadings(post.body!);
         return (
-          <div className="mt-10 flex items-start gap-10">
+          <div className="mt-10 flex gap-24">
             {headings.length > 0 ? (
               <aside className="hidden xl:block w-52 shrink-0">
                 <TableOfContents headings={headings} />
               </aside>
             ) : null}
-            <div className="min-w-0 flex-1 prose-content">
+            <div className="prose-content min-w-0 flex-1 text-primary">
               <PortableTextRenderer value={post.body!} />
             </div>
           </div>
@@ -152,24 +164,9 @@ export default async function PostPage({ params }: PageProps) {
           </div>
         </section>
       ) : null}
-
-      {post.author?.bio ? (
-        <footer className="mt-12 flex items-start gap-4 border-t border-gray-200 pt-6">
-          {post.author.avatar?.asset ? (
-            <Image
-              src={urlForImage(post.author.avatar).width(96).height(96).fit("crop").url()}
-              alt={post.author.name}
-              width={48}
-              height={48}
-              className="h-12 w-12 rounded-full object-cover"
-            />
-          ) : null}
-          <div>
-            <p className="font-semibold">{post.author.name}</p>
-            <p className="text-sm text-gray-600">{post.author.bio}</p>
-          </div>
-        </footer>
-      ) : null}
     </article>
+
+    <SimilarArticles posts={similarPosts} />
+  </>
   );
 }

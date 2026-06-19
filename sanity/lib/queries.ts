@@ -57,6 +57,7 @@ export const POST_QUERY = defineQuery(`
     gallery,
     ${POST_TAGS_PROJECTION},
     body,
+    "authorId": author._ref,
     "author": author->{ name, "slug": slug.current, avatar, bio }
   }
 `);
@@ -94,6 +95,27 @@ export const POSTS_LIST_QUERY = defineQuery(`
 // Tous les slugs d'articles (pour la génération statique des pages).
 export const POSTS_SLUGS_QUERY = defineQuery(`
   *[_type == "post" && defined(slug.current)]{ "slug": slug.current }
+`);
+
+// Articles similaires : tags communs, puis même auteur.
+// Aucune correspondance : la section n'est pas affichée.
+export const SIMILAR_POSTS_QUERY = defineQuery(`
+  *[_type == "post" && slug.current != $slug && defined(slug.current)] {
+    _id,
+    title,
+    titleHighlight,
+    "slug": slug.current,
+    description,
+    publishedAt,
+    mainImage,
+    ${POST_TAGS_PROJECTION},
+    "author": author->{ name, "slug": slug.current, avatar },
+    "sharedTagCount": count(tags[@._ref in $tagIds]),
+    "sameAuthor": author._ref == $authorId
+  }
+  [sharedTagCount > 0 || sameAuthor]
+  | order(sharedTagCount desc, sameAuthor desc)
+  [0...6]
 `);
 
 // ------------------------------------------------------------------

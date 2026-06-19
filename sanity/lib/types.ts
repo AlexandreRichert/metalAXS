@@ -66,6 +66,7 @@ export type Post = {
   tags?: PostTag[];
   body?: PortableTextBlock[];
   author?: Author;
+  authorId?: string;
 };
 
 export type QuestionType =
