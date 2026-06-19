@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import type { MouseEvent, ReactNode } from "react";
+import type { ButtonHTMLAttributes, ComponentProps, MouseEvent, ReactNode } from "react";
 import { usePageTransition } from "@/app/components/page-transition";
 
 type ButtonVariant = "primary" | "secondary" | "light" | "ghost";
@@ -13,20 +13,23 @@ function isInternal(href: string) {
   return href.startsWith("/") && !href.startsWith("//");
 }
 
-type ButtonProps = {
+type CommonButtonProps = {
   children: ReactNode;
   /** Petit picto optionnel affiché à droite du texte (ex: une flèche). */
   icon?: ReactNode;
   variant?: ButtonVariant;
   size?: ButtonSize;
   className?: string;
-  /** Fourni → rendu en <Link> (déclenche la transition de page). */
-  href?: string;
-  /** Fourni (sans href) → rendu en <button> (action : téléchargement, etc.). */
-  onClick?: () => void;
-  disabled?: boolean;
-  type?: "button" | "submit";
 };
+
+type LinkButtonProps = CommonButtonProps & {
+  href: string;
+} & Omit<ComponentProps<typeof Link>, keyof CommonButtonProps | "href">;
+
+type NativeButtonProps = CommonButtonProps &
+  Omit<ButtonHTMLAttributes<HTMLButtonElement>, keyof CommonButtonProps>;
+
+type ButtonProps = LinkButtonProps | NativeButtonProps;
 
 type VariantConfig = {
   /** Classes appliquées au lien (bordure + éventuel fond de repos). */
@@ -89,26 +92,21 @@ const variantConfig: Record<ButtonVariant, VariantConfig> = {
   },
 };
 
-export default function Button({
-  href,
-  onClick,
-  disabled = false,
-  type = "button",
+function ButtonContent({
   children,
   icon,
-  variant = "secondary",
-  size = "md",
-  className = "",
-}: ButtonProps) {
+  variant,
+  size,
+}: {
+  children: ReactNode;
+  icon?: ReactNode;
+  variant: ButtonVariant;
+  size: ButtonSize;
+}) {
   const config = variantConfig[variant];
   const sizeClasses = sizeConfig[size];
-  const navigate = usePageTransition();
 
-  const classes = `${baseLink} ${sizeClasses.link} ${config.link} ${config.focus} ${
-    disabled ? "pointer-events-none opacity-60" : ""
-  } ${className}`.trim();
-
-  const inner = (
+  return (
     <>
       <span aria-hidden="true" className={`${baseFill} ${config.fill}`} />
       <span className={`${baseContent} ${sizeClasses.text} ${config.text}`}>
@@ -121,34 +119,68 @@ export default function Button({
       </span>
     </>
   );
+}
 
-  // Mode action : rendu en <button> (pas de navigation).
-  if (!href) {
+export default function Button(props: ButtonProps) {
+  const {
+    children,
+    icon,
+    variant = "secondary",
+    size = "md",
+    className = "",
+    ...rest
+  } = props;
+
+  const config = variantConfig[variant];
+  const sizeClasses = sizeConfig[size];
+  const navigate = usePageTransition();
+
+  // Mode lien : rendu en <Link>, déclenche la transition de page pour les liens internes.
+  if ("href" in props && props.href) {
+    const { href, onClick, ...linkRest } = rest as Omit<
+      LinkButtonProps,
+      keyof CommonButtonProps
+    >;
+
+    const classes =
+      `${baseLink} ${sizeClasses.link} ${config.link} ${config.focus} ${className}`.trim();
+
+    const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
+      onClick?.(e);
+      if (
+        !e.defaultPrevented &&
+        isInternal(href) &&
+        e.button === 0 &&
+        !e.metaKey &&
+        !e.ctrlKey &&
+        !e.shiftKey &&
+        !e.altKey
+      ) {
+        e.preventDefault();
+        navigate(href);
+      }
+    };
+
     return (
-      <button type={type} onClick={onClick} disabled={disabled} className={classes}>
-        {inner}
-      </button>
+      <Link href={href} onClick={handleClick} className={classes} {...linkRest}>
+        <ButtonContent icon={icon} size={size} variant={variant}>
+          {children}
+        </ButtonContent>
+      </Link>
     );
   }
 
-  // Mode lien : déclenche la transition de page pour les liens internes.
-  const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
-    if (
-      isInternal(href) &&
-      e.button === 0 &&
-      !e.metaKey &&
-      !e.ctrlKey &&
-      !e.shiftKey &&
-      !e.altKey
-    ) {
-      e.preventDefault();
-      navigate(href);
-    }
-  };
+  // Mode action : rendu en <button> (pas de navigation).
+  const buttonRest = rest as Omit<NativeButtonProps, keyof CommonButtonProps>;
+  const classes = `${baseLink} ${sizeClasses.link} ${config.link} ${config.focus} ${
+    buttonRest.disabled ? "pointer-events-none opacity-60" : ""
+  } ${className}`.trim();
 
   return (
-    <Link href={href} onClick={handleClick} className={classes}>
-      {inner}
-    </Link>
+    <button type="button" className={classes} {...buttonRest}>
+      <ButtonContent icon={icon} size={size} variant={variant}>
+        {children}
+      </ButtonContent>
+    </button>
   );
 }

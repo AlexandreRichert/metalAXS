@@ -1,25 +1,13 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
 
-import TitleWithHighlight from "@/app/components/title-with-highlight";
+import Button from "@/app/components/button";
 import { BlogBento } from "@/app/components/blog-bento";
-import { urlForImage } from "@/sanity/lib/image";
 import { getPostTags } from "@/sanity/lib/post-tags";
 import type { FilterGroup, PostListItem } from "@/sanity/lib/types";
 
 const MAX_SEARCH_RESULTS = 10;
-
-function formatDate(value?: string) {
-  if (!value) return null;
-  return new Date(value).toLocaleDateString("fr-FR", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-}
 
 function getPostTagIds(post: PostListItem) {
   return new Set(getPostTags(post).map((tag) => tag._id));
@@ -199,35 +187,41 @@ export function BlogPostsSearch({
             type="search"
             value={query}
             onChange={handleQueryChange}
-            placeholder="Rechercher un article..."
+            placeholder="Rechercher une bonne pratique"
             className="flex-1 bg-transparent text-secondary outline-none"
           />
-          <button
+          <Button
             type="button"
+            variant="secondary"
+            size="sm"
+            className="shrink-0"
             onClick={() => (isFilterOpen ? setIsFilterOpen(false) : openFilters())}
             aria-expanded={isFilterOpen}
             aria-controls="blog-filter-panel"
-            className="inline-flex shrink-0 items-center gap-2 rounded-[12px] bg-[#E3E1DC] px-4 py-2.5 text-sm text-primary transition-colors hover:bg-[#d9d6cf]"
+            icon={
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className={`h-4 w-4 transition-transform ${isFilterOpen ? "rotate-180" : ""}`}
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            }
           >
-            Filtres
-            {appliedTagIds.size > 0 ? (
-              <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-primary px-1.5 text-xs text-background">
-                {appliedTagIds.size}
-              </span>
-            ) : null}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className={`h-4 w-4 transition-transform ${isFilterOpen ? "rotate-180" : ""}`}
-            >
-              <path d="m6 9 6 6 6-6" />
-            </svg>
-          </button>
+            <span className="inline-flex items-center gap-2">
+              Filtres
+              {appliedTagIds.size > 0 ? (
+                <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-primary px-1.5 text-xs text-background">
+                  {appliedTagIds.size}
+                </span>
+              ) : null}
+            </span>
+          </Button>
           {hasActiveFilters ? (
             <button
               type="button"
@@ -305,68 +299,15 @@ export function BlogPostsSearch({
             ? "Aucun article ne correspond à votre recherche."
             : "Aucun article pour le moment. Revenez bientôt !"}
         </p>
-      ) : !isFiltered ? (
-        <BlogBento posts={visiblePosts} />
       ) : (
-        <ul className="relative z-0 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {visiblePosts.map((post) => {
-            const postTags = getPostTags(post);
-
-            return (
-              <li
-                key={post._id}
-                className="flex h-[600px] flex-col rounded-3xl border border-gray-200 p-4 transition-shadow hover:shadow-md"
-              >
-                <Link href={`/blog/${post.slug}`} className="flex h-full flex-col">
-                  {post.mainImage?.asset ? (
-                    <Image
-                      src={urlForImage(post.mainImage)
-                        .width(800)
-                        .height(450)
-                        .fit("crop")
-                        .url()}
-                      alt={post.mainImage.alt || post.title}
-                      width={800}
-                      height={450}
-                      className="h-44 w-full rounded-2xl object-cover"
-                    />
-                  ) : (
-                    <div className="h-44 w-full rounded-2xl bg-gray-100" />
-                  )}
-                  <div className="flex flex-1 flex-col px-1 pt-4">
-                    <p className="text-xs text-secondary">
-                      {formatDate(post.publishedAt)}
-                    </p>
-                    {postTags.length > 0 ? (
-                      <ul className="mt-2 flex flex-wrap gap-2">
-                        {postTags.map((tag) => (
-                          <li
-                            key={tag._id}
-                            className="rounded-full bg-[#E3E1DC] px-3 py-1 text-xs text-primary"
-                          >
-                            {tag.title}
-                          </li>
-                        ))}
-                      </ul>
-                    ) : null}
-                    <TitleWithHighlight
-                      title={post.title}
-                      highlight={post.titleHighlight}
-                      as="h2"
-                      className="mt-2 text-h3 font-black uppercase text-primary"
-                    />
-                    <p className="mt-2 text-lg text-secondary">
-                      {post.description}
-                    </p>
-                    <span className="mt-auto rounded-full bg-gray-100 px-6 py-3 text-center text-sm font-medium text-primary transition-colors hover:bg-gray-200">
-                      Lire l&apos;article
-                    </span>
-                  </div>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+        <BlogBento
+          key={
+            isFiltered
+              ? `filtered-${submittedQuery}-${[...appliedTagIds].sort().join(",")}`
+              : "default"
+          }
+          posts={visiblePosts}
+        />
       )}
     </div>
   );

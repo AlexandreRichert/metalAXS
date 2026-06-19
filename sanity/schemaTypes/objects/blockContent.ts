@@ -1,6 +1,16 @@
 import { defineArrayMember, defineType } from "sanity";
 import React from "react";
 
+import { HighlightLetterAIcon } from "../../components/highlight-letter-a-icon";
+
+const HIGHLIGHT_GREEN = "#abf000";
+
+const highlightStyle = {
+  backgroundColor: HIGHLIGHT_GREEN,
+  borderRadius: "2px",
+  padding: "0 0.1em",
+} as const;
+
 // Texte riche (Portable Text) : paragraphes, titres, listes, liens, images.
 export const blockContent = defineType({
   name: "blockContent",
@@ -26,18 +36,9 @@ export const blockContent = defineType({
           {
             title: "Surligné (vert)",
             value: "highlight",
+            icon: HighlightLetterAIcon,
             component: ({ children }: { children: React.ReactNode }) =>
-              React.createElement(
-                "span",
-                {
-                  style: {
-                    backgroundColor: "#abf000",
-                    borderRadius: "2px",
-                    padding: "0 0.1em",
-                  },
-                },
-                children,
-              ),
+              React.createElement("span", { style: highlightStyle }, children),
           },
         ],
         annotations: [
