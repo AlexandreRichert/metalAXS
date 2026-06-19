@@ -71,17 +71,6 @@ const LAYOUT: CardConfig[] = [
   },
 ];
 
-function formatDate(value?: string) {
-  if (!value) return null;
-  return new Date(value)
-    .toLocaleDateString("fr-FR", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    })
-    .toUpperCase();
-}
-
 const readArrow = (
   <svg
     width="16"
@@ -173,9 +162,6 @@ function BentoCard({ post, config }: { post: PostListItem; config: CardConfig })
           isHorizontal ? "flex-1 lg:justify-center" : ""
         }`}
       >
-        <p className="font-sans text-sm font-medium uppercase text-ink/70">
-          {formatDate(post.publishedAt)}
-        </p>
         <Link href={href} className="transition-opacity hover:opacity-80">
           <TitleWithHighlight
             title={post.title}
@@ -194,7 +180,7 @@ function BentoCard({ post, config }: { post: PostListItem; config: CardConfig })
         </p>
         <div className="pt-1">
           <Button href={href} variant="primary" size="sm" icon={readArrow}>
-            Lire l&apos;article
+            Voir la pratique
           </Button>
         </div>
       </div>

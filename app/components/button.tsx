@@ -1,11 +1,10 @@
 import Link from "next/link";
-import type { ReactNode } from "react";
+import type { ButtonHTMLAttributes, ComponentProps, ReactNode } from "react";
 
 type ButtonVariant = "primary" | "secondary";
 type ButtonSize = "sm" | "md" | "lg";
 
-type ButtonProps = {
-  href: string;
+type CommonButtonProps = {
   children: ReactNode;
   /** Petit picto optionnel affiché à droite du texte (ex: une flèche). */
   icon?: ReactNode;
@@ -13,6 +12,15 @@ type ButtonProps = {
   size?: ButtonSize;
   className?: string;
 };
+
+type LinkButtonProps = CommonButtonProps & {
+  href: string;
+} & Omit<ComponentProps<typeof Link>, keyof CommonButtonProps | "href">;
+
+type NativeButtonProps = CommonButtonProps &
+  Omit<ButtonHTMLAttributes<HTMLButtonElement>, keyof CommonButtonProps>;
+
+type ButtonProps = LinkButtonProps | NativeButtonProps;
 
 type VariantConfig = {
   /** Classes appliquées au lien (bordure + éventuel fond de repos). */
@@ -58,22 +66,22 @@ const variantConfig: Record<ButtonVariant, VariantConfig> = {
   },
 };
 
-export default function Button({
-  href,
+function ButtonContent({
   children,
   icon,
-  variant = "secondary",
-  size = "md",
-  className = "",
-}: ButtonProps) {
+  variant,
+  size,
+}: {
+  children: ReactNode;
+  icon?: ReactNode;
+  variant: ButtonVariant;
+  size: ButtonSize;
+}) {
   const config = variantConfig[variant];
   const sizeClasses = sizeConfig[size];
 
   return (
-    <Link
-      href={href}
-      className={`${baseLink} ${sizeClasses.link} ${config.link} ${config.focus} ${className}`.trim()}
-    >
+    <>
       <span aria-hidden="true" className={`${baseFill} ${config.fill}`} />
       <span className={`${baseContent} ${sizeClasses.text} ${config.text}`}>
         <span>{children}</span>
@@ -83,6 +91,44 @@ export default function Button({
           </span>
         ) : null}
       </span>
-    </Link>
+    </>
+  );
+}
+
+export default function Button(props: ButtonProps) {
+  const {
+    children,
+    icon,
+    variant = "secondary",
+    size = "md",
+    className = "",
+    ...rest
+  } = props;
+
+  const config = variantConfig[variant];
+  const sizeClasses = sizeConfig[size];
+  const classes =
+    `${baseLink} ${sizeClasses.link} ${config.link} ${config.focus} ${className}`.trim();
+
+  if ("href" in props && props.href) {
+    const { href, ...linkRest } = rest as Omit<LinkButtonProps, keyof CommonButtonProps>;
+
+    return (
+      <Link href={href} className={classes} {...linkRest}>
+        <ButtonContent icon={icon} size={size} variant={variant}>
+          {children}
+        </ButtonContent>
+      </Link>
+    );
+  }
+
+  const buttonRest = rest as Omit<NativeButtonProps, keyof CommonButtonProps>;
+
+  return (
+    <button type="button" className={classes} {...buttonRest}>
+      <ButtonContent icon={icon} size={size} variant={variant}>
+        {children}
+      </ButtonContent>
+    </button>
   );
 }

@@ -1,6 +1,33 @@
 import { defineArrayMember, defineType } from "sanity";
 import React from "react";
 
+const HIGHLIGHT_GREEN = "#abf000";
+
+const highlightStyle = {
+  backgroundColor: HIGHLIGHT_GREEN,
+  borderRadius: "2px",
+  padding: "0 0.1em",
+} as const;
+
+function HighlightIcon() {
+  return React.createElement(
+    "span",
+    {
+      style: {
+        ...highlightStyle,
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontSize: "0.75em",
+        fontWeight: 700,
+        lineHeight: 1,
+        padding: "1px 3px",
+      },
+    },
+    "A",
+  );
+}
+
 // Texte riche (Portable Text) : paragraphes, titres, listes, liens, images.
 export const blockContent = defineType({
   name: "blockContent",
@@ -26,18 +53,9 @@ export const blockContent = defineType({
           {
             title: "Surligné (vert)",
             value: "highlight",
+            icon: HighlightIcon,
             component: ({ children }: { children: React.ReactNode }) =>
-              React.createElement(
-                "span",
-                {
-                  style: {
-                    backgroundColor: "#abf000",
-                    borderRadius: "2px",
-                    padding: "0 0.1em",
-                  },
-                },
-                children,
-              ),
+              React.createElement("span", { style: highlightStyle }, children),
           },
         ],
         annotations: [

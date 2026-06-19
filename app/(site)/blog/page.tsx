@@ -100,7 +100,7 @@ export default async function BlogPage() {
               </svg>
             }
           >
-            Lire l&apos;article
+            Voir la pratique
           </Button>
         </div>
         <div className="relative w-1/2">
