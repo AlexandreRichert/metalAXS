@@ -1,7 +1,6 @@
 import type { StructureResolver } from "sanity/structure";
 
-// Organisation du menu du Studio, pensée pour le client :
-// un groupe « Blog » et un groupe « Questionnaires ».
+// Organisation du menu du Studio, pensée pour le client : groupe « Blog ».
 export const structure: StructureResolver = (S) =>
   S.list()
     .title("Contenu")
@@ -16,19 +15,6 @@ export const structure: StructureResolver = (S) =>
               S.documentTypeListItem("author").title("Auteurs"),
               S.documentTypeListItem("category").title("Groupes de tags"),
               S.documentTypeListItem("tag").title("Tags"),
-            ])
-        ),
-      S.divider(),
-      S.listItem()
-        .title("Questionnaires")
-        .child(
-          S.list()
-            .title("Questionnaires")
-            .items([
-              S.documentTypeListItem("questionnaire").title("Questionnaires"),
-              S.documentTypeListItem("submission").title(
-                "Réponses reçues"
-              ),
             ])
         ),
     ]);

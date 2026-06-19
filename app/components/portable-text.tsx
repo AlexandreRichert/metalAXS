@@ -37,7 +37,7 @@ function makeComponents(counts: Record<string, number>): PortableTextComponents 
               className="h-auto w-full rounded-lg"
             />
             {value.alt ? (
-              <figcaption className="mt-2 text-center text-sm text-gray-500">
+              <figcaption className="mt-2 text-center text-sm text-primary">
                 {value.alt}
               </figcaption>
             ) : null}
@@ -69,7 +69,7 @@ function makeComponents(counts: Record<string, number>): PortableTextComponents 
                 className="h-auto w-full rounded-lg"
               />
               {value.image.alt ? (
-                <figcaption className="mt-2 text-center text-sm text-gray-500">
+                <figcaption className="mt-2 text-center text-sm text-primary">
                   {value.image.alt}
                 </figcaption>
               ) : null}
@@ -80,7 +80,7 @@ function makeComponents(counts: Record<string, number>): PortableTextComponents 
     },
     marks: {
       highlight: ({ children }) => (
-        <mark className="highlight-mark bg-transparent text-inherit">
+        <mark className="highlight-mark text-inherit">
           {children}
         </mark>
       ),
@@ -104,7 +104,7 @@ function makeComponents(counts: Record<string, number>): PortableTextComponents 
       h2: ({ value: blockValue, children }) => {
         const id = blockToId(blockValue, counts);
         return (
-          <h2 id={id} className="mt-8 mb-3 text-2xl font-bold">
+          <h2 id={id} className="mt-8 mb-3 scroll-mt-28 text-2xl font-bold">
             {children}
           </h2>
         );
@@ -112,13 +112,13 @@ function makeComponents(counts: Record<string, number>): PortableTextComponents 
       h3: ({ value: blockValue, children }) => {
         const id = blockToId(blockValue, counts);
         return (
-          <h3 id={id} className="mt-6 mb-2 text-xl font-bold">
+          <h3 id={id} className="mt-6 mb-2 scroll-mt-28 text-xl font-bold">
             {children}
           </h3>
         );
       },
       blockquote: ({ children }) => (
-        <blockquote className="my-4 border-l-4 border-gray-300 pl-4 text-gray-600 italic">
+        <blockquote className="my-4 border-l-4 border-line pl-4 text-primary italic">
           {children}
         </blockquote>
       ),

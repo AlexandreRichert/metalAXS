@@ -45,6 +45,7 @@ export type FilterGroup = {
 export type PostListItem = {
   _id: string;
   title: string;
+  titleHighlight?: string;
   slug: string;
   description: string;
   publishedAt?: string;
@@ -56,6 +57,7 @@ export type PostListItem = {
 export type Post = {
   _id: string;
   title: string;
+  titleHighlight?: string;
   slug: string;
   description: string;
   publishedAt?: string;
@@ -64,39 +66,5 @@ export type Post = {
   tags?: PostTag[];
   body?: PortableTextBlock[];
   author?: Author;
-};
-
-export type QuestionType =
-  | "text"
-  | "textarea"
-  | "radio"
-  | "checkbox"
-  | "select"
-  | "boolean"
-  | "rating";
-
-export type QuestionOption = { label: string; value: string };
-
-export type Question = {
-  _key: string;
-  label: string;
-  type: QuestionType;
-  helpText?: string;
-  required?: boolean;
-  options?: QuestionOption[];
-};
-
-export type Step = {
-  _key: string;
-  title: string;
-  description?: string;
-  questions: Question[];
-};
-
-export type Questionnaire = {
-  _id: string;
-  title: string;
-  slug: string;
-  description?: string;
-  steps: Step[];
+  authorId?: string;
 };

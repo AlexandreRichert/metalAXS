@@ -26,11 +26,4 @@ export default defineConfig({
   schema: {
     types: schemaTypes,
   },
-
-  document: {
-    // Retire « Réponse au questionnaire » du menu de création global :
-    // une soumission est toujours créée par le formulaire public.
-    newDocumentOptions: (prev) =>
-      prev.filter((item) => item.templateId !== "submission"),
-  },
 });
