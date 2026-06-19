@@ -11,7 +11,9 @@ export default function FeaturesSection() {
           imageAlt="Scène de concert vue depuis la foule"
           title={
             <>
-              Qu’est ce que l’<Highlight>accessibilité</Highlight> ?
+              Qu’est ce que
+              <br />
+              l’<Highlight>accessibilité</Highlight> ?
             </>
           }
           subtitle="L’accessibilité, c’est permettre à chaque festivalier de vivre l’événement dans de bonnes conditions, quel que soit son handicap : moteur, visuel, auditif ou cognitif. Cela passe par des aménagements concrets, mais aussi par une organisation et un accueil pensés en amont."
