@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { HexColorInput, HexColorPicker } from "react-colorful";
 
 // Couleurs de marque proposées (le reste via le sélecteur personnalisé).
-export const SWATCHES = ["#2c1f00", "#abf000", "#fc470d", "#610017"];
+export const SWATCHES = ["#abf000", "#fc470d", "#2c1f00", "#f2ede3"];
 
 type Props = {
   value: string;

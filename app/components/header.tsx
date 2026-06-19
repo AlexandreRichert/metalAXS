@@ -15,12 +15,12 @@ type NavItem = { label: string; href: string; children?: NavChild[] };
 // Navigation principale (Figma « Navbar » 544:1387). Seul « Handicaps » ouvre un
 // menu déroulant ; les autres liens pointent directement vers leurs pages.
 const navItems: NavItem[] = [
-  { label: "Bonnes pratiques", href: "/goodPractices" },
+  { label: "Bonnes pratiques", href: "/blog" },
   {
     label: "Handicaps",
     href: "/disabilitiesTypes",
     children: [
-      { label: "Moteur", href: "/disabilitiesTypes/motor" },
+      { label: "Moteur", href: "/disabilitiesTypes/moteur" },
       { label: "Auditif", href: "/disabilitiesTypes/auditif" },
       { label: "Visuel", href: "/disabilitiesTypes/visuel" },
       { label: "Déficience intellectuelle", href: "/disabilitiesTypes/intellectuelle" },
@@ -127,6 +127,10 @@ export default function Header() {
               {navItems.map((item) => {
                 const hasMenu = Boolean(item.children);
                 const open = openHref === item.href;
+                // Page courante : le lien (ou le déclencheur du menu) passe en état sélectionné.
+                const active =
+                  pathname === item.href ||
+                  pathname.startsWith(`${item.href}/`);
                 return (
                   <li
                     key={item.href}
@@ -152,7 +156,12 @@ export default function Header() {
                         onClick={() => setOpenHref(open ? null : item.href)}
                         aria-haspopup="true"
                         aria-expanded={open}
-                        className="inline-flex cursor-pointer items-center gap-1.5 rounded-xl px-4 py-3 text-sm font-medium text-ink transition-colors duration-200 hover:bg-ink/5"
+                        aria-current={active ? "page" : undefined}
+                        className={`inline-flex cursor-pointer items-center gap-1.5 rounded-xl px-4 py-3 text-sm font-medium transition-colors duration-200 ${
+                          active
+                            ? "bg-ink text-background"
+                            : "text-ink hover:bg-ink/5"
+                        }`}
                       >
                         {item.label}
                         <ChevronDown
@@ -165,7 +174,12 @@ export default function Header() {
                       <Link
                         href={item.href}
                         onClick={(e) => go(e, item.href)}
-                        className="inline-flex items-center gap-1.5 rounded-xl px-4 py-3 text-sm font-medium text-ink transition-colors duration-200 hover:bg-ink/5"
+                        aria-current={active ? "page" : undefined}
+                        className={`inline-flex items-center gap-1.5 rounded-xl px-4 py-3 text-sm font-medium transition-colors duration-200 ${
+                          active
+                            ? "bg-ink text-background"
+                            : "text-ink hover:bg-ink/5"
+                        }`}
                       >
                         {item.label}
                       </Link>
@@ -203,7 +217,7 @@ export default function Header() {
 
           {/* Appel à l'action */}
           <Button
-            href="mailto:contact@fedemetal.com"
+            href="/contact"
             variant="primary"
             icon={<ArrowRight className="size-4" />}
             className="shrink-0"

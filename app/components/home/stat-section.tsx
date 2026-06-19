@@ -22,8 +22,8 @@ const cards: DisabilityCard[] = [
     subtitle:
       "Circuler sur un site de festival vire vite au parcours d’obstacles quand on est en fauteuil ou vite fatigué.",
     image: "/home/moteurs.jpg",
-    icon: "fa-solid fa-wheelchair",
-    href: "/disabilitiesTypes/motor",
+    icon: "/Handicap_Moteur.svg",
+    href: "/disabilitiesTypes/moteur",
   },
   {
     title: "Visuels",
@@ -31,7 +31,7 @@ const cards: DisabilityCard[] = [
     subtitle:
       "De la malvoyance à la cécité, profiter d’un concert passe par le son et le toucher, pas seulement par la vue.",
     image: "/home/festival-crowd.jpg",
-    icon: "fa-solid fa-eye",
+    icon: "/Handicap_Visuel.svg",
     href: "/disabilitiesTypes/visuel",
   },
   {
@@ -40,7 +40,7 @@ const cards: DisabilityCard[] = [
     subtitle:
       "Sourd ou malentendant, on vit la musique autrement, par les vibrations et le regard.",
     image: "/home/stage.jpg",
-    icon: "fa-solid fa-ear-listen",
+    icon: "/Handicap_Auditif.svg",
     href: "/disabilitiesTypes/auditif",
   },
   {
@@ -49,7 +49,7 @@ const cards: DisabilityCard[] = [
     subtitle:
       "Une signalétique claire et un accueil patient suffisent souvent à rendre le festival accessible.",
     image: "/home/cognitifs.jpg",
-    icon: "fa-solid fa-puzzle-piece",
+    icon: "/Handicap_Autisme.svg",
     href: "/disabilitiesTypes/intellectuelle",
   },
   {
@@ -58,7 +58,7 @@ const cards: DisabilityCard[] = [
     subtitle:
       "Entre la foule, le bruit et l’imprévu, un festival peut vite devenir trop intense sans espace de répit.",
     image: "/home/accessibilite.jpg",
-    icon: "fa-solid fa-brain",
+    icon: "/Handicap_Intellect.svg",
     href: "/disabilitiesTypes/psychique",
   },
   {
@@ -67,7 +67,7 @@ const cards: DisabilityCard[] = [
     subtitle:
       "Douleurs, fatigue ou traitements lourds : des contraintes invisibles qui demandent des aménagements bien réels.",
     image: "/home/debuter.jpg",
-    icon: "fa-solid fa-heart-pulse",
+    icon: "/Handicap_Invalidantes.svg",
     href: "/disabilitiesTypes",
   },
 ];
@@ -118,7 +118,13 @@ export default function StatSection() {
                     <h3 className="font-display text-3xl font-extrabold uppercase leading-none">
                       {card.title}
                     </h3>
-                    <i className={`${card.icon} text-2xl text-ink`} aria-hidden="true" />
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={card.icon}
+                      alt=""
+                      aria-hidden="true"
+                      className="size-8 shrink-0 object-contain"
+                    />
                   </div>
                   <p className="text-lg leading-snug">{card.subtitle}</p>
                 </div>

@@ -62,7 +62,7 @@ function Card({ item }: { item: Ressource }) {
         <h3 className="font-display text-3xl font-extrabold uppercase leading-none text-ink">
           {item.title}
         </h3>
-        <p className="text-base text-muted">{item.subtitle}</p>
+        <p className="text-base text-ink">{item.subtitle}</p>
       </div>
       <Button href={item.href} variant="primary" className="self-start">
         {item.cta}

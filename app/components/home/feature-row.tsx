@@ -62,7 +62,7 @@ export default function FeatureRow({
                 as="p"
                 delay={0.15 + i * 0.1}
                 text={para}
-                className="text-base text-muted sm:text-lg"
+                className="text-base text-ink sm:text-lg"
               />
             ))}
           </div>
