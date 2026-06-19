@@ -14,8 +14,8 @@ const signaletique: Entry[] = [
   { name: "Commerces", file: "Commerces.svg" },
   { name: "Douches", file: "Douches.svg" },
   { name: "Entrée", file: "Entrée.svg" },
-  { name: "Flèche gauche", file: "Flèche Gauche.svg" },
-  { name: "Flèche haut", file: "Flèche Haut.svg" },
+  { name: "Flèche tournante", file: "Flèche Gauche.svg" },
+  { name: "Flèche", file: "Flèche Haut.svg" },
   { name: "Infirmerie", file: "Infirmerie.svg" },
   { name: "Interdit", file: "Interdit.svg" },
   { name: "Lieu de concerts", file: "Lieu de concerts.svg" },
@@ -30,12 +30,12 @@ const signaletique: Entry[] = [
 ];
 
 const handicaps: Entry[] = [
-  { name: "Moteur", file: "Handicap_Moteur.svg" },
-  { name: "Visuel", file: "Handicap_Visuel.svg" },
-  { name: "Auditif", file: "Handicap_Auditif.svg" },
-  { name: "Intellectuel", file: "Handicap_Intellect.svg" },
-  { name: "Psychiques", file: "Handicap_Psychiques.svg" },
-  { name: "Autisme", file: "Handicap_Autisme.svg" },
+  { name: "Moteurs", file: "Handicap_Moteur.svg" },
+  { name: "Visuels", file: "Handicap_Visuel.svg" },
+  { name: "Auditifs", file: "Handicap_Auditif.svg" },
+  { name: "Psychiques", file: "Handicap_Intellect.svg" },
+  { name: "Maladies Invalidantes", file: "Handicap_Psychiques.svg" },
+  { name: "Déficiences Intellectuelles", file: "Handicap_Autisme.svg" },
 ];
 
 function slug(value: string) {
