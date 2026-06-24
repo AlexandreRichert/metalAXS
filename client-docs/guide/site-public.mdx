@@ -1,6 +1,7 @@
 ---
 title: "Ce que voit le visiteur"
-description: "Correspondance entre le Studio et le rendu public du blog."
+description: "Correspondance entre les champs du Studio et le rendu public du blog : page liste, page article et table des matières."
+sidebarTitle: "Site public"
 ---
 
 Comprendre le rendu public aide à mieux préparer le contenu dans le Studio.
@@ -9,10 +10,10 @@ Comprendre le rendu public aide à mieux préparer le contenu dans le Studio.
 
 | Zone | Source dans le Studio |
 | --- | --- |
-| **Article vedette** (grand bloc en haut) | L'article **le plus récent** (date de publication) |
+| **Article vedette** (grand bloc en haut) | L'article **le plus récent** par date de publication (si absente, la date de création est utilisée) |
 | **Barre de recherche** | Recherche dans les titres et descriptions |
 | **Filtres par tags** | Groupes et tags pré-configurés |
-| **Grille d'articles (bento)** | Tous les autres articles publiés, par blocs de 6 |
+| **Grille d'articles (bento)** | Tous les autres articles publiés, paginés par blocs de 6 |
 
 ## Page article `/blog/[slug]`
 
@@ -25,7 +26,7 @@ Comprendre le rendu public aide à mieux préparer le contenu dans le Studio.
 | Sommaire latéral | Généré automatiquement à partir des **Titre 2** et **Titre 3** du contenu |
 | Corps de l'article | Contenu de l'article |
 | Galerie | Médias → Galerie d'images |
-| Articles similaires | Sélection automatique selon les tags et l'auteur |
+| Articles similaires | Sélection automatique selon les tags partagés et l'auteur |
 
 <Tip>
   L'article vedette est toujours le **plus récent** par date de publication. Ajuster la date le remonte en tête, mais change aussi l'ordre dans la liste.

@@ -1,12 +1,17 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
+  "theme": "almond",
   "name": "All Access Metal — Guide bonnes pratiques",
   "description": "Guide d'administration du site All Access Metal via Sanity Studio",
+  "logo": {
+    "light": "https://media.brand.dev/439fcff8-f5f7-452c-bf05-c89ed22323ce.svg",
+    "dark": "https://media.brand.dev/439fcff8-f5f7-452c-bf05-c89ed22323ce.svg"
+  },
+  "favicon": "https://media.brand.dev/481d2905-3d7f-4597-b0da-f10078e18a2a.svg",
   "colors": {
-    "primary": "#2C1F00",
+    "primary": "#2c1c04",
     "light": "#ABF000",
-    "dark": "#610017"
+    "dark": "#2c1c04"
   },
   "background": {
     "color": {
